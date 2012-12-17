@@ -3,7 +3,14 @@ class Employee < ActiveRecord::Base
   
   self.table_name = 'employee'
   
-  has_one :employee_contact, :dependent => :destroy
+  has_one :employee_contact, :dependent => :destroy, :foreign_key => 'id'
+  has_one :employee_ec_contact, :dependent => :destroy, :foreign_key => 'id'
+  has_many :employee_dependent, :dependent => :destroy, :foreign_key => 'id'
+  has_one :employee_job, :dependent => :destroy, :foreign_key => 'id'
+  has_one :employee_spouse, :dependent => :destroy, :foreign_key => 'id'
+  has_one :employee_salary, :dependent => :destroy, :foreign_key => 'id'
+  has_one :employee_qualification, :dependent => :destroy, :foreign_key => 'id'
+  has_one :employee_membership, :dependent => :destroy, :foreign_key => 'id'
   
   validates_presence_of :employee_id, :message => 'Employee ID is required'
   validates_presence_of :first_name, :message => 'First Name is required'
@@ -15,7 +22,6 @@ class Employee < ActiveRecord::Base
   validates_presence_of :dob, :message => 'Date of Birth is required'
   validates_presence_of :place_of_birth, :message => 'Place of Birth is required'
   validates_presence_of :race, :message => 'Race is required'
-  validates_presence_of :is_bumi, :message => 'Is Bumi is required'
   
   validates_uniqueness_of :employee_id, :message => "Employee ID %{value} already exist"
 end

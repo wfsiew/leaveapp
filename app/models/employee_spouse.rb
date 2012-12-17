@@ -3,6 +3,8 @@ class EmployeeSpouse < ActiveRecord::Base
   
   self.table_name = 'employee_spouse'
   
+  belongs_to :employee, :foreign_key => 'id'
+  
   validates_presence_of :name, :message => 'Name is required'
   validates_presence_of :dob, :message => 'Date of Birth is required'
   validates_presence_of :ic, :message => 'IC No. is required'

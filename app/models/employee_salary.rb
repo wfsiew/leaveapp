@@ -3,6 +3,8 @@ class EmployeeSalary < ActiveRecord::Base
   
   self.table_name = 'employee_salary'
   
+  belongs_to :employee, :foreign_key => 'id'
+  
   validates_presence_of :salary, :message => 'Salary is required'
   validates_presence_of :bank_name, :message => 'Bank Name is required'
   validates_presence_of :bank_acc_no, :message => 'Bank Account No. is required'
@@ -11,5 +13,5 @@ class EmployeeSalary < ActiveRecord::Base
   validates_presence_of :epf_no, :message => 'EPF No. is required'
   
   validates_numericality_of :salary, :greater_than => 0, :message => 'Salary is invalid'
-  validates_numericality_of :allowance, :greater_than => 0, :message => 'Allowance is invalid'
+  validates_numericality_of :allowance, :greater_than_or_equal_to => 0, :message => 'Allowance is invalid'
 end

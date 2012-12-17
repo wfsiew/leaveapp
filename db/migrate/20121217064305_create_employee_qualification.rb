@@ -1,6 +1,6 @@
 class CreateEmployeeQualification < ActiveRecord::Migration
   def change
-    create_table :employee_qualification, { :primary_key => :id } do |t|
+    create_table :employee_qualification, { :primary_key => 'id' } do |t|
       t.string :id, :null => false, :limit => 40
       t.integer :level, :null => false
       t.string :institute, :null => false

@@ -1,6 +1,6 @@
 class CreateEmployeeContact < ActiveRecord::Migration
   def change
-    create_table :employee_contact, { :primary_key => :id } do |t|
+    create_table :employee_contact, { :primary_key => 'id' } do |t|
       t.string :id, :null => false, :limit => 40
       t.string :address_1, :null => false
       t.string :address_2

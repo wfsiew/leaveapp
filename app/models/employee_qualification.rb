@@ -3,6 +3,8 @@ class EmployeeQualification < ActiveRecord::Base
   
   self.table_name = 'employee_qualification'
   
+  belongs_to :employee, :foreign_key => 'id'
+  
   validates_presence_of :level, :message => 'Qualification Level is required'
   validates_presence_of :institute, :message => 'Institute name is required'
   validates_presence_of :year, :message => 'Year obtained is required'

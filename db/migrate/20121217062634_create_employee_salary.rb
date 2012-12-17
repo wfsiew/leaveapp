@@ -1,6 +1,6 @@
 class CreateEmployeeSalary < ActiveRecord::Migration
   def change
-    create_table :employee_salary, { :primary_key => :id } do |t|
+    create_table :employee_salary, { :primary_key => 'id' } do |t|
       t.string :id, :null => false, :limit => 40
       t.decimal :salary, :null => false, :precision => 10, :scale => 2
       t.decimal :allowance, :precision => 10, :scale => 2
