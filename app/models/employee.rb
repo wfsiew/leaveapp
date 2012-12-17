@@ -3,7 +3,7 @@ class Employee < ActiveRecord::Base
   
   self.table_name = 'employee'
   
-  has_one :employee_contact, :dependent => :nullify
+  has_one :employee_contact, :dependent => :destroy
   
   validates_presence_of :employee_id, :message => 'Employee ID is required'
   validates_presence_of :first_name, :message => 'First Name is required'
