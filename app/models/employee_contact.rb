@@ -3,6 +3,8 @@ class EmployeeContact < ActiveRecord::Base
   
   self.table_name = 'employee_contact'
   
+  belongs_to :employee, :foreign_key => 'id'
+  
   validates_presence_of :address_1, :message => 'Address 1 is required'
   validates_presence_of :city, :message => 'City is required'
   validates_presence_of :state, :message => 'State is required'
