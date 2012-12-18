@@ -22,5 +22,6 @@
 //= require user
 //= require designation
 //= require empstatus
+//= require jobcat
 //= require sort
 // require_tree .

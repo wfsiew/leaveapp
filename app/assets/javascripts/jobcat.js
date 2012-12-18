@@ -1,11 +1,11 @@
-var empstatus = ( function() {
+var jobcat = ( function() {
     var url = {
-      add : '/empstatus/new/',
-      create: '/empstatus/create/',
-      edit : '/empstatus/edit/',
-      update : '/empstatus/update/',
-      del : '/empstatus/delete/',
-      list : '/empstatus/list/'
+      add : '/jobcat/new/',
+      create: '/jobcat/create/',
+      edit : '/jobcat/edit/',
+      update : '/jobcat/update/',
+      del : '/jobcat/delete/',
+      list : '/jobcat/list/'
     };
 
     var popup_dialog_opt = null;
@@ -237,7 +237,7 @@ var empstatus = ( function() {
     }
 
     function load() {
-      return menu.get('/empstatus/', init);
+      return menu.get('/jobcat/', init);
     }
 
     return {

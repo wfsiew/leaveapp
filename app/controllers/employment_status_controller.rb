@@ -18,8 +18,8 @@ class EmploymentStatusController < ApplicationController
     keyword = params[:keyword].blank? ? '' : params[:keyword]
     pgnum = params[:pgnum].blank? ? 1 : params[:pgnum].to_i
     pgsize = params[:pgsize].blank? ? 0 : params[:pgsize].to_i
-    sortcolumn = params[:sortcolumn].blank? ? empstatusHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
-    sortdir = params[:sortdir].blank? ? empstatusHelper::DEFAULT_SORT_DIR : params[:sortdir]
+    sortcolumn = params[:sortcolumn].blank? ? EmploymentStatusHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
+    sortdir = params[:sortdir].blank? ? EmploymentStatusHelper::DEFAULT_SORT_DIR : params[:sortdir]
     
     sort = ApplicationHelper::Sort.new(sortcolumn, sortdir)
     
@@ -76,8 +76,8 @@ class EmploymentStatusController < ApplicationController
   def update
     o = EmploymentStatus.find(params[:id])
     
-    if o.update_attributes(:title => params[:title])
-      render :json => { :success => 1, :message => 'Employment was successfully updated.' }
+    if o.update_attributes(:name => params[:name])
+      render :json => { :success => 1, :message => 'Employment Status was successfully updated.' }
         
     else
       render :json => EmploymentStatusHelper.get_errors(o.errors, params)
@@ -95,6 +95,6 @@ class EmploymentStatusController < ApplicationController
     
     itemscount = EmploymentStatusHelper.item_message(keyword, pgnum, pgsize)
     
-    render :json => { :success => 1, :itemscount => itemscount, :message => "#{ids.size} designation(s) was successfully deleted." }
+    render :json => { :success => 1, :itemscount => itemscount, :message => "#{ids.size} Employment Status(es) was successfully deleted." }
   end
 end

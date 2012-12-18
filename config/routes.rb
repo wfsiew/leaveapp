@@ -30,6 +30,16 @@ Leaveapp::Application.routes.draw do
     match 'update(/:id)' => 'employment_status#update', :as => :update, :via => :post
     match 'delete' => 'employment_status#destroy', :as => :delete, :via => :post
   end
+
+  scope 'jobcat', :as => 'jobcat' do
+    match '' => 'job_category#index', :via => :get
+    match 'list' => 'job_category#list', :as => :list, :via => [:get, :post]
+    match 'new' => 'job_category#new', :as => :new, :via => :get
+    match 'create' => 'job_category#create', :as => :create, :via => :post
+    match 'edit(/:id)' => 'job_category#edit', :as => :edit, :via => :get
+    match 'update(/:id)' => 'job_category#update', :as => :update, :via => :post
+    match 'delete' => 'job_category#destroy', :as => :delete, :via => :post
+  end
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
