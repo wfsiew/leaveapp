@@ -54,7 +54,7 @@ class DesignationController < ApplicationController
     o = Designation.new(:title => params[:title], :desc => params[:desc], :note => params[:note])
     
     if o.save
-      render :json => { :success => 1, :message => 'Designation was successfully added.' }
+      render :json => { :success => 1, :message => 'Job Title was successfully added.' }
       
     else
       render :json => DesignationHelper.get_errors(o.errors, params)
@@ -78,7 +78,7 @@ class DesignationController < ApplicationController
     o = Designation.find(params[:id])
     
     if o.update_attributes(:title => params[:title], :desc => params[:desc], :note => params[:note])
-      render :json => { :success => 1, :message => 'Designation was successfully updated.' }
+      render :json => { :success => 1, :message => 'Job Title was successfully updated.' }
         
     else
       render :json => DesignationHelper.get_errors(o.errors, params)
@@ -96,6 +96,6 @@ class DesignationController < ApplicationController
     
     itemscount = DesignationHelper.item_message(keyword, pgnum, pgsize)
     
-    render :json => { :success => 1, :itemscount => itemscount, :message => "#{ids.size} designation(s) was successfully deleted." }
+    render :json => { :success => 1, :itemscount => itemscount, :message => "#{ids.size} Job Title(s) was successfully deleted." }
   end
 end

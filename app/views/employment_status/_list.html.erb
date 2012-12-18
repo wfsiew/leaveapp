@@ -4,25 +4,18 @@
       <tr>
         <th class="data chkbox"><input class="hdchk" type="checkbox" /></th>
         <th class="data">
-          <div id="hd_title" class="sortheader hover">
-            <span class="colheader">Job Title</span>
-            <span class="sorticon"></span>
-          </div>
-        </th>
-        <th class="data">
-          <div id="hd_desc" class="sortheader hover">
-            <span class="colheader">Job Description</span>
+          <div id="hd_name" class="sortheader hover">
+            <span class="colheader">Employment Status</span>
             <span class="sorticon"></span>
           </div>
         </th>
       </tr>
     </thead>
     <tbody>
-    <% @data[:list].each do |d| %>
-      <tr id="tr_<%= d.id %>" class="<%= cycle("ui-state-active", "ui-state-default") %>">
+    <% @data[:list].each do |o| %>
+      <tr id="tr_<%= o.id %>" class="<%= cycle("ui-state-active", "ui-state-default") %>">
         <td class="data chkbox"><input class="chk" type="checkbox" /></td>
-        <td class="data"><%= h d.title %></td>
-        <td class="data"><%= h d.desc %></td>
+        <td class="data"><%= h o.name %></td>
       </tr>
     <% end %>
     </tbody>

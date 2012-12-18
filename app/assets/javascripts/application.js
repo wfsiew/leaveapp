@@ -21,5 +21,6 @@
 //= require menu
 //= require user
 //= require designation
+//= require empstatus
 //= require sort
 // require_tree .
