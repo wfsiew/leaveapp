@@ -8,6 +8,7 @@
 
 require 'securerandom'
 
+User.delete_all
 Employee.delete_all
 EmployeeContact.delete_all
 EmployeeEcContact.delete_all
@@ -34,6 +35,15 @@ es = EmploymentStatus.create({name: 'Probation'})
 es1 = EmploymentStatus.create({name: 'Confirmed'})
 es2 = EmploymentStatus.create({name: 'Terminated'})
 
+us = User.new
+us.id = SecureRandom.uuid
+us.role = 1
+us.username = 'ben'
+us.status = true
+us.pwd = 'ben123'
+us.pwd_confirmation = 'ben123'
+us.save
+
 ActiveRecord::Base.transaction do
   employee = Employee.new
   employee.id = SecureRandom.uuid
@@ -50,6 +60,7 @@ ActiveRecord::Base.transaction do
   employee.race = 'chinese'
   employee.is_bumi = false
   employee.dob = Date.strptime('30-08-1988', '%d-%m-%Y')
+  employee.user_id = us.id
   
   ect = EmployeeContact.new
   ect.id = employee.id
@@ -158,6 +169,4 @@ lea.day = 1
 lea.from_date = Date.new(2012, 12, 25)
 lea.to_date = Date.new(2012, 12, 25)
 lea.reason = 'Clear leave'
-lea.approve_by = Employee.all.first.id
-lea.approve_datetime = Time.now
 lea.save

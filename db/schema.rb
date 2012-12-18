@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217065627) do
+ActiveRecord::Schema.define(:version => 20121218035747) do
 
   create_table "department", :force => true do |t|
     t.string "name", :null => false
@@ -28,21 +28,22 @@ ActiveRecord::Schema.define(:version => 20121217065627) do
   add_index "designation", ["title"], :name => "title", :unique => true
 
   create_table "employee", :force => true do |t|
-    t.string  "employee_id",                 :null => false
-    t.string  "first_name",                  :null => false
+    t.string  "employee_id",                  :null => false
+    t.string  "first_name",                   :null => false
     t.string  "middle_name"
-    t.string  "last_name",                   :null => false
-    t.string  "new_ic",                      :null => false
+    t.string  "last_name",                    :null => false
+    t.string  "new_ic",                       :null => false
     t.string  "old_ic"
     t.string  "passport_no"
-    t.string  "gender",         :limit => 1, :null => false
-    t.string  "marital_status", :limit => 1, :null => false
-    t.string  "nationality",                 :null => false
-    t.date    "dob",                         :null => false
-    t.string  "place_of_birth",              :null => false
-    t.string  "race",                        :null => false
+    t.string  "gender",         :limit => 1,  :null => false
+    t.string  "marital_status", :limit => 1,  :null => false
+    t.string  "nationality",                  :null => false
+    t.date    "dob",                          :null => false
+    t.string  "place_of_birth",               :null => false
+    t.string  "race",                         :null => false
     t.string  "religion"
-    t.boolean "is_bumi",                     :null => false
+    t.boolean "is_bumi",                      :null => false
+    t.string  "user_id",        :limit => 40
   end
 
   add_index "employee", ["employee_id"], :name => "employee_id", :unique => true
@@ -156,5 +157,14 @@ ActiveRecord::Schema.define(:version => 20121217065627) do
   end
 
   add_index "leave_type", ["name"], :name => "name", :unique => true
+
+  create_table "user", :force => true do |t|
+    t.integer "role",     :null => false
+    t.string  "username", :null => false
+    t.boolean "status",   :null => false
+    t.string  "password", :null => false
+  end
+
+  add_index "user", ["username"], :name => "username", :unique => true
 
 end

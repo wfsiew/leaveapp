@@ -17,6 +17,7 @@ class CreateEmployee < ActiveRecord::Migration
       t.string :race, :null => false
       t.string :religion
       t.boolean :is_bumi, :null => false
+      t.string :user_id, :limit => 40
     end
     
     add_index :employee, [:employee_id], { :name => 'employee_id', :unique => true }
