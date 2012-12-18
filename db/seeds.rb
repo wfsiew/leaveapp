@@ -18,6 +18,10 @@ EmployeeSalary.delete_all
 EmployeeQualification.delete_all
 EmployeeMembership.delete_all
 
+LeaveType.delete_all
+LeaveRule.delete_all
+Leave.delete_all
+
 Designation.delete_all
 Department.delete_all
 JobCategory.delete_all
@@ -120,3 +124,40 @@ ActiveRecord::Base.transaction do
   eq.save
   em.save
 end
+
+le = LeaveType.new
+le.name = 'Annual'
+le.admin_adjust = true
+le.admin_assign = true
+le.employee_apply = true
+
+le1 = LeaveType.new
+le1.name = 'Emergency'
+le1.admin_adjust = true
+le1.admin_assign = true
+le1.employee_apply = true
+
+le.save
+le1.save
+
+lr = LeaveRule.new
+lr.leave_type_id = le.id
+lr.employment_status_id = es1.id
+lr.save
+
+lr1 = LeaveRule.new
+lr1.leave_type_id = le1.id
+lr1.employment_status_id = es1.id
+lr1.save
+
+lea = Leave.new
+lea.id = SecureRandom.uuid
+lea.employee_id = Employee.all.first.id
+lea.leave_type_id = le.id
+lea.day = 1
+lea.from_date = Date.new(2012, 12, 25)
+lea.to_date = Date.new(2012, 12, 25)
+lea.reason = 'Clear leave'
+lea.approve_by = Employee.all.first.id
+lea.approve_datetime = Time.now
+lea.save

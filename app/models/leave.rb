@@ -1,7 +1,9 @@
 class Leave < ActiveRecord::Base
-  attr_accessible :day, :from_date, :id, :leave_type_id, :reason, :to_date
+  attr_accessible :day, :from_date, :id, :leave_type_id, :reason, :to_date, :employee_id, :approve_by, :approve_datetime
   
   self.table_name = 'leave'
+  
+  belongs_to :leave_type
   
   validates_presence_of :day, :message => 'No. of day(s) is required'
   validates_presence_of :from_date, :message => 'From Date is required'

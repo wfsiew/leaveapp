@@ -133,14 +133,17 @@ ActiveRecord::Schema.define(:version => 20121217065627) do
   add_index "job_category", ["name"], :name => "name", :unique => true
 
   create_table "leave", :force => true do |t|
-    t.integer "leave_type_id", :null => false
-    t.integer "day",           :null => false
-    t.date    "from_date",     :null => false
-    t.date    "to_date",       :null => false
-    t.string  "reason"
+    t.string   "employee_id",      :limit => 40, :null => false
+    t.integer  "leave_type_id",                  :null => false
+    t.float    "day",                            :null => false
+    t.date     "from_date",                      :null => false
+    t.date     "to_date",                        :null => false
+    t.string   "reason"
+    t.string   "approve_by",       :limit => 40
+    t.datetime "approve_datetime"
   end
 
-  create_table "leave_rule_1", :id => false, :force => true do |t|
+  create_table "leave_rule", :id => false, :force => true do |t|
     t.integer "leave_type_id",        :null => false
     t.integer "employment_status_id", :null => false
   end
