@@ -17,6 +17,7 @@ class UserController < ApplicationController
   # GET /user/list
   # GET /user/list.json
   def list
+    find = params[:find].blank? ? 0 : params[:find].to_i
     keyword = params[:keyword].blank? ? '' : params[:keyword]
     pgnum = params[:pgnum].blank? ? 1 : params[:pgnum].to_i
     pgsize = params[:pgsize].blank? ? 0 : params[:pgsize].to_i
@@ -25,11 +26,11 @@ class UserController < ApplicationController
     
     sort = ApplicationHelper::Sort.new(sortcolumn, sortdir)
     
-    if keyword.blank?
+    if find == 0 && keyword.blank?
       @data = UserHelper.get_all(pgnum, pgsize, sort)
       
     else
-      @data = UserHelper.get_filter_by(keyword, pgnum, pgsize, sort)
+      @data = UserHelper.get_filter_by(find, keyword, pgnum, pgsize, sort)
     end
     
     respond_to do |fmt|

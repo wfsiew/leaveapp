@@ -20,5 +20,6 @@
 //= require base
 //= require menu
 //= require user
+//= require designation
 //= require sort
 // require_tree .

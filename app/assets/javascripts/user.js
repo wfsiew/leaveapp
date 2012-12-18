@@ -95,7 +95,7 @@
           return func_update(id);
         });
         $('.save_button.cancel').click(func_cancel_edit);
-        $('#edit-form').tooltip({track: false});
+        $('#edit-form').tooltip({track: true});
         utils.bind_hover($('.save_button'));
         $('#dialog-edit').dialog('open');
       });

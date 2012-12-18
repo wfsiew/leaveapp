@@ -11,6 +11,16 @@ Leaveapp::Application.routes.draw do
     match 'delete' => 'user#destroy', :as => :delete, :via => :post
   end
   
+  scope 'designation', :as => 'designation' do
+    match '' => 'designation#index', :via => :get
+    match 'list' => 'designation#list', :as => :list, :via => [:get, :post]
+    match 'new' => 'designation#new', :as => :new, :via => :get
+    match 'create' => 'designation#create', :as => :create, :via => :post
+    match 'edit(/:id)' => 'designation#edit', :as => :edit, :via => :get
+    match 'update(/:id)' => 'designation#update', :as => :update, :via => :post
+    match 'delete' => 'designation#destroy', :as => :delete, :via => :post
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

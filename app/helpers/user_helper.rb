@@ -15,9 +15,9 @@ module UserHelper
       :list => list, :sortcolumn => sort.column, :sortdir => sort.direction }
   end
   
-  def self.get_filter_by(keyword, pagenum = 1, pagesize = ApplicationHelper::Pager.default_page_size,
+  def self.get_filter_by(find, keyword, pagenum = 1, pagesize = ApplicationHelper::Pager.default_page_size,
     sort = ApplicationHelper::Sort.new(DEFAULT_SORT_COLUMN, DEFAULT_SORT_DIR))
-    criteria = User.where('username like ?', "%#{keyword}%")
+    criteria, order = get_filter_criteria(find, keyword, sort)
     total = criteria.count
     pager = ApplicationHelper::Pager.new(total, pagenum, pagesize)
     order = sort.to_s
@@ -45,6 +45,36 @@ module UserHelper
       total = criteria.count
       pager = ApplicationHelper::Pager.new(total, pagenum, pagesize)
       return pager.item_message
+    end
+  end
+  
+  private
+  
+  def self.get_filter_criteria(find, keyword, sort = nil)
+    text = "%#{keyword}%"
+    order = sort.present? ? sort.to_s : nil
+    criteria = User
+    
+    case find 
+    when 2
+      criteria = criteria.where('username like ? and role = 1', text)
+      return criteria, order
+      
+    when 3
+      criteria = criteria.where('username like ? and role = 2', text)
+      return criteria, order
+      
+    when 4
+      criteria = criteria.where('username like ? and status = 1', text)
+      return criteria, order
+      
+    when 5
+      criteria = criteria.where('username like ? and status = 0', text)
+      return criteria, order
+      
+    else
+      criteria = criteria.where('username like ?', text)
+      return criteria, order
     end
   end
 end

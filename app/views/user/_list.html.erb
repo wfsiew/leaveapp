@@ -5,7 +5,19 @@
         <th class="data chkbox"><input class="hdchk" type="checkbox" /></th>
         <th class="data">
           <div id="hd_username" class="sortheader hover">
-            <span class="colheader"><%= t('user.field.username') %></span>
+            <span class="colheader">Username</span>
+            <span class="sorticon"></span>
+          </div>
+        </th>
+        <th class="data">
+          <div id="hd_role" class="sortheader hover">
+            <span class="colheader">User Role</span>
+            <span class="sorticon"></span>
+          </div>
+        </th>
+        <th class="data">
+          <div id="hd_status" class="sortheader hover">
+            <span class="colheader">Status</span>
             <span class="sorticon"></span>
           </div>
         </th>
@@ -15,7 +27,9 @@
     <% @data[:list].each do |o| %>
       <tr id="tr_<%= o.id %>" class="<%= cycle("ui-state-active", "ui-state-default") %>">
         <td class="data chkbox"><input class="chk" type="checkbox" /></td>
-        <td class="data"><%= o.username %></td>
+        <td class="data"><%= h o.username %></td>
+        <td class="data"><%= h o.role_display %></td>
+        <td class="data"><%= h o.status_display %></td>
       </tr>
     <% end %>
     </tbody>

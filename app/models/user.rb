@@ -41,6 +41,14 @@ class User < ActiveRecord::Base
     @@statuses
   end
   
+  def role_display
+    role == 1 ? 'Admin' : 'Normal User'
+  end
+  
+  def status_display
+    status == true ? 'Enabled' : 'Disabled'
+  end
+  
   protected
   
   def encrypt_new_password

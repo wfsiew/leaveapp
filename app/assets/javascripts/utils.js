@@ -47,8 +47,11 @@
      */
     function init_progress() {
       $(document).ajaxSend(function(evt, jqXHR, ajaxOptions) {
+        $('#progress_status').show();
       });
-      $(document).ajaxComplete($.unblockUI);
+      $(document).ajaxComplete(function() {
+        $('#progress_status').hide();
+      });
     }
 
     /**
