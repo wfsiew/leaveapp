@@ -1,4 +1,16 @@
 Leaveapp::Application.routes.draw do
+  root :to => 'home#index'
+  
+  scope 'user', :as => 'user' do
+    match '' => 'user#index', :via => :get
+    match 'list' => 'user#list', :as => :list, :via => [:get, :post]
+    match 'new' => 'user#new', :as => :new, :via => :get
+    match 'create' => 'user#create', :as => :create, :via => :post
+    match 'edit(/:id)' => 'user#edit', :as => :edit, :via => :get
+    match 'update(/:id)' => 'user#update', :as => :update, :via => :post
+    match 'delete' => 'user#destroy', :as => :delete, :via => :post
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

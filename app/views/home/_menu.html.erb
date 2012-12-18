@@ -1,0 +1,19 @@
+<div id="menu">
+  <h3><%= link_to 'Administration', '#' %></h3>
+  <div>
+    <div><%= link_to 'User', '#', :onclick => "return user.load()" %></div>
+    <div><%= link_to 'Employee', '#', :onclick => "return emp.load" %></div>
+  </div>
+  <h3><%= link_to 'Job', '#' %></h3>
+  <div>
+    <div><%= link_to 'Job Title', '#', :onclick => "return jobtitle.load()" %></div>
+    <div><%= link_to 'Employment Status', '#', :onclick => "return empstatus.load()" %></div>
+    <div><%= link_to 'Job Category', '#', :onclick => "return jobcat.load()" %></div>
+  </div>
+  <h3><%= link_to 'Leave', '#' %></h3>
+  <div>
+    <div><%= link_to 'Leave Type', '#', :onclick => "return leavetype.load()" %></div>
+    <div><%= link_to 'Leave Summary', '#', :onclick => "return leavesumm.load()" %></div>
+    <div><%= link_to 'Leave List', '#', :onclick => "return leavelist.load()" %></div>
+  </div>
+</div>

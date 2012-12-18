@@ -9,15 +9,18 @@ class User < ActiveRecord::Base
   has_one :employee, :dependent => :nullify
   
   validates :username, :uniqueness => { :message => "Username %{value} already exist" },
-                       :length => { :within => 3..50, :message => "Minimum is %{value} characters" }
+                       :length => { :within => 3..50, :message => "Minimum is %{count} characters" }
   validates :pwd, :confirmation => { :message => "Password doesn't match confirmation" },
-                  :length => { :within => 4..20, :message => "Minimum is %{value} characters" },
+                  :length => { :within => 4..20, :message => "Minimum is %{count} characters" },
                   :presence => { :message => "Password is required" },
                   :if => :password_required?
                   
   before_save :encrypt_new_password
   
   UNCHANGED_PASSWORD = '********'
+  
+  @@roles = { 'Admin' => 1, 'Normal User' => 2 }
+  @@statuses = { 'Enabled' => 1, 'Disabled' => 0 }
   
   def self.authenticate(username, password)
     user = find_by_username(username)
@@ -28,6 +31,14 @@ class User < ActiveRecord::Base
   
   def authenticated?(password)
     self.password == encrypt(password)
+  end
+  
+  def self.roles
+    @@roles
+  end
+  
+  def self.statuses
+    @@statuses
   end
   
   protected
