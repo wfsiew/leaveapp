@@ -23,7 +23,7 @@ class AssignLeaveController < ApplicationController
     from_date = Date.strptime(_from_date, '%d-%m-%Y') if _from_date.present?
     to_date = Date.strptime(_to_date, '%d-%m-%Y') if _to_date.present?
     
-    o = Leave.new(:id => SecureRandom.uuid, :employee_id => params[:employee_id], :leave_type_id => params[:leave_type_id],
+    o = Leave.new(:id => SecureRandom.uuid, :staff_id => params[:staff_id], :leave_type_id => params[:leave_type_id],
                   :day => params[:day], :from_date => from_date, :to_date => to_date, :reason => params[:reason])
                   
     if o.save

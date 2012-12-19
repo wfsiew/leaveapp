@@ -46,7 +46,7 @@ us.save
 
 x = Employee.new
 x.id = SecureRandom.uuid
-x.employee_id = 'S0003'
+x.staff_id = 'S0003'
 x.first_name = 'Lim'
 x.middle_name = 'Gun'
 x.last_name = 'Min'
@@ -65,7 +65,7 @@ x.save
 ActiveRecord::Base.transaction do
   employee = Employee.new
   employee.id = SecureRandom.uuid
-  employee.employee_id = 'S0002'
+  employee.staff_id = 'S0002'
   employee.first_name = 'Lim'
   employee.middle_name = 'Gun'
   employee.last_name = 'Min'
@@ -182,7 +182,7 @@ lr1.save
 
 lea = Leave.new
 lea.id = SecureRandom.uuid
-lea.employee_id = Employee.all.first.id
+lea.staff_id = 'S0002'
 lea.leave_type_id = le.id
 lea.day = 1
 lea.from_date = Date.new(2012, 12, 25)

@@ -1,11 +1,13 @@
 class Leave < ActiveRecord::Base
-  attr_accessible :day, :from_date, :id, :leave_type_id, :reason, :to_date, :employee_id, :approve_by, :approve_datetime
+  attr_accessible :day, :from_date, :id, :leave_type_id, :reason, :to_date, :staff_id, :approve_by, :approve_datetime,
                   :status
   
   self.table_name = 'leave'
   
   belongs_to :leave_type
+  belongs_to :employee, :foreign_key => 'staff_id', :primary_key => 'staff_id'
   
+  validates_presence_of :staff_id, :message => 'Staff ID is required'
   validates_presence_of :day, :message => 'No. of day(s) is required'
   validates_presence_of :from_date, :message => 'From Date is required'
   validates_presence_of :to_date, :message => 'To Date is required'

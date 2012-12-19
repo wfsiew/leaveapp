@@ -2,11 +2,11 @@
   <table>
     <tr>
       <td valign="top" class="lbl">
-        <%= label_tag :employee_id, 'Employee ID', :class => 'label' %>
+        <%= label_tag :staff_id, 'Staff ID', :class => 'label' %>
       </td>
       <td>
-        <%= text_field_tag :employee_id, nil, :id => 'id_employee_id', :class => 'text', :placeholder => 'enter employee id',
-                           :title => 'enter employee id' %>
+        <%= text_field_tag :staff_id, nil, :id => 'id_staff_id', :class => 'text', :placeholder => 'enter staff id',
+                           :title => 'enter staff id' %>
       </td>
     </tr>
     <tr>
@@ -58,7 +58,7 @@
       <td></td>
       <td>
         <div class="row_button">
-          <%= render 'home/save_button' %>
+          <%= render 'home/assign_button' %>
         </div>
       </td>
     </tr>

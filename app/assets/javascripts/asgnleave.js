@@ -43,7 +43,7 @@ var asgnleave = ( function() {
     var form = $('#save-form');
     
     var data = {
-      employee_id : form.find('#id_employee_id').val(),
+      staff_id : form.find('#id_staff_id').val(),
       leave_type_id : form.find('#id_leave_type').val(),
       day : form.find('#id_day').val(),
       from_date : form.find('#id_from_date').val(),

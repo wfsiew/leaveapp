@@ -1,5 +1,5 @@
 class Employee < ActiveRecord::Base
-  attr_accessible :dob, :employee_id, :user_id, :first_name, :gender, :id, :is_bumi, :last_name, :marital_status, :middle_name, :nationality, :new_ic, :old_ic, :passport_no, :place_of_birth, :race, :religion
+  attr_accessible :dob, :staff_id, :user_id, :first_name, :gender, :id, :is_bumi, :last_name, :marital_status, :middle_name, :nationality, :new_ic, :old_ic, :passport_no, :place_of_birth, :race, :religion
   
   self.table_name = 'employee'
   
@@ -14,8 +14,9 @@ class Employee < ActiveRecord::Base
   has_one :employee, :foreign_key => 'id'
   belongs_to :user
   belongs_to :employee, :foreign_key => 'supervisor_id'
+  has_many :leave, :dependent => :destroy, :foreign_key => 'staff_id', :primary_key => 'staff_id'
   
-  validates_presence_of :employee_id, :message => 'Employee ID is required'
+  validates_presence_of :staff_id, :message => 'Employee ID is required'
   validates_presence_of :first_name, :message => 'First Name is required'
   validates_presence_of :last_name, :message => 'Last Name is required'
   validates_presence_of :new_ic, :message => 'New IC No. is required'
@@ -26,5 +27,5 @@ class Employee < ActiveRecord::Base
   validates_presence_of :place_of_birth, :message => 'Place of Birth is required'
   validates_presence_of :race, :message => 'Race is required'
   
-  validates_uniqueness_of :employee_id, :message => "Employee ID %{value} already exist"
+  validates_uniqueness_of :staff_id, :message => "Employee ID %{value} already exist"
 end

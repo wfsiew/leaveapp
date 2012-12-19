@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20121218035747) do
   add_index "designation", ["title"], :name => "title", :unique => true
 
   create_table "employee", :force => true do |t|
-    t.string  "employee_id",                  :null => false
+    t.string  "staff_id",                     :null => false
     t.string  "first_name",                   :null => false
     t.string  "middle_name"
     t.string  "last_name",                    :null => false
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(:version => 20121218035747) do
     t.string  "supervisor_id",  :limit => 40
   end
 
-  add_index "employee", ["employee_id"], :name => "employee_id", :unique => true
+  add_index "employee", ["staff_id"], :name => "staff_id", :unique => true
 
   create_table "employee_contact", :force => true do |t|
     t.string "address_1",    :null => false
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(:version => 20121218035747) do
   add_index "job_category", ["name"], :name => "name", :unique => true
 
   create_table "leave", :force => true do |t|
-    t.string   "employee_id",      :limit => 40, :null => false
+    t.string   "staff_id",         :limit => 40, :null => false
     t.integer  "leave_type_id",                  :null => false
     t.float    "day",                            :null => false
     t.date     "from_date",                      :null => false
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20121218035747) do
     t.string   "reason"
     t.string   "approve_by",       :limit => 40
     t.datetime "approve_datetime"
+    t.string   "status",           :limit => 1
   end
 
   create_table "leave_rule", :id => false, :force => true do |t|

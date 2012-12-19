@@ -2,7 +2,7 @@ class CreateEmployee < ActiveRecord::Migration
   def change
     create_table :employee, { :primary_key => 'id' } do |t|
       t.string :id, :null => false, :limit => 40
-      t.string :employee_id, :null => false
+      t.string :staff_id, :null => false
       t.string :first_name, :null => false
       t.string :middle_name
       t.string :last_name, :null => false
@@ -21,7 +21,7 @@ class CreateEmployee < ActiveRecord::Migration
       t.string :supervisor_id, :limit => 40
     end
     
-    add_index :employee, [:employee_id], { :name => 'employee_id', :unique => true }
+    add_index :employee, [:staff_id], { :name => 'staff_id', :unique => true }
     change_column :employee, :id, :string, :limit => 40
   end
 end
