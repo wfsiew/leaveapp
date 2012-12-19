@@ -1,7 +1,7 @@
 var empstatus = ( function() {
     var url = {
       add : '/empstatus/new/',
-      create: '/empstatus/create/',
+      create : '/empstatus/create/',
       edit : '/empstatus/edit/',
       update : '/empstatus/update/',
       del : '/empstatus/delete/',

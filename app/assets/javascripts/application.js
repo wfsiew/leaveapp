@@ -23,5 +23,8 @@
 //= require designation
 //= require empstatus
 //= require jobcat
+//= require dept
+//= require leavetype
+//= require asgnleave
 //= require sort
 // require_tree .

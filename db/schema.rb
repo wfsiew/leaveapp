@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20121218035747) do
     t.string  "religion"
     t.boolean "is_bumi",                      :null => false
     t.string  "user_id",        :limit => 40
+    t.string  "supervisor_id",  :limit => 40
   end
 
   add_index "employee", ["employee_id"], :name => "employee_id", :unique => true

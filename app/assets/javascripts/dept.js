@@ -1,11 +1,11 @@
-﻿var designation = ( function() {
+var dept = ( function() {
     var url = {
-      add : '/designation/new/',
-      create : '/designation/create/',
-      edit : '/designation/edit/',
-      update : '/designation/update/',
-      del : '/designation/delete/',
-      list : '/designation/list/'
+      add : '/dept/new/',
+      create : '/dept/create/',
+      edit : '/dept/edit/',
+      update : '/dept/update/',
+      del : '/dept/delete/',
+      list : '/dept/list/'
     };
 
     var popup_dialog_opt = null;
@@ -194,9 +194,7 @@
       var form = (t == 'add' ? $('#add-form') : $('#edit-form'));
 
       var data = {
-        title : form.find('#id_title').val(),
-        desc : form.find('#id_desc').val(),
-        note : form.find('#id_note').val()
+        name : form.find('#id_name').val()
       };
 
       return data;
@@ -224,7 +222,7 @@
       $('#id_add').click(show_form);
       $('#id_delete').click(func_delete);
       $('#id_find').click(nav_list.show_list);
-      $('#id_display,#id_selection').change(nav_list.show_list);
+      $('#id_display').change(nav_list.show_list);
       $('#id_query').keypress(nav_list.query_keypress);
       $('#id_query').keyup(nav_list.query_keyup);
       $('#id_query').tooltip({track: true});
@@ -239,7 +237,7 @@
     }
 
     function load() {
-      return menu.get('/designation/', init);
+      return menu.get('/dept/', init);
     }
 
     return {

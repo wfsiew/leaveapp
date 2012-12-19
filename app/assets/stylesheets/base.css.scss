@@ -143,6 +143,11 @@ body {
   height: 100px;
 }
 
+.textarea2 {
+  width: 250px;
+  height: 50px;
+}
+
 .select {
   width: 202px;
   font-size: 1em;
@@ -226,15 +231,19 @@ div.row_button {
   display: none;
 }
 
-input[type='text'], input[type='password'], .textarea {
+#admin-form {
+  width: 450px;
+}
+
+input[type='text'], input[type='password'], textarea {
   border: 1px solid #ccc;
 }
 
-input[type='text']:HOVER, input[type='password']:HOVER, .textarea:HOVER {
+input[type='text']:HOVER, input[type='password']:HOVER, textarea:HOVER {
   border: 1px solid #000;
 }
 
-input[type='text']:FOCUS, input[type='password']:FOCUS, .textarea:FOCUS {
+input[type='text']:FOCUS, input[type='password']:FOCUS, textarea:FOCUS {
   background-color: #ffc;
 }
 

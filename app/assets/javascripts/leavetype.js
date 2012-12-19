@@ -1,11 +1,11 @@
-﻿var designation = ( function() {
+var leavetype = ( function() {
     var url = {
-      add : '/designation/new/',
-      create : '/designation/create/',
-      edit : '/designation/edit/',
-      update : '/designation/update/',
-      del : '/designation/delete/',
-      list : '/designation/list/'
+      add : '/leavetype/new/',
+      create : '/leavetype/create/',
+      edit : '/leavetype/edit/',
+      update : '/leavetype/update/',
+      del : '/leavetype/delete/',
+      list : '/leavetype/list/'
     };
 
     var popup_dialog_opt = null;
@@ -192,11 +192,15 @@
 
     function get_data(t) {
       var form = (t == 'add' ? $('#add-form') : $('#edit-form'));
+      var admin_adjust = (form.find('#id_admin_adjust').attr('checked') == 'checked' ? true : false);
+      var admin_assign = (form.find('#id_admin_assign').attr('checked') == 'checked' ? true : false);
+      var employee_apply = (form.find('#id_employee_apply').attr('checked') == 'checked' ? true : false);
 
       var data = {
-        title : form.find('#id_title').val(),
-        desc : form.find('#id_desc').val(),
-        note : form.find('#id_note').val()
+        name : form.find('#id_name').val(),
+        admin_adjust : admin_adjust,
+        admin_assign : admin_assign,
+        employee_apply : employee_apply
       };
 
       return data;
@@ -224,7 +228,7 @@
       $('#id_add').click(show_form);
       $('#id_delete').click(func_delete);
       $('#id_find').click(nav_list.show_list);
-      $('#id_display,#id_selection').change(nav_list.show_list);
+      $('#id_display').change(nav_list.show_list);
       $('#id_query').keypress(nav_list.query_keypress);
       $('#id_query').keyup(nav_list.query_keyup);
       $('#id_query').tooltip({track: true});
@@ -239,7 +243,7 @@
     }
 
     function load() {
-      return menu.get('/designation/', init);
+      return menu.get('/leavetype/', init);
     }
 
     return {

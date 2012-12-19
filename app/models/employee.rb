@@ -11,7 +11,9 @@ class Employee < ActiveRecord::Base
   has_one :employee_salary, :dependent => :destroy, :foreign_key => 'id'
   has_one :employee_qualification, :dependent => :destroy, :foreign_key => 'id'
   has_one :employee_membership, :dependent => :destroy, :foreign_key => 'id'
+  has_one :employee, :foreign_key => 'id'
   belongs_to :user
+  belongs_to :employee, :foreign_key => 'supervisor_id'
   
   validates_presence_of :employee_id, :message => 'Employee ID is required'
   validates_presence_of :first_name, :message => 'First Name is required'

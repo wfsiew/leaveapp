@@ -10,6 +10,7 @@ class CreateLeave < ActiveRecord::Migration
       t.string :reason
       t.string :approve_by, :limit => 40
       t.datetime :approve_datetime
+      t.string :status, :limit => 1
     end
     
     change_column :leave, :id, :string, :limit => 40

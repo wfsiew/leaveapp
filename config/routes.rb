@@ -41,6 +41,31 @@ Leaveapp::Application.routes.draw do
     match 'delete' => 'job_category#destroy', :as => :delete, :via => :post
   end
   
+  scope 'dept', :as => 'dept' do
+    match '' => 'department#index', :via => :get
+    match 'list' => 'department#list', :as => :list, :via => [:get, :post]
+    match 'new' => 'department#new', :as => :new, :via => :get
+    match 'create' => 'department#create', :as => :create, :via => :post
+    match 'edit(/:id)' => 'department#edit', :as => :edit, :via => :get
+    match 'update(/:id)' => 'department#update', :as => :update, :via => :post
+    match 'delete' => 'department#destroy', :as => :delete, :via => :post
+  end
+  
+  scope 'leavetype', :as => 'leavetype' do
+    match '' => 'leave_type#index', :via => :get
+    match 'list' => 'leave_type#list', :as => :list, :via => [:get, :post]
+    match 'new' => 'leave_type#new', :as => :new, :via => :get
+    match 'create' => 'leave_type#create', :as => :create, :via => :post
+    match 'edit(/:id)' => 'leave_type#edit', :as => :edit, :via => :get
+    match 'update(/:id)' => 'leave_type#update', :as => :update, :via => :post
+    match 'delete' => 'leave_type#destroy', :as => :delete, :via => :post
+  end
+  
+  scope 'asgnleave', :as => 'asgnleave' do
+    match '' => 'assign_leave#index', :via => :get
+    match 'create' => 'assign_leave#create', :as => :create, :via => :post
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

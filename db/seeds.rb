@@ -44,6 +44,24 @@ us.pwd = 'ben123'
 us.pwd_confirmation = 'ben123'
 us.save
 
+x = Employee.new
+x.id = SecureRandom.uuid
+x.employee_id = 'S0003'
+x.first_name = 'Lim'
+x.middle_name = 'Gun'
+x.last_name = 'Min'
+x.new_ic = '5599888'
+x.gender = 'F'
+x.marital_status = 'S'
+x.nationality = 'Malaysian'
+x.dob = '1988-06-08'
+x.place_of_birth = 'k.l'
+x.race = 'chinese'
+x.is_bumi = false
+x.dob = Date.strptime('30-08-1988', '%d-%m-%Y')
+x.user_id = us.id
+x.save
+
 ActiveRecord::Base.transaction do
   employee = Employee.new
   employee.id = SecureRandom.uuid
@@ -61,6 +79,7 @@ ActiveRecord::Base.transaction do
   employee.is_bumi = false
   employee.dob = Date.strptime('30-08-1988', '%d-%m-%Y')
   employee.user_id = us.id
+  employee.supervisor_id = x.id
   
   ect = EmployeeContact.new
   ect.id = employee.id
@@ -169,4 +188,5 @@ lea.day = 1
 lea.from_date = Date.new(2012, 12, 25)
 lea.to_date = Date.new(2012, 12, 25)
 lea.reason = 'Clear leave'
+lea.status = 'P'
 lea.save

@@ -1,7 +1,7 @@
 var jobcat = ( function() {
     var url = {
       add : '/jobcat/new/',
-      create: '/jobcat/create/',
+      create : '/jobcat/create/',
       edit : '/jobcat/edit/',
       update : '/jobcat/update/',
       del : '/jobcat/delete/',
