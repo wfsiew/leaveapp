@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class LeaveRule1Test < ActiveSupport::TestCase
+class LeaveEntitlementControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,6 +1,6 @@
 class Leave < ActiveRecord::Base
   attr_accessible :day, :from_date, :id, :leave_type_id, :reason, :to_date, :staff_id, :approve_by, :approve_datetime,
-                  :status
+                  :status, :day_type
   
   self.table_name = 'leave'
   

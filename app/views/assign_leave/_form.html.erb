@@ -55,6 +55,27 @@
       </td>
     </tr>
     <tr>
+      <td valign="top" class="lbl"></td>
+      <td>
+        <%= radio_button_tag :day_type, 0, :selected => true %>
+        <%= label_tag :day_type_full, 'Full day' %>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" class="lbl"></td>
+      <td>
+        <%= radio_button_tag :day_type, 1 %>
+        <%= label_tag :day_type_half_am, 'Half day morning' %>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" class="lbl"></td>
+      <td>
+        <%= radio_button_tag :day_type, 2 %>
+        <%= label_tag :day_type_half_pm, 'Half day afternoon' %>
+      </td>
+    </tr>
+    <tr>
       <td></td>
       <td>
         <div class="row_button">

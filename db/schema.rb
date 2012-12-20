@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218035747) do
+ActiveRecord::Schema.define(:version => 20121220072940) do
 
   create_table "department", :force => true do |t|
     t.string "name", :null => false
@@ -144,6 +144,21 @@ ActiveRecord::Schema.define(:version => 20121218035747) do
     t.string   "approve_by",       :limit => 40
     t.datetime "approve_datetime"
     t.string   "status",           :limit => 1
+    t.integer  "day_type",                       :null => false
+  end
+
+  create_table "leave_entitlement", :id => false, :force => true do |t|
+    t.string  "id",            :limit => 40, :null => false
+    t.integer "leave_type_id",               :null => false
+    t.float   "day",                         :null => false
+    t.integer "year",                        :null => false
+    t.float   "balance",                     :null => false
+    t.float   "taken",                       :null => false
+  end
+
+  create_table "leave_period", :force => true do |t|
+    t.date "from_date"
+    t.date "to_date"
   end
 
   create_table "leave_rule", :id => false, :force => true do |t|

@@ -48,7 +48,8 @@ var asgnleave = ( function() {
       day : form.find('#id_day').val(),
       from_date : form.find('#id_from_date').val(),
       to_date : form.find('#id_to_date').val(),
-      reason : form.find('#id_reason').val()
+      reason : form.find('#id_reason').val(),
+      day_type : form.find("input[name='day_type']:checked").val()
     };
     
     return data;

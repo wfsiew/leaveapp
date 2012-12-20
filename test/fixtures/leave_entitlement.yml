@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: MyString
+  leave_type_id: 1
+  day: 1.5
+  year: 1
+  balance: 1.5
+  taken: 1.5
+
+two:
+  id: MyString
+  leave_type_id: 1
+  day: 1.5
+  year: 1
+  balance: 1.5
+  taken: 1.5

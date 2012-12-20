@@ -189,4 +189,5 @@ lea.from_date = Date.new(2012, 12, 25)
 lea.to_date = Date.new(2012, 12, 25)
 lea.reason = 'Clear leave'
 lea.status = 'P'
+lea.day_type = 0
 lea.save

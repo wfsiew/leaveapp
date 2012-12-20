@@ -5,6 +5,7 @@ class LeaveType < ActiveRecord::Base
   
   has_many :leave_rule, :dependent => :destroy
   has_many :leave, :dependent => :destroy
+  has_many :leave_entitlement, :dependent => :destroy
   
   validates_presence_of :name, :message => 'Name is required'
   validates_uniqueness_of :name, :message => "Leave Type %{value} already exist"
