@@ -1,0 +1,2 @@
+class LeaveSummaryController < ApplicationController
+end

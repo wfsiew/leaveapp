@@ -39,7 +39,7 @@ class LeaveTypeController < ApplicationController
   # GET /leavetype/new
   # GET /leavetype/new.json
   def new
-    @leavetype = LeaveType.new
+    @leavetype = LeaveType.new(:admin_adjust => true, :admin_assign => true, :employee_apply => true)
     @form_id = 'add-form'
     
     respond_to do |fmt|

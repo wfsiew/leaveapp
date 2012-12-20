@@ -54,6 +54,26 @@ class LeavePeriodController < ApplicationController
     
     _to_date = params[:to_date]
     to_date = Date.strptime(_to_date, "%d-%m-%Y")
+    
+    o = LeavePeriod.first
+    
+    if o.blank?
+      o = LeavePeriod.new(:from_date => from_date, :to_date => to_date)
+      if o.save
+        render :json => { :success => 1, :message => 'Leave Period was successfully created.' }
+        
+      else
+        render :json => get_errors(o.errors, params)
+      end
+      
+    else
+      if o.update_attributes(:from_date => from_date, :to_date => to_date)
+        render :json => { :success => 1, :message => 'Leave Period was successfully updated.' }
+        
+      else
+        render :json => get_errors(o.errors, params)
+      end
+    end
   end
   
   private
@@ -62,5 +82,9 @@ class LeavePeriodController < ApplicationController
     x = 12.month.since(dt)
     y = 1.day.ago(x)
     return y
+  end
+  
+  def get_errors(errors, attr = {})
+    { :error => 1, :errors => errors }
   end
 end
