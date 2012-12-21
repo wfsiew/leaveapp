@@ -4,6 +4,9 @@ class EmployeeJob < ActiveRecord::Base
   self.table_name = 'employee_job'
   
   belongs_to :employee, :foreign_key => 'id'
+  belongs_to :designation 
+  belongs_to :employment_status
+  belongs_to :job_category
   
   validates_presence_of :designation_id, :message => 'Designation is required'
   validates_presence_of :department_id, :message => 'Department is required'

@@ -3,6 +3,8 @@ class Designation < ActiveRecord::Base
   
   self.table_name = 'designation'
   
+  has_many :employee_job, :dependent => :nullify
+  
   validates_presence_of :title, :message => 'Job Title is required'
   validates_uniqueness_of :title, :message => "Job Title %{value} already exist"
 end

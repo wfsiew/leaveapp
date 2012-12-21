@@ -27,5 +27,6 @@
 //= require leavetype
 //= require asgnleave
 //= require leaveperiod
+//= require leavesummary
 //= require sort
 // require_tree .

@@ -72,6 +72,11 @@ Leaveapp::Application.routes.draw do
     match 'create' => 'leave_period#create', :as => :create, :via => :post
   end
   
+  scope 'leavesummary', :as => 'leavesummary' do
+    match '' => 'leave_summary#index', :via => :get
+    match 'list' => 'leave_summary#list', :as => :list, :via => [:get, :post]
+  end
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

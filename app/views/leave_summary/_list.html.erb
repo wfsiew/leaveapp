@@ -1,0 +1,34 @@
+<% if @data.present? && @data[:list].any? %>
+  <table class="list_table">
+    <thead class="ui-widget-header">
+      <tr>
+        <th class="data">
+          <span class="colheader">Employee Name</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Leave Type</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @data[:list].each do |o| %>
+      <tr id="tr_<%= o.id %>" class="<%= cycle("ui-state-active", "ui-state-default") %>">
+        <td class="data"><%= h o.first_name %> <%= h o.middle_name %> <%= h o.last_name %></td>
+        <td class="data">
+          <table class="list_table">
+          <% @leavetypes.each do |t| %>
+            <tr>
+              <td><%= h t.name %></td>
+              <td><input type="text" size="6"></td>
+              <td>0.0</td>
+              <td>0.0</td>
+            </tr>
+          <% end %>
+          </table>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+<input id="id_pg" type="hidden" value="<%= @data[:hasprev] %>,<%= @data[:hasnext] %>,<%= @data[:prevpage] %>,<%= @data[:nextpage] %>,<%= @data[:item_msg] %>,<%= @data[:sortcolumn] %>,<%= @data[:sortdir] %>" />

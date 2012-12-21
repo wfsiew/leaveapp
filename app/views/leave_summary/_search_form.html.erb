@@ -1,0 +1,7 @@
+<%= label_tag :id_selection, 'Search By', :class => 'label' %>
+<select id="id_selection" class="search_option">
+  <%= options_for_select({ 'All' => 0, 'Staff ID' => 1,
+                           'First name' => 2, 'Middle name' => 3,
+                           'Last name' => 4, 'New IC' => 5 }) %>
+</select>
+<%= render 'search_panel' %>
