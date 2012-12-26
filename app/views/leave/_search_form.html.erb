@@ -1,7 +1,7 @@
 <table>
   <tr>
     <td>
-      <%= label_tag :from_date, 'From', :class => 'label' %>
+      <%= label_tag :id_from_date, 'From', :class => 'label' %>
     </td>
     <td>
       <%= text_field_tag :from_date, nil, :id => 'id_from_date', :class => 'text', :placeholder => 'dd-mm-YYYY' %>
@@ -9,7 +9,7 @@
   </tr>
   <tr>
     <td>
-      <%= label_tag :to_date, 'To', :class => 'label' %>
+      <%= label_tag :id_to_date, 'To', :class => 'label' %>
     </td>
     <td>
       <%= text_field_tag :to_date, nil, :id => 'id_to_date', :class => 'text', :placeholder => 'dd-mm-YYYY' %>
@@ -18,6 +18,9 @@
   <tr>
     <td>
       <%= label_tag :status, 'Show Leave with Status', :class => 'label' %>
+    </td>
+    <td>
+      
     </td>
   </tr>
 </table>
