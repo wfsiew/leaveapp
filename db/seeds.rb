@@ -21,7 +21,7 @@ EmployeeMembership.delete_all
 
 LeaveType.delete_all
 LeaveRule.delete_all
-Leave.delete_all
+LeaveRequest.delete_all
 
 Designation.delete_all
 Department.delete_all
@@ -180,7 +180,7 @@ lr1.leave_type_id = le1.id
 lr1.employment_status_id = es1.id
 lr1.save
 
-lea = Leave.new
+lea = LeaveRequest.new
 lea.id = SecureRandom.uuid
 lea.staff_id = 'S0002'
 lea.leave_type_id = le.id

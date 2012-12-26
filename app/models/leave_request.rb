@@ -1,8 +1,8 @@
-class Leave < ActiveRecord::Base
+class LeaveRequest < ActiveRecord::Base
   attr_accessible :day, :from_date, :id, :leave_type_id, :reason, :to_date, :staff_id, :approve_by, :approve_datetime,
                   :status, :day_type
   
-  self.table_name = 'leave'
+  self.table_name = 'leave_request'
   
   belongs_to :leave_type
   belongs_to :employee, :foreign_key => 'staff_id', :primary_key => 'staff_id'

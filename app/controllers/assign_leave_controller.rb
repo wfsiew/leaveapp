@@ -23,9 +23,9 @@ class AssignLeaveController < ApplicationController
     from_date = Date.strptime(_from_date, '%d-%m-%Y') if _from_date.present?
     to_date = Date.strptime(_to_date, '%d-%m-%Y') if _to_date.present?
     
-    o = Leave.new(:id => SecureRandom.uuid, :staff_id => params[:staff_id], :leave_type_id => params[:leave_type_id],
-                  :day => params[:day], :from_date => from_date, :to_date => to_date, :reason => params[:reason],
-                  :day_type => params[:day_type])
+    o = LeaveRequest.new(:id => SecureRandom.uuid, :staff_id => params[:staff_id], :leave_type_id => params[:leave_type_id],
+                         :day => params[:day], :from_date => from_date, :to_date => to_date, :reason => params[:reason],
+                         :day_type => params[:day_type])
                   
     if o.save
       render :json => { :success => 1, :message => 'Leave was successfully assigned.' }

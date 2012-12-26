@@ -1,6 +1,6 @@
-class CreateLeave < ActiveRecord::Migration
+class CreateLeaveRequest < ActiveRecord::Migration
   def change
-    create_table :leave, { :primary_key => 'id' } do |t|
+    create_table :leave_request, { :primary_key => 'id' } do |t|
       t.string :id, :null => false, :limit => 40
       t.string :staff_id, :null => false, :limit => 40
       t.integer :leave_type_id, :null => false
@@ -14,6 +14,6 @@ class CreateLeave < ActiveRecord::Migration
       t.integer :day_type, :null => false
     end
     
-    change_column :leave, :id, :string, :limit => 40
+    change_column :leave_request, :id, :string, :limit => 40
   end
 end

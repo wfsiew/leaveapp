@@ -1,5 +1,5 @@
 module LeaveHelper
-  def self.get_errors(errors, attr = {})
-    { :error => 1, :errors => errors }
+  def self.get_all
+    
   end
 end

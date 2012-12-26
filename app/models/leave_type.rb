@@ -4,7 +4,7 @@ class LeaveType < ActiveRecord::Base
   self.table_name = 'leave_type'
   
   has_many :leave_rule, :dependent => :destroy
-  has_many :leave, :dependent => :destroy
+  has_many :leave_request, :dependent => :destroy
   has_many :leave_entitlement, :dependent => :destroy
   
   validates_presence_of :name, :message => 'Name is required'
