@@ -23,7 +23,7 @@ class LeaveController < ApplicationController
     
     leave_status = params[:leave_status]
     
-    keyword = params[:keyword].blank? ? '' : params[:keyword]
+    keyword = params[:employee].blank? ? '' : params[:employee]
     pgnum = params[:pgnum].blank? ? 1 : params[:pgnum].to_i
     pgsize = params[:pgsize].blank? ? 0 : params[:pgsize].to_i
     sortcolumn = params[:sortcolumn].blank? ? LeaveHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
@@ -35,7 +35,7 @@ class LeaveController < ApplicationController
       @data = LeaveHelper.get_all(pgnum, pgsize, sort)
       
     else
-      @data = LeaveHelper.get_filter_by(from_date, to_date, leave_status, keyword, pgnum, pgsize, sort)
+      @data = LeaveHelper.get_filter_by(from_date, to_date, leave_status, employee, pgnum, pgsize, sort)
     end
     
     respond_to do |fmt|

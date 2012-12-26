@@ -1,6 +1,7 @@
 ﻿var utils = ( function() {
     var typing_timer = null;
     var done_typing_interval = 2000;
+    var date_format = 'dd-mm-yy';
 
     /**
      * @public
@@ -224,6 +225,7 @@
       stop_filter_timer : stop_filter_timer,
       get_itemid : get_itemid,
       set_disabled : set_disabled,
-      safe_replace : safe_replace
+      safe_replace : safe_replace,
+      date_format : date_format
     };
 }());

@@ -3,7 +3,8 @@
       list_url : '',
       list_func : null,
       del_func : null,
-      save_func : null
+      save_func : null,
+      search_param_func : null
     };
 
     /**
@@ -25,7 +26,7 @@
       var pgsize = $('#id_display').val();
       var pgnum = $('#id_display').data('pgnum');
       var sort = get_sort();
-      var param = get_search_param();
+      var param = ($.isFunction(config.search_param_func) ? config.search_param_func() : get_search_param());
       param['pgnum'] = pgnum;
       param['pgsize'] = pgsize;
       
