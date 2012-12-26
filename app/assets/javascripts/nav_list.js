@@ -2,7 +2,8 @@
     var config = {
       list_url : '',
       list_func : null,
-      del_func : null
+      del_func : null,
+      save_func : null
     };
 
     /**
@@ -153,6 +154,14 @@
           
         else
           utils.set_disabled('#id_delete', 1, null);
+      }
+      
+      if ($.isFunction(config.save_func)) {
+        if ($('.list_table')[0] != null)
+          utils.set_disabled('#id_save', 0, config.save_func);
+          
+        else
+          utils.set_disabled('#id_save', 1, null);
       }
       
       sort.init_sort($('#hd_' + utils.safe_replace(arr[5], '.', '-')), arr[6]);

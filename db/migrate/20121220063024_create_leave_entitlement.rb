@@ -5,7 +5,6 @@ class CreateLeaveEntitlement < ActiveRecord::Migration
       t.integer :leave_type_id, :null => false
       t.float :day, :null => false
       t.integer :year, :null => false
-      t.float :balance, :null => false
       t.float :taken, :null => false
     end
     

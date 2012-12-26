@@ -15,6 +15,7 @@ class Employee < ActiveRecord::Base
   belongs_to :user
   belongs_to :employee, :foreign_key => 'supervisor_id'
   has_many :leave, :dependent => :destroy, :foreign_key => 'staff_id', :primary_key => 'staff_id'
+  has_many :leave_entitlement, :dependent => :destroy, :foreign_key => 'id'
   
   validates_presence_of :staff_id, :message => 'Employee ID is required'
   validates_presence_of :first_name, :message => 'First Name is required'

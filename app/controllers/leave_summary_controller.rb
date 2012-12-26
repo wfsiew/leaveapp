@@ -32,9 +32,47 @@ class LeaveSummaryController < ApplicationController
       @data = EmployeeHelper.get_filter_by(find, keyword, pgnum, pgsize, sort)
     end
     
+    @leavetypes = LeaveType.order(:name).where(:admin_adjust => true)
+    
     respond_to do |fmt|
       fmt.html { render :partial => 'list' }
-      fmt.json { render :json => @data }
+      fmt.json { render :json => [@data, @leavetypes] }
+    end
+  end
+  
+  # POST /leavesummary/create
+  def create
+    empids = params[:empids]
+    leavetypeids = params[:leavetypeids]
+    leaveent = params[:leaveent]
+    year = Time.now.year
+    count = 0
+    
+    ActiveRecord::Base.transaction do
+      (0..empids.size).each do |i|
+        o = LeaveEntitlement.where(:id => empids[i], :leave_type_id => leavetypeids[i], :year => year).first
+        if o.present?
+          n = LeaveEntitlement.update_all({ :day => leaveent[i] }, 
+            ['id = ? and leave_type_id = ? and year = ?', empids[i], leavetypeids[i], year])
+          if n > 0
+            count += 1
+          end
+        
+        else
+          o = LeaveEntitlement.new(:id => empids[i], :leave_type_id => leavetypeids[i], :year => year,
+                                   :day => leaveent[i], :taken => 0)
+          if o.save
+            count += 1
+          end
+        end
+      end
+    end
+    
+    if count == empids.size
+      render :json => { :success => 1, :message => 'Succesfully saved.' }
+      
+    else
+      render :json => { :error => 1, :message => 'Failed to save.' }
     end
   end
   
