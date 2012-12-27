@@ -14,7 +14,7 @@
         <%= label_tag :leave_type_id, 'Leave Type', :class => 'label' %>
       </td>
       <td>
-        <select id="id_leave_type" class="select" name="leave_type_id">
+        <select id="id_leave_type" class="select" name="leave_type">
           <option value="">-- Please Select --</option>
           <%= options_from_collection_for_select(@data, :id, :name) %>
         </select>

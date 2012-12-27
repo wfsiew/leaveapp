@@ -61,7 +61,7 @@ module Leaveapp
     
     config.assets.precompile += %w(ui-darkness/jquery-ui-1.9.2.custom.min.css)
     
-    jquitheme = %w(ui-darkness)
+    jquitheme = %w(dark-hive)
     jquicss = 'jquery-ui-1.9.2.custom.min.css'
     
     jquitheme.each do |t|

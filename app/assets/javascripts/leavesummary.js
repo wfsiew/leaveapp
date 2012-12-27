@@ -39,17 +39,27 @@ var leavesummary = ( function() {
 
       return false;
     }
+    
+    function get_search_param() {
+      var param = {
+        employee : $('#id_employee').val(),
+        leave_type : $('#id_leave_type').val(),
+        designation : $('#id_designation').val(),
+        dept : $('#id_dept').val()
+      };
+      
+      return param;
+    }
 
     function init() {
       $('#id_find').click(nav_list.show_list);
-      $('#id_display,#id_selection').change(nav_list.show_list);
-      $('#id_query').keypress(nav_list.query_keypress);
-      $('#id_query').keyup(nav_list.query_keyup);
-      $('#id_query').tooltip({track : true});
+      $('#id_display').change(nav_list.show_list);
+      $('#id_employee').tooltip({track : true});
       utils.init_alert_dialog('#dialog-message');
       utils.bind_hover($('#id_save,#id_find'));
       nav_list.config.list_url = url.list;
       nav_list.config.save_func = func_save;
+      nav_list.config.search_param_func = get_search_param;
       nav_list.init();
     }
 

@@ -6,6 +6,8 @@ class LeaveSummaryController < ApplicationController
   def index
     @data = EmployeeHelper.get_all
     @leavetypes = LeaveType.order(:name).where(:admin_adjust => true)
+    @designation = Designation.order(:title).all
+    @dept = Department.order(:name).all
     
     respond_to do |fmt|
       fmt.html { render 'index', :layout => 'list' }
@@ -16,8 +18,10 @@ class LeaveSummaryController < ApplicationController
   # GET /leavesummary/list
   # GET /leavesummary/list.json
   def list
-    find = params[:find].blank? ? 0 : params[:find].to_i
-    keyword = params[:keyword].blank? ? '' : params[:keyword]
+    employee = params[:employee].blank? ? '' : params[:employee]
+    leave_type = params[:leave_type].blank? ? 0 : params[:leave_type].to_i
+    designation = params[:designation].blank? ? 0 : params[:designation].to_i
+    dept = params[:dept].blank? ? 0 : params[:dept].to_i
     pgnum = params[:pgnum].blank? ? 1 : params[:pgnum].to_i
     pgsize = params[:pgsize].blank? ? 0 : params[:pgsize].to_i
     sortcolumn = params[:sortcolumn].blank? ? EmployeeHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
@@ -25,14 +29,24 @@ class LeaveSummaryController < ApplicationController
     
     sort = ApplicationHelper::Sort.new(sortcolumn, sortdir)
     
-    if find == 0 && keyword.blank?
-      @data = EmployeeHelper.get_all(pgnum, pgsize, sort)
+    filters = { :employee => employee,
+                :designation => designation,
+                :dept => dept }
+    
+    if employee.blank? && leave_type == 0 && designation == 0 && dept == 0
+      @data = LeaveSummaryHelper.get_all(pgnum, pgsize, sort)
       
     else
-      @data = EmployeeHelper.get_filter_by(find, keyword, pgnum, pgsize, sort)
+      @data = LeaveSummaryHelper.get_filter_by(filters, pgnum, pgsize, sort)
     end
     
-    @leavetypes = LeaveType.order(:name).where(:admin_adjust => true)
+    criteria_leavetypes = LeaveType.order(:name).where(:admin_adjust => true)
+    
+    if leave_type != 0
+      criteria_leavetypes = criteria_leavetypes.where(:id => leave_type)
+    end
+    
+    @leavetypes = criteria_leavetypes.all
     
     respond_to do |fmt|
       fmt.html { render :partial => 'list' }

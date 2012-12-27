@@ -1,7 +1,41 @@
-<%= label_tag :id_selection, 'Search By', :class => 'label' %>
-<select id="id_selection" class="search_option">
-  <%= options_for_select({ 'All' => 0, 'Staff ID' => 1,
-                           'First name' => 2, 'Middle name' => 3,
-                           'Last name' => 4, 'New IC' => 5 }) %>
-</select>
+<table>
+  <tr>
+    <td>
+      <%= label_tag :id_employee, 'Employee', :class => 'label' %>
+    </td>
+    <td class="colspacing">
+      <%= text_field_tag :employee, nil, :id => 'id_employee', :class => 'text', :placeholder => 'type here to search', :title => 'type here to search' %>
+    </td>
+    <td>
+      <%= label_tag :id_leave_type, 'Leave Type', :class => 'label' %>
+    </td>
+    <td>
+      <select id="id_leave_type" class="select">
+        <option value="0">All</option>
+        <%= options_from_collection_for_select(@leavetypes, :id, :name) %>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= label_tag :id_designation, 'Job Title', :class => 'label' %>
+    </td>
+    <td class="colspacing">
+      <select id="id_designation" class="select">
+        <option value="0">All</option>
+        <%= options_from_collection_for_select(@designation, :id, :title) %>
+      </select>
+    </td>
+    <td>
+      <%= label_tag :id_dept, 'Department', :label => 'label' %>
+    </td>
+    <td>
+      <select id="id_dept" class="select">
+        <option value="0">All</option>
+        <%= options_from_collection_for_select(@dept, :id, :name) %>
+      </select>
+    </td>
+  </tr>
+</table>
+<br />
 <%= render 'search_panel' %>
