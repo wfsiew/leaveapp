@@ -255,6 +255,12 @@ input[type='text']:FOCUS, input[type='password']:FOCUS, textarea:FOCUS {
   background-color: #ffc;
 }
 
+.spaceiconlist {
+  margin-right: 10px;
+  white-space: nowrap;
+  display: inline-block;
+}
+
 .paddicon {
   padding-left: 18px;
 }
@@ -295,4 +301,7 @@ input[type='text']:FOCUS, input[type='password']:FOCUS, textarea:FOCUS {
 }
 .optionicon {
   background-position: 0 -189px !important;
+}
+.editicon {
+  background-position: 0 -210px !important;
 }

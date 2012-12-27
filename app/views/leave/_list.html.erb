@@ -23,6 +23,7 @@
         <th class="data">
           <span class="colheader">Reason</span>
         </th>
+        <th></th>
         <th class="data">
           <span class="colheader">Actions</span>
         </th>
@@ -31,30 +32,39 @@
     <tbody>
     <% @data[:list].each do |o| %>
       <% e = o.employee %>
-      <tr class="<%= cycle("ui-state-active", "ui-state-default") %>">
+      <% ent = LeaveSummaryHelper::get_employee_leave_entitlement(e.id, o.leave_type.id, Time.now.year) %>
+      <tr id="tr_<%= o.id %>" class="<%= cycle("ui-state-active", "ui-state-default") %>">
         <td class="data">
-          
+          <%= h o.display_date %>
         </td>
         <td class="data">
           <%= h e.first_name %> <%= h e.middle_name %> <%= h e.last_name %>
         </td>
         <td class="data">
-          
+          <%= h o.leave_type.name %>
         </td>
         <td class="data">
-          
+          <%= number_with_precision ent[:balance], :precision => 2 %>
         </td>
         <td class="data">
-          
+          <%= number_with_precision o.day, :precision => 1 %>
         </td>
         <td class="data">
           <%= h o.display_status %>
         </td>
         <td class="data">
-          
+          <%= h o.reason %>
+        </td>
+        <td>
+          <span class="icons editicon spaceiconlist hover editreason" title="Click here to edit"></span>
         </td>
         <td class="data">
-          
+          <% if o.status != 'C' && o.status != 'R' %>
+          <select class="leaveaction">
+            <option value="0">Select Action</option>
+            <%= options_for_select o.actions %>
+          </select>
+          <% end %>
         </td>
       </tr>
     <% end %>

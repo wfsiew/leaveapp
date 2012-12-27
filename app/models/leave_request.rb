@@ -16,11 +16,31 @@ class LeaveRequest < ActiveRecord::Base
   validates_numericality_of :day, :greater_than => 0, :message => 'No. of day(s) is invalid'
   
   def display_status
-    case :status
-    when 'P' 'Pending'
-    when 'A' 'Approved'
-    when 'R' 'Rejected'
-    when 'C' 'Canceled'
+    case self.status
+    when 'P' then 'Pending' 
+    when 'A' then 'Approved'
+    when 'R' then 'Rejected'
+    else 'Canceled'
+    end
+  end
+  
+  def display_date
+    if self.from_date == self.to_date
+      self.from_date.strftime('%d-%m-%Y')
+      
+    else
+      from = self.from_date.strftime('%d-%m-%Y')
+      to = self.to_date.strftime('%d-%m-%Y')
+      "#{from} to #{to}"
+    end
+  end
+  
+  def actions
+    if self.status == 'P'
+      [['Approve', 'A'], ['Reject', 'R'], ['Cancel', 'C']]
+      
+    elsif sel.status == 'A'
+      [['Cancel', 'C']]
     end
   end
 end

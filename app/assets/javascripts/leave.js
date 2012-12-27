@@ -56,6 +56,18 @@ var leave = ( function() {
       else
         $('.chkstatus').removeAttr('checked');
     }
+    
+    function func_edit_reason() {
+      var tr = $(this).parent().parent();
+      var rowid = tr.attr('id');
+      var id = utils.get_itemid(rowid);
+      alert(id)
+      return false;
+    }
+    
+    function init_list() {
+      $('.editreason').click(func_edit_reason);
+    }
 
     function init() {
       $('#id_from_date,#id_to_date').datepicker({
@@ -69,6 +81,7 @@ var leave = ( function() {
       utils.init_alert_dialog('#dialog-message');
       utils.bind_hover($('#id_save,#id_find'));
       nav_list.config.list_url = url.list;
+      nav_list.config.list_func = init_list;
       nav_list.config.save_func = func_save;
       nav_list.config.search_param_func = get_search_param;
       nav_list.init();

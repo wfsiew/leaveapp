@@ -38,7 +38,7 @@ class LeaveController < ApplicationController
                 :employee => employee,
                 :dept => dept }
                 
-    if from_date.blank? && to_date.blank? && employee.blank? && dept == 0
+    if from_date.blank? && to_date.blank? && employee.blank? && dept == 0 && leave_status.blank?
       @data = LeaveHelper.get_all(pgnum, pgsize, sort)
       
     else
@@ -49,5 +49,10 @@ class LeaveController < ApplicationController
       fmt.html { render :partial => 'list' }
       fmt.json { render :json => @data }
     end
+  end
+  
+  # POST /leave/update/1
+  def update
+    
   end
 end

@@ -81,6 +81,7 @@ Leaveapp::Application.routes.draw do
   scope 'leave', :as => 'leave' do
     match '' => 'leave#index', :via => :get
     match 'list' => 'leave#list', :as => :list, :via => [:get, :post]
+    match 'update(/:id)' => 'leave#update', :as => :update, :via => :post
   end
   
   # The priority is based upon order of creation:
