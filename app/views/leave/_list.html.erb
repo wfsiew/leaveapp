@@ -1,6 +1,64 @@
 <% if @data.present? && @data[:list].any? %>
   <table class="list_table">
-    
+    <thead class="ui-widget-header">
+      <tr>
+        <th class="data">
+          <span class="colheader">Date</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Employeee Name</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Leave Type</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Leave Balance (Days)</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Number of Days</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Status</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Reason</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Actions</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @data[:list].each do |o| %>
+      <% e = o.employee %>
+      <tr class="<%= cycle("ui-state-active", "ui-state-default") %>">
+        <td class="data">
+          
+        </td>
+        <td class="data">
+          <%= h e.first_name %> <%= h e.middle_name %> <%= h e.last_name %>
+        </td>
+        <td class="data">
+          
+        </td>
+        <td class="data">
+          
+        </td>
+        <td class="data">
+          
+        </td>
+        <td class="data">
+          <%= h o.display_status %>
+        </td>
+        <td class="data">
+          
+        </td>
+        <td class="data">
+          
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
   </table>
 <% end %>
 <input id="id_pg" type="hidden" value="<%= @data[:hasprev] %>,<%= @data[:hasnext] %>,<%= @data[:prevpage] %>,<%= @data[:nextpage] %>,<%= @data[:item_msg] %>,<%= @data[:sortcolumn] %>,<%= @data[:sortdir] %>" />

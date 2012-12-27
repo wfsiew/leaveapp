@@ -1,4 +1,7 @@
 module LeaveSummaryHelper
+  DEFAULT_SORT_COLUMN = 'staff_id'
+  DEFAULT_SORT_DIR = 'ASC'
+  
   def self.get_employee_leave_entitlement(empid, leavetype, year)
     m = { :day =>  0.00, :balance => 0.00, :taken => 0.00 }
     o = LeaveEntitlement.where(:id => empid, :leave_type_id => leavetype, :year => year).first
@@ -57,7 +60,6 @@ module LeaveSummaryHelper
   end
   
   def self.get_join(filters)
-    q = nil
     if filters[:designation] != 0
       q = Employee.joins('inner join employee_job ej on employee.id = ej.id')
                   .joins('inner join designation d on ej.designation_id = d.id')

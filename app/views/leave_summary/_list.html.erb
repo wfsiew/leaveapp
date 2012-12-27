@@ -33,13 +33,13 @@
           <%= h t.name %>
           <input type="hidden" value="<%= t.id %>" name="hdnLeaveTypeId[]">
         </td>
-        <td>
+        <td class="data">
           <input type="text" value="<%= number_with_precision ent[:day], :precision => 2 %>" name="txtLeaveEntitled[]" size="6">
         </td>
-        <td>
+        <td class="data">
           <%= number_with_precision ent[:taken], :precision => 2 %>
         </td>
-        <td>
+        <td class="data">
           <%= number_with_precision ent[:balance], :precision => 2 %>
         </td>
       </tr>

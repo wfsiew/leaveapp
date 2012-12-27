@@ -12,6 +12,7 @@ var leave = ( function() {
         from_date : $('#id_from_date').val(),
         to_date : $('#id_to_date').val(),
         employee : encodeURIComponent($('#id_employee').val()),
+        dept : $('#id_dept').val(),
         'leave_status[]' : get_leave_status()
       };
       

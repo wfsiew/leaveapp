@@ -14,4 +14,13 @@ class LeaveRequest < ActiveRecord::Base
   validates_presence_of :leave_type_id, :message => 'Leave Type is required'
   
   validates_numericality_of :day, :greater_than => 0, :message => 'No. of day(s) is invalid'
+  
+  def display_status
+    case :status
+    when 'P' 'Pending'
+    when 'A' 'Approved'
+    when 'R' 'Rejected'
+    when 'C' 'Canceled'
+    end
+  end
 end

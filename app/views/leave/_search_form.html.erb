@@ -45,7 +45,18 @@
       <%= label_tag :id_employee, 'Employee', :class => 'label' %>
     </td>
     <td>
-      <%= text_field_tag :id_employee, nil, :id => 'id_employee', :class => 'search', :placeholder => 'type here to search', :title => 'type here to search' %>
+      <%= text_field_tag :employee, nil, :id => 'id_employee', :class => 'search', :placeholder => 'type here to search', :title => 'type here to search' %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= label_tag :id_dept, 'Department', :label => 'label' %>
+    </td>
+    <td>
+      <select id="id_dept" class="select">
+        <option value="0">All</option>
+        <%= options_from_collection_for_select(@dept, :id, :name) %>
+      </select>
     </td>
   </tr>
 </table>
