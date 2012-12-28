@@ -35,6 +35,10 @@ class LeaveRequest < ActiveRecord::Base
     end
   end
   
+  def can_modify_status
+    self.status != 'C' && self.status != 'R' ? true : false
+  end
+  
   def actions
     if self.status == 'P'
       [['Approve', 'A'], ['Reject', 'R'], ['Cancel', 'C']]

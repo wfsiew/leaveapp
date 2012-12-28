@@ -1,0 +1,11 @@
+<%= label_tag :id_selection, 'Search By', :class => 'label' %>
+<select id="id_selection" class="search_option">
+  <%= options_for_select({ 'All' => 0, 'Username' => 1 }) %>
+  <optgroup label="Role">
+    <%= options_for_select({ 'Admin' => 2, 'Normal User' => 3 }) %>
+  </optgroup>
+  <optgroup label="Status">
+    <%= options_for_select({ 'Enabled' => 4, 'Disabled' => 5 }) %>
+  </optgroup>
+</select>
+<%= render 'shared/search_panel' %>
