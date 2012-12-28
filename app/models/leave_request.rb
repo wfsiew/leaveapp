@@ -43,7 +43,7 @@ class LeaveRequest < ActiveRecord::Base
     if self.status == 'P'
       [['Approve', 'A'], ['Reject', 'R'], ['Cancel', 'C']]
       
-    elsif sel.status == 'A'
+    elsif self.status == 'A'
       [['Cancel', 'C']]
     end
   end

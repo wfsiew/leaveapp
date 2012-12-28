@@ -1,10 +1,106 @@
 var leave = ( function() {
     var url = {
+      edit : '/admin/leave/edit/',
+      update : '/admin/leave/update/',
+      update_action : '/admin/leave/action/update/',
       list : '/admin/leave/list/'
     };
+    
+    var popup_dialog_opt = null;
+    
+    function init_ui_opt() {
+      popup_dialog_opt = {
+        autoOpen : false,
+        width : 350,
+        resizable : false,
+        draggable : true,
+        modal : false,
+        stack : true,
+        zIndex : 1000
+      };
+    }
+    
+    function update_success() {
+      func_cancel_edit();
+      nav_list.show_list();
+    }
+    
+    function func_cancel_edit() {
+      $('#dialog-edit').dialog('close');
+      return false;
+    }
 
     function func_save() {
-      alert('save')
+      var a = [];
+      var b = [];
+      $('.leaveaction').each(function(idx, elm) {
+        var x = $(this).val();
+        var id = $(this).parent().parent().attr('id');
+        id = utils.get_itemid(id);
+        if (x != '0') {
+          a.push(id);
+          b.push(x);
+        }
+      });
+      
+      var data = {
+        'id[]' : a,
+        'act[]' : b
+      };
+      
+      $.post(url.update_action, data, function(result) {
+        if (result.success == 1) {
+          stat.show_status(0, result.message);
+          nav_list.show_list();
+        }
+        
+        else {
+          stat.show_status(1, result.message);
+        }
+      });
+    }
+    
+    function func_edit() {
+      var id = $(this).parent().parent().attr('id');
+      id = utils.get_itemid(id);
+      $('#dialog_edit_body').load(url.edit + id, function() {
+        $('.save_button.save').click(function() {
+          return func_update(id);
+        });
+        $('.save_button.cancel').click(func_cancel_edit);
+        $('#edit-form').tooltip({track: true});
+        utils.bind_hover($('.save_button'));
+        $('#dialog-edit').dialog('open');
+      });
+      return false;
+    }
+    
+    function func_update(id) {
+      var data = get_data();
+      $.post(url.update + id, data, function(result) {
+        if (result.success == 1) {
+          stat.show_status(0, result.message);
+          update_success();
+        }
+        
+        else if (result.success == 0)
+          func_cancel_edit();
+          
+        else
+          utils.show_dialog(2, result);
+      });
+      
+      return false;
+    }
+    
+    function get_data() {
+      var form = $('#edit-form');
+
+      var data = {
+        reason : form.find('#id_reason').val()
+      };
+
+      return data;
     }
 
     function get_search_param() {
@@ -57,19 +153,12 @@ var leave = ( function() {
         $('.chkstatus').removeAttr('checked');
     }
     
-    function func_edit_reason() {
-      var tr = $(this).parent().parent();
-      var rowid = tr.attr('id');
-      var id = utils.get_itemid(rowid);
-      alert(id)
-      return false;
-    }
-    
     function init_list() {
-      $('.editreason').click(func_edit_reason);
+      $('.editreason').click(func_edit);
     }
 
     function init() {
+      init_ui_opt();
       $('#id_from_date,#id_to_date').datepicker({
         dateFormat : utils.date_format,
         changeMonth : true,
@@ -78,6 +167,7 @@ var leave = ( function() {
       $('#id_find').click(nav_list.show_list);
       $('#id_employee').tooltip({track: true});
       $('.chkall').click(check_all_status);
+      $('#dialog-edit').dialog(popup_dialog_opt);
       utils.init_alert_dialog('#dialog-message');
       utils.bind_hover($('#id_save,#id_find'));
       nav_list.config.list_url = url.list;

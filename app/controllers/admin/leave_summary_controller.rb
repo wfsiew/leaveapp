@@ -62,7 +62,7 @@ class Admin::LeaveSummaryController < Admin::AdminController
     count = 0
     
     ActiveRecord::Base.transaction do
-      (0..empids.size).each do |i|
+      (0...empids.size).each do |i|
         o = LeaveEntitlement.where(:id => empids[i], :leave_type_id => leavetypeids[i], :year => year).first
         if o.present?
           n = LeaveEntitlement.update_all({ :day => leaveent[i] }, 

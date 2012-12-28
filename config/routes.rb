@@ -84,7 +84,9 @@ Leaveapp::Application.routes.draw do
     scope 'leave', :as => 'leave' do
       match '' => 'leave#index', :via => :get
       match 'list' => 'leave#list', :as => :list, :via => [:get, :post]
+      match 'edit(/:id)' => 'leave#edit', :as => :edit, :via => :get
       match 'update(/:id)' => 'leave#update', :as => :update, :via => :post
+      match 'action/update' => 'leave#update_action', :as => :update, :via => :post
     end
   end
 

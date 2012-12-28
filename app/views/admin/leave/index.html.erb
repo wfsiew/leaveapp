@@ -1,8 +1,12 @@
 <% @title = 'Leave List' %>
 <% @dialog_title = 'Leave List' %>
+<% @dialog_edit_title = 'Edit Leave Reason' %>
 <% content_for :search_form do %>
   <%= render 'search_form' %>
 <% end %>
 <% content_for :content_list do %>
   <%= render 'list' %>
+<% end %>
+<% content_for :dialog do %>
+  <%= render 'shared/dialog_save' %>
 <% end %>

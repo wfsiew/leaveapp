@@ -50,8 +50,46 @@ class Admin::LeaveController < Admin::AdminController
     end
   end
   
+  # GET /leave/edit/1
+  def edit
+    @leave = LeaveRequest.find(params[:id])
+    
+    respond_to do |fmt|
+      fmt.html { render :partial => 'form' }
+      fmt.json { render :json => @leave }
+    end
+  end
+  
   # POST /leave/update/1
   def update
+    o = LeaveRequest.find(params[:id])
     
+    if o.update_attributes(:reason => params[:reason])
+      render :json => { :success => 1, :message => 'Leave Reason was successfully updated.' }
+      
+    else
+      render :json => { :success => 0 }
+    end
+  end
+  
+  # POST /leave/action/update
+  def update_action
+    ids = params[:id]
+    actions = params[:act]
+    count = 0
+
+    ActiveRecord::Base.transaction do
+     (0...ids.size).each do |i|
+        n = LeaveRequest.update_all({ :status => actions[i] }, ['id = ?', ids[i]])
+        count += 1 if n > 0
+      end
+    end
+    
+    if count == ids.size
+      render :json => { :success => 1, :message => 'Successfully updated.' }
+      
+    else
+      render :json => { :error => 1, :message => 'Failed to update.' }
+    end
   end
 end
