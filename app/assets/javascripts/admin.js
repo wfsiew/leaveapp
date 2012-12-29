@@ -21,6 +21,7 @@
 //= require sort
 //= require admin/base
 //= require admin/user
+//= require admin/emp
 //= require admin/designation
 //= require admin/empstatus
 //= require admin/jobcat

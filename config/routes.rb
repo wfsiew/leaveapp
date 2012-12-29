@@ -13,6 +13,11 @@ Leaveapp::Application.routes.draw do
       match 'update(/:id)' => 'user#update', :as => :update, :via => :post
       match 'delete' => 'user#destroy', :as => :delete, :via => :post
     end
+    
+    scope 'employee', :as => 'employee' do
+      match '' => 'employee#index', :via => :get
+      match 'list' => 'employee#list', :via => [:get, :post]
+    end
 
     scope 'designation', :as => 'designation' do
       match '' => 'designation#index', :via => :get

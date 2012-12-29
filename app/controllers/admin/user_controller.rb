@@ -16,8 +16,10 @@ class Admin::UserController < Admin::AdminController
   # GET /user/list
   # GET /user/list.json
   def list
-    find = params[:find].blank? ? 0 : params[:find].to_i
-    keyword = params[:keyword].blank? ? '' : params[:keyword]
+    username = params[:username].blank? ? '' : params[:username]
+    role = params[:role].blank? ? 0 : params[:role].to_i
+    employee = params[:employee].blank? ? '' : params[:employee]
+    status = params[:status].blank? ? 0 : params[:status].to_i
     pgnum = params[:pgnum].blank? ? 1 : params[:pgnum].to_i
     pgsize = params[:pgsize].blank? ? 0 : params[:pgsize].to_i
     sortcolumn = params[:sortcolumn].blank? ? UserHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
@@ -25,11 +27,16 @@ class Admin::UserController < Admin::AdminController
     
     sort = ApplicationHelper::Sort.new(sortcolumn, sortdir)
     
-    if find == 0 && keyword.blank?
+    filters = { :username => username,
+                :role => role,
+                :employee => employee,
+                :status => status }
+    
+    if username.blank? && role == 0 && employee.blank? && status == 0
       @data = UserHelper.get_all(pgnum, pgsize, sort)
       
     else
-      @data = UserHelper.get_filter_by(find, keyword, pgnum, pgsize, sort)
+      @data = UserHelper.get_filter_by(filters, pgnum, pgsize, sort)
     end
     
     respond_to do |fmt|

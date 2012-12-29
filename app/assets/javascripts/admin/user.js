@@ -204,6 +204,17 @@
       return data;
     }
     
+    function get_search_param() {
+      var param = {
+        username :  encodeURIComponent($('#id_username').val()),
+        role : $('#id_user_role').val(),
+        employee : encodeURIComponent($('#id_employee').val()),
+        status : $('#id_status').val()
+      };
+      
+      return param;
+    }
+    
     function sort_list() {
       var s = sort.set_sort_css($(this));
       nav_list.set_sort(s);
@@ -225,10 +236,8 @@
       init_ui_opt();
       $('#id_add').click(show_form);
       $('#id_find').click(nav_list.show_list);
-      $('#id_display,#id_selection').change(nav_list.show_list);
-      $('#id_query').keypress(nav_list.query_keypress);
-      $('#id_query').keyup(nav_list.query_keyup);
-      $('#id_query').tooltip({track: true});
+      $('#id_display').change(nav_list.show_list);
+      $('#id_username,#id_employee').tooltip({track: true});
       $('#dialog-add').dialog(popup_dialog_opt);
       $('#dialog-edit').dialog(popup_dialog_opt);
       utils.init_alert_dialog('#dialog-message');
@@ -236,6 +245,7 @@
       nav_list.config.list_url = url.list;
       nav_list.config.list_func = init_list;
       nav_list.config.del_func = func_delete;
+      nav_list.config.search_param_func = get_search_param;
       nav_list.init();
     }
 
