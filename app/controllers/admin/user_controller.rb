@@ -100,14 +100,27 @@ class Admin::UserController < Admin::AdminController
   
   # POST /user/delete
   def destroy
-    keyword = params[:keyword].blank? ? '' : params[:keyword]
+    username = params[:username].blank? ? '' : params[:username]
+    role = params[:role].blank? ? 0 : params[:role].to_i
+    employee = params[:employee].blank? ? '' : params[:employee]
+    status = params[:status].blank? ? 0 : params[:status].to_i
     pgnum = params[:pgnum].blank? ? 1 : params[:pgnum].to_i
     pgsize = params[:pgsize].blank? ? 0 : params[:pgsize].to_i
     ids = params[:id]
     
     User.delete_all(:id => ids)
     
-    itemscount = UserHelper.item_message(keyword, pgnum, pgsize)
+    filters = { :username => username,
+                :role => role,
+                :employee => employee,
+                :status => status }
+    
+    if username.blank? && role == 0 && employee.blank? && status == 0
+      itemscount = UserHelper.item_message(nil, pgnum, pgsize)
+      
+    else
+      itemscount = UserHelper.item_message(filters, pgnum, pgsize)
+    end
     
     render :json => { :success => 1, :itemscount => itemscount, :message => "#{ids.size} user(s) was successfully deleted." }
   end

@@ -33,9 +33,9 @@ module UserHelper
     { :error => 1, :errors => errors }
   end
   
-  def self.item_message(keyword, pagenum, pagesize)
+  def self.item_message(filters, pagenum, pagesize)
     total = 0
-    if keyword.blank?
+    if filters.blank?
       total = User.count
       pager = ApplicationHelper::Pager.new(total, pagenum, pagesize)
       return pager.item_message

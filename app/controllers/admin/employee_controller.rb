@@ -20,7 +20,7 @@ class Admin::EmployeeController < Admin::AdminController
   # GET /employee/list.json
   def list
     employee = params[:employee].blank? ? '' : params[:employee]
-    id = params[:id].blank? ? '' : params[:id]
+    staff_id = params[:staff_id].blank? ? '' : params[:staff_id]
     employment_status = params[:employment_status].blank? ? 0 : params[:employment_status].to_i
     supervisor = params[:supervisor].blank? ? '' : params[:supervisor]
     designation = params[:designation].blank? ? 0 : params[:designation].to_i
@@ -33,13 +33,13 @@ class Admin::EmployeeController < Admin::AdminController
     sort = ApplicationHelper::Sort.new(sortcolumn, sortdir)
     
     filters = { :employee => employee,
-                :id => id,
+                :staff_id => staff_id,
                 :employment_status => employment_status,
                 :supervisor => supervisor,
                 :designation => designation,
                 :dept => dept }
                 
-    if employee.blank? && id.blank? && employment_status == 0 && supervisor.blank? && designation == 0 && dept == 0
+    if employee.blank? && staff_id.blank? && employment_status == 0 && supervisor.blank? && designation == 0 && dept == 0
       @data = EmployeeHelper.get_all(pgnum, pgsize, sort)
       
     else
@@ -50,7 +50,60 @@ class Admin::EmployeeController < Admin::AdminController
       fmt.html { render :partial => 'list' }
       fmt.json { render :json => @data }
     end
+  end
+  
+  # GET /employee/new
+  # GET /employee/new.json
+  def new
+    @employee = Employee.new
+    @form_id = 'add-form'
     
+    respond_to do |fmt|
+      fmt.html { render :partial => 'form' }
+      fmt.json { render :json => @employee }
+    end
+  end
+  
+  def create
     
+  end
+  
+  def edit
+    
+  end
+  
+  def update
+    
+  end
+  
+  # POST /employee/delete
+  def destroy
+    employee = params[:employee].blank? ? '' : params[:employee]
+    staff_id = params[:staff_id].blank? ? '' : params[:staff_id]
+    employment_status = params[:employment_status].blank? ? 0 : params[:employment_status].to_i
+    supervisor = params[:supervisor].blank? ? '' : params[:supervisor]
+    designation = params[:designation].blank? ? 0 : params[:designation].to_i
+    dept = params[:dept].blank? ? 0 : params[:dept].to_i
+    pgnum = params[:pgnum].blank? ? 1 : params[:pgnum].to_i
+    pgsize = params[:pgsize].blank? ? 0 : params[:pgsize].to_i
+    ids = params[:id]
+    
+    Employee.delete_all(:id => ids)
+    
+    filters = { :employee => employee,
+                :staff_id => staff_id,
+                :employment_status => employment_status,
+                :supervisor => supervisor,
+                :designation => designation,
+                :dept => dept }
+    
+    if employee.blank? && staff_id.blank? && employment_status == 0 && supervisor.blank? && designation == 0 && dept == 0
+      itemscount = EmployeeHelper.item_message(nil, pgnum, pgsize)
+      
+    else
+      itemscount = EmployeeHelper.item_message(filters, pgnum, pgsize)
+    end
+    
+    render :json => { :success => 1, :itemscount => itemscount, :message => "#{ids.size} employee(s) was successfully deleted." }
   end
 end

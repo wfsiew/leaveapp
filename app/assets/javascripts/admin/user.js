@@ -158,13 +158,10 @@
       var pgsize = $('#id_display').val();
       var search_by = $('#id_selection').val();
       var keyword = $('#id_query').val();
-      var data = {
-        'id[]' : l,
-        pgnum : currpg,
-        pgsize : pgsize,
-        find : search_by,
-        keyword : keyword
-      };
+      var data = get_search_param();
+      data['id[]'] = l;
+      data['pgnum'] = currpg;
+      data['pgsize'] = pgsize;
 
       $.post(url.del, data, function(result) {
         if (result.success == 1) {
