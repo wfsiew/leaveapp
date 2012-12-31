@@ -3,24 +3,24 @@
     <td valign="top" class="lbl">
       <%= label_tag :full_name, 'Full Name', :class => 'label' %>
     </td>
-    <td>
+    <td valign="top">
       <%= text_field_tag :first_name, @employee.first_name, :id => 'id_first_name', :class => 'text', :placeholder => 'enter first name',
                          :title => 'enter first name' %>
     </td>
-    <td>
+    <td valign="top">
       <%= text_field_tag :middle_name, @employee.middle_name, :id => 'id_middle_name', :class => 'text', :placeholder => 'enter middle name',
                          :title => 'enter middle name' %>
     </td>
-    <td>
+    <td valign="top">
       <%= text_field_tag :last_name, @employee.last_name, :id => 'id_last_name', :class => 'text', :placeholder => 'enter last name',
                          :title => 'enter last name' %>
     </td>
   </tr>
   <tr>
     <td></td>
-    <td align="center" id="lb_first_name">First Name</td>
-    <td align="center" id="lb_middle_name">Middle Name</td>
-    <td align="center" id="lb_last_name">Last Name</td>
+    <td align="center">First Name</td>
+    <td align="center">Middle Name</td>
+    <td align="center">Last Name</td>
   </tr>
 </table>
 <hr />
@@ -64,11 +64,11 @@
     <td valign="top" class="lbl">
       <%= label_tag :gender, 'Gender', :class => 'label' %>
     </td>
-    <td>
+    <td valign="top">
       <%= radio_button_tag :gender, 'M', @employee.gender == 'M' ? true : false %>
       <%= label_tag :gender_m, 'Male' %>
       <%= radio_button_tag :gender, 'F', @employee.gender == 'F' ? true : false %>
-      <%= label_tag :gender_f, 'Female' %>
+      <%= label_tag :gender_f, 'Female', :id => 'lb_gender_f' %>
     </td>
     <td valign="top" class="lbl">
       <%= label_tag :marital_status, 'Marital Status', :class => 'label' %>
@@ -116,7 +116,7 @@
       <%= label_tag :is_bumi, 'Is Bumiputra', :class => 'label' %>
     </td>
     <td>
-      <%= check_box_tag :is_bumi, nil, @employee.is_bumi %>
+      <%= check_box_tag :is_bumi, nil, @employee.is_bumi, :id => 'id_is_bumi' %>
     </td>
   </tr>
   <tr>

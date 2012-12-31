@@ -78,6 +78,14 @@ class Admin::EmployeeController < Admin::AdminController
   
   def create
     
+    o = Employee.new(:id => SecureRandom.uuid)
+    
+    if !o.valid?
+      render :json => EmployeeHelper.get_errors(o.errors, params)
+      
+    else
+      render :json => { :success => 1, :message => 'Employee was successfulyl added.' }
+    end
   end
   
   # GET /employee/edit/1
