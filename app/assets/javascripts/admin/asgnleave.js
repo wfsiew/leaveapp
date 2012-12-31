@@ -60,11 +60,7 @@ var asgnleave = ( function() {
       $('#save-form').tooltip({track : true});
       $('.save_button.save').click(func_save);
       utils.bind_hover($('.save_button'));
-      $('#id_from_date,#id_to_date').datepicker({
-        dateFormat : utils.date_format,
-        changeMonth : true,
-        changeYear : true
-      });
+      $('.date_input').datepicker(utils.date_opt());
     }
 
     function load() {

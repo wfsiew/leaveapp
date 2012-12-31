@@ -210,6 +210,18 @@
         
       return s.replace(a, b);
     }
+    
+    /**
+     * @public
+     * This function returns the options for datepicker. 
+     */
+    function date_opt() {
+      return {
+        dateFormat : date_format,
+        changeMonth : true,
+        changeYear : true
+      };
+    }
 
     return {
       init_alert_dialog : init_alert_dialog,
@@ -226,6 +238,7 @@
       get_itemid : get_itemid,
       set_disabled : set_disabled,
       safe_replace : safe_replace,
-      date_format : date_format
+      date_format : date_format,
+      date_opt : date_opt
     };
 }());

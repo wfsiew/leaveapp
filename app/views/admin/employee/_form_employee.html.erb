@@ -65,19 +65,18 @@
       <%= label_tag :gender, 'Gender', :class => 'label' %>
     </td>
     <td>
-      <input type="radio" name="gender" />
-      <label>Male</label>
-      <input type="radio" name="gender" />
-      <label>Female</label>
+      <%= radio_button_tag :gender, 'M', @employee.gender == 'M' ? true : false %>
+      <%= label_tag :gender_m, 'Male' %>
+      <%= radio_button_tag :gender, 'F', @employee.gender == 'F' ? true : false %>
+      <%= label_tag :gender_f, 'Female' %>
     </td>
     <td valign="top" class="lbl">
       <%= label_tag :marital_status, 'Marital Status', :class => 'label' %>
     </td>
     <td>
-      <select id="id_marital_status" class="select">
-        <option value="0">-- Select --</option>
-        <%= options_for_select [['Single', 'S'], ['Married', 'M'], ['Other', 'O']] %>
-      </select>
+      <%= select_tag :marital_status, 
+          options_for_select([['-- Select --', '0'], ['Single', 'S'], ['Married', 'M'], ['Other', 'O']], @employee.marital_status.blank? ? '0' : @employee.marital_status), 
+          :id => 'id_marital_status', :class => 'select' %>
     </td>
   </tr>
   <tr>
@@ -95,7 +94,7 @@
       <%= label_tag :dob, 'Date of Birth', :class => 'label' %>
     </td>
     <td class="colspacing">
-      <%= text_field_tag :dob, @employee.dob, :id => 'id_dob', :class => 'text', :placeholder => 'dd-mm-YYYY' %>
+      <%= text_field_tag :dob, fmt_date(@employee.dob), :id => 'id_dob', :class => 'text date_input', :placeholder => 'dd-mm-YYYY' %>
     </td>
     <td valign="top" class="lbl">
       <%= label_tag :place_of_birth, 'Place of Birth', :class => 'label' %>
@@ -104,5 +103,56 @@
       <%= text_field_tag :place_of_birth, @employee.place_of_birth, :id => 'id_place_of_birth', :class => 'text', :placeholder => 'enter place of birth',
                          :title => 'enter place of birth' %>
     </td>
+  </tr>
+  <tr>
+    <td valign="top" class="lbl">
+      <%= label_tag :race, 'Race', :class => 'label' %>
+    </td>
+    <td class="colspacing">
+      <%= text_field_tag :race, @employee.race, :id => 'id_race', :class => 'text', :placeholder => 'enter race',
+                         :title => 'enter race' %>
+    </td>
+    <td>
+      <%= label_tag :is_bumi, 'Is Bumiputra', :class => 'label' %>
+    </td>
+    <td>
+      <%= check_box_tag :is_bumi, nil, @employee.is_bumi %>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top" class="lbl">
+      <%= label_tag :religion, 'Religion', :class => 'label' %>
+    </td>
+    <td>
+      <%= text_field_tag :religion, @employee.religion, :id => 'id_religion', :class => 'text', :placeholder => 'enter religion',
+                         :title => 'enter religion' %>
+    </td>
+    <td colspan="2"></td>
+  </tr>
+  <tr>
+    <td valign="top" class="lbl">
+      <%= label_tag :user_id, 'User ID', :class => 'label' %>
+    </td>
+    <td>
+      <select id="id_user_id" class="select">
+        <option value="0">-- Select --</option>
+        <%= options_from_collection_for_select(@users, :id, :username, @employee.user_id.blank? ? '0' : @employee.user_id) %>
+      </select>
+    </td>
+    <td colspan="2"></td>
+  </tr>
+  <tr>
+    <td valign="top" class="lbl">
+      <%= label_tag :supervisor_id, 'Report to', :class => 'label' %>
+    </td>
+    <td>
+      <select id="id_supervisor_id" class="select">
+        <option value="0">-- Select --</option>
+        <% @supervisors.each do |o| %>
+        <option <%= "selected='selected'" if o.id == @employee.supervisor_id %> value="<%= o.id %>"><%= h o.first_name %> <%= h o.middle_name %> <%= h o.last_name %></option>
+        <% end %>
+      </select>
+    </td>
+    <td colspan="2"></td>
   </tr>
 </table>

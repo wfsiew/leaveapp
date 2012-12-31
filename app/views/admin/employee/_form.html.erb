@@ -1,42 +1,60 @@
 <%= form_tag('.', :id => @form_id, :class => 'save_form ui-widget-content ui-widget ui-corner-all') do %>
-<div id="tabs">
-  <ul>
-    <li>
-      <a href="#tabs-1">Personal Details</a>
-    </li>
-    <li>
-      <a href="#tabs-2">Contact Details</a>
-    </li>
-    <li>
-      <a href="#tabs-3">Emergency Contacts</a>
-    </li>
-    <li>
-      <a href="#tabs-4">Dependents</a>
-    </li>
-    <li>
-      <a href="#tabs-5">Job</a>
-    </li>
-    <li>
-      <a href="#tabs-6">Salary</a>
-    </li>
-  </ul>
-  <div id="tabs-1">
-    <%= render 'form_employee' %>
-  </div>
-  <div id="tabs-2">
+  <div id="tabs">
+    <ul>
+      <li>
+        <a href="#tabs-1">Personal Details</a>
+      </li>
+      <li>
+        <a href="#tabs-2">Contact Details</a>
+      </li>
+      <li>
+        <a href="#tabs-3">Emergency Contacts</a>
+      </li>
+      <li>
+        <a href="#tabs-4">Spouse Details</a>
+      </li>
+      <li>
+        <a href="#tabs-5">Dependents</a>
+      </li>
+      <li>
+        <a href="#tabs-6">Job</a>
+      </li>
+      <li>
+        <a href="#tabs-7">Salary</a>
+      </li>
+      <li>
+        <a href="#tabs-8">Qualification</a>
+      </li>
+      <li>
+        <a href="#tabs-9">Membership</a>
+      </li>
+    </ul>
+    <div id="tabs-1">
+      <%= render 'form_employee' %>
+    </div>
+    <div id="tabs-2">
+      <%= render 'form_employee_contact' %>
+    </div>
+    <div id="tabs-3">
 
+    </div>
+    <div id="tabs-4">
+      <%= render 'form_employee_spouse' %>
+    </div>
+    <div id="tabs-5">
+      <%= render 'form_employee_spouse' %>
+    </div>
+    <div id="tabs-6">
+      <%= render 'form_employee_job' %>
+    </div>
+    <div id="tabs-7">
+      <%= render 'form_employee_salary' %>
+    </div>
+    <div id="tabs-8">
+      <%= render 'form_employee_qualification' %>
+    </div>
+    <div id="tabs-9">
+      <%= render 'form_employee_membership' %>
+    </div>
   </div>
-  <div id="tabs-3">
-
-  </div>
-  <div id="tabs-4">
-
-  </div>
-  <div id="tabs-5">
-
-  </div>
-  <div id="tabs-6">
-
-  </div>
-</div>
 <% end %>

@@ -159,11 +159,7 @@ var leave = ( function() {
 
     function init() {
       init_ui_opt();
-      $('#id_from_date,#id_to_date').datepicker({
-        dateFormat : utils.date_format,
-        changeMonth : true,
-        changeYear : true
-      });
+      $('.date_input').datepicker(utils.date_opt());
       $('#id_find').click(nav_list.show_list);
       $('#id_employee').tooltip({track: true});
       $('.chkall').click(check_all_status);

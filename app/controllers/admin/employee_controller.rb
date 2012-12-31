@@ -56,7 +56,19 @@ class Admin::EmployeeController < Admin::AdminController
   # GET /employee/new.json
   def new
     @employee = Employee.new
+    @employee_contact = EmployeeContact.new
+    @employee_job = EmployeeJob.new
+    @employee_salary = EmployeeSalary.new
+    @employee_qualification = EmployeeQualification.new
+    @employee_membership = EmployeeMembership.new
+    @employee_spouse = EmployeeSpouse.new
     @form_id = 'add-form'
+    @users = User.order(:username).all
+    @supervisors = Employee.all
+    @designations = Designation.order(:title).all
+    @employment_statuses = EmploymentStatus.order(:name).all
+    @job_categories = JobCategory.order(:name).all
+    @departments = Department.order(:name).all
     
     respond_to do |fmt|
       fmt.html { render :partial => 'form' }
@@ -68,8 +80,28 @@ class Admin::EmployeeController < Admin::AdminController
     
   end
   
+  # GET /employee/edit/1
+  # GET /employee/edit/1.json
   def edit
+    @employee = Employee.find(params[:id])
+    @employee_contact = @employee.employee_contact.blank? ? EmployeeContact.new : @employee.employee_contact
+    @employee_job = @employee.employee_job.blank? ? EmployeeJob.new : @employee.employee_job
+    @employee_salary = @employee.employee_salary.blank? ? EmployeeSalary.new : @employee.employee_salary
+    @employee_qualification = @employee.employee_qualification.blank? ? EmployeeQualification.new : @employee.employee_qualification
+    @employee_membership = @employee.employee_membership.blank? ? EmployeeMembership.new : @employee.employee_membership
+    @employee_spouse = @employee.employee_spouse.blank? ? EmployeeSpouse.new : @employee.employee_spouse
+    @form_id = 'edit-form'
+    @users = User.order(:username).all
+    @supervisors = Employee.all
+    @designations = Designation.order(:title).all
+    @employment_statuses = EmploymentStatus.order(:name).all
+    @job_categories = JobCategory.order(:name).all
+    @departments = Department.order(:name).all
     
+    respond_to do |fmt|
+      fmt.html { render :partial => 'form' }
+      fmt.json { render :json => @employee }
+    end
   end
   
   def update
