@@ -57,6 +57,7 @@ class Admin::EmployeeController < Admin::AdminController
   def new
     @employee = Employee.new
     @employee_contact = EmployeeContact.new
+    @employee_ec_contact = EmployeeEcContact.new
     @employee_job = EmployeeJob.new
     @employee_salary = EmployeeSalary.new
     @employee_qualification = EmployeeQualification.new
@@ -76,15 +77,36 @@ class Admin::EmployeeController < Admin::AdminController
     end
   end
   
+  # POST /employee/create
   def create
     
     o = Employee.new(:id => SecureRandom.uuid)
+    oc = EmployeeContact.new(:id => o.id)
+    oec = EmployeeEcContact.new(:id => o.id)
+    oej = EmployeeJob.new(:id => o.id)
+    osp = EmployeeSpouse.new(:id => o.id)
     
-    if !o.valid?
-      render :json => EmployeeHelper.get_errors(o.errors, params)
+    v1 = o.valid?
+    v2 = oc.valid?
+    v3 = oec.valid?
+    v4 = oej.valid?
+    v5 = osp.valid?
+    
+    if !v1 || !v2 || !v3 || !v4 || !v5
+      employee_errors = EmployeeHelper.get_errors(o.errors, params)
+      employee_contact_errors = EmployeeContactHelper.get_errors(oc.errors, params)
+      employee_ec_contact_errors = EmployeeEcContactHelper.get_errors(oec.errors, params)
+      employee_job_errors = EmployeeJobHelper.get_errors(oej.errors, params)
+      employee_spouse_errors = EmployeeSpouseHelper.get_errors(osp.errors, params)
+      errors = { :error => 1, :employee => employee_errors,
+                              :employee_contact => employee_contact_errors,
+                              :employee_ec_contact => employee_ec_contact_errors,
+                              :employee_job => employee_job_errors,
+                              :employee_spouse => employee_spouse_errors }
+      render :json => errors
       
     else
-      render :json => { :success => 1, :message => 'Employee was successfulyl added.' }
+      render :json => { :success => 1, :message => 'Employee was successfully added.' }
     end
   end
   
@@ -93,6 +115,7 @@ class Admin::EmployeeController < Admin::AdminController
   def edit
     @employee = Employee.find(params[:id])
     @employee_contact = @employee.employee_contact.blank? ? EmployeeContact.new : @employee.employee_contact
+    @employee_ec_contact = @employee.employee_ec_contact.blank? ? EmployeeEcContact.new : @employee.employee_ec_contact
     @employee_job = @employee.employee_job.blank? ? EmployeeJob.new : @employee.employee_job
     @employee_salary = @employee.employee_salary.blank? ? EmployeeSalary.new : @employee.employee_salary
     @employee_qualification = @employee.employee_qualification.blank? ? EmployeeQualification.new : @employee.employee_qualification

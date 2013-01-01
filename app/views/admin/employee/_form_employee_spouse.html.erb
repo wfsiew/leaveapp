@@ -1,46 +1,48 @@
-<table>
-  <tr>
-    <td valign="top" class="lbl">
-      <%= label_tag :name, 'Name', :class => 'label' %>
-    </td>
-    <td>
-      <%= text_field_tag :name, @employee_spouse.name, :id => 'id_name', :class => 'text', :placeholder => 'enter name',
-                         :title => 'enter name' %>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top" class="lbl">
-      <%= label_tag :dob, 'Date of Birth', :class => 'label' %>
-    </td>
-    <td>
-      <%= text_field_tag :dob, fmt_date(@employee_spouse.dob), :id => 'id_spouse_dob', :class => 'text date_input', :placeholder => 'dd-mm-YYYY' %>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top" class="lbl">
-      <%= label_tag :ic, 'I.C No.', :class => 'label' %>
-    </td>
-    <td>
-      <%= text_field_tag :ic, @employee_spouse.ic, :id => 'id_ic', :class => 'text', :placeholder => 'enter I.C no.',
-                         :title => 'enter I.C no.' %>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top" class="lbl">
-      <%= label_tag :passport_no, 'Passport No.', :class => 'label' %>
-    </td>
-    <td>
-      <%= text_field_tag :passport_no, @employee_spouse.passport_no, :id => 'id_passport_no', :class => 'text', :placeholder => 'enter passport no.',
-                         :title => 'enter passport no.' %>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top" class="lbl">
-      <%= label_tag :occupation, 'Occupation', :class => 'label' %>
-    </td>
-    <td>
-      <%= text_field_tag :occupation, @employee_spouse.occupation, :id => 'id_occupation', :class => 'text', :placeholder => 'enter occupation',
-                         :title => 'enter occupation' %>
-    </td>
-  </tr>
-</table>
+<div id="form-employee-spouse">
+  <table>
+    <tr>
+      <td valign="top" class="lbl">
+        <%= label_tag :name, 'Name', :class => 'label' %>
+      </td>
+      <td>
+        <%= text_field_tag :name, @employee_spouse.name, :id => 'id_name', :class => 'text', :placeholder => 'enter name',
+                           :title => 'enter name' %>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" class="lbl">
+        <%= label_tag :dob, 'Date of Birth', :class => 'label' %>
+      </td>
+      <td>
+        <%= text_field_tag :dob, fmt_date(@employee_spouse.dob), :id => 'id_spouse_dob', :class => 'text date_input', :placeholder => 'dd-mm-YYYY' %>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" class="lbl">
+        <%= label_tag :ic, 'I.C No.', :class => 'label' %>
+      </td>
+      <td>
+        <%= text_field_tag :ic, @employee_spouse.ic, :id => 'id_ic', :class => 'text', :placeholder => 'enter I.C no.',
+                           :title => 'enter I.C no.' %>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" class="lbl">
+        <%= label_tag :passport_no, 'Passport No.', :class => 'label' %>
+      </td>
+      <td>
+        <%= text_field_tag :passport_no, @employee_spouse.passport_no, :id => 'id_passport_no', :class => 'text', :placeholder => 'enter passport no.',
+                           :title => 'enter passport no.' %>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" class="lbl">
+        <%= label_tag :occupation, 'Occupation', :class => 'label' %>
+      </td>
+      <td>
+        <%= text_field_tag :occupation, @employee_spouse.occupation, :id => 'id_occupation', :class => 'text', :placeholder => 'enter occupation',
+                           :title => 'enter occupation' %>
+      </td>
+    </tr>
+  </table>
+</div>
