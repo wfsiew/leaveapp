@@ -110,4 +110,8 @@ module ApplicationHelper
       "#{@column} #{@direction}"
     end
   end
+  
+  def self.date_fmt
+    '%d-%m-%Y'
+  end
 end

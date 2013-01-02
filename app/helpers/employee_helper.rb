@@ -1,3 +1,5 @@
+require 'securerandom'
+
 module EmployeeHelper
   DEFAULT_SORT_COLUMN = 'staff_id'
   DEFAULT_SORT_DIR = 'ASC'
@@ -54,6 +56,33 @@ module EmployeeHelper
       pager = ApplicationHelper::Pager.new(total, pagenum, pagesize)
       return pager.item_message
     end
+  end
+  
+  def self.employee_obj(params)
+    q = params[:employee]
+    
+    _dob = q[:dob]
+    dob = Date.strptime(_dob, ApplicationHelper.date_fmt) if _dob.present?
+    
+    Employee.new(:id => SecureRandom.uuid, :staff_id => q[:staff_id], :first_name => q[:first_name], :middle_name => q[:middle_name],
+                 :last_name => q[:last_name], :new_ic => q[:new_ic], :old_ic => q[:old_ic], :passport_no => q[:passport_no],
+                 :gender => q[:gender], :marital_status => q[:marital_status], :nationality => q[:nationality],
+                 :dob => dob, :place_of_birth => q[:place_of_birth], :race => q[:race], :religion => q[:religion],
+                 :is_bumi => q[:is_bumi], :user_id => q[:user_id], :supervisor_id => q[:supervisor_id])
+  end
+  
+  def self.update_obj(o, params)
+    q = params[:employee]
+    
+    _dob = q[:dob]
+    dob = Date.strptime(_dob, ApplicationHelper.date_fmt) if _dob.present?
+    
+    o.update_attributes(:staff_id => q[:staff_id], :first_name => q[:first_name], :middle_name => q[:middle_name],
+                        :last_name => q[:last_name], :new_ic => q[:new_ic], :old_ic => q[:old_ic], 
+                        :passport_no => q[:passport_no], :gender => q[:gender], :marital_status => q[:marital_status], 
+                        :nationality => q[:nationality], :dob => dob, :place_of_birth => q[:place_of_birth], 
+                        :race => q[:race], :religion => q[:religion], :is_bumi => q[:is_bumi], :user_id => q[:user_id], 
+                        :supervisor_id => q[:supervisor_id])
   end
   
   private

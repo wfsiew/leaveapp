@@ -251,6 +251,176 @@ var emp = ( function() {
     }
   
     function func_update(id) {
+      var data = get_data('edit');
+      data = get_data_contact('edit', data);
+      data = get_data_ec_contact('edit', data);
+      data = get_data_job('edit', data);
+      data = get_data_spouse('edit', data);
+      data = get_data_salary('edit', data);
+      data = get_data_qualification('edit', data);
+      data = get_data_membership('edit', data);
+      $('#edit-form input[type="text"]').next().remove();
+      $('#edit-form select').next().remove();
+      $('#edit-form').find('#lb_gender_f').next().remove();
+      $.post(url.update + id, data, function(result) {
+        if (result.success == 1) {
+          stat.show_status(0, result.message);
+          update_success();
+        }
+        
+        else if (result.error == 1) {
+          if (result.employee.error == 1) {
+            for (var e in result.employee.errors) {
+              var d = $('#edit-form #form-employee #error_' + e).get(0);
+              if (!d) {
+                var o = {
+                  field : e,
+                  msg : result.employee.errors[e]
+                };
+                var h = new EJS({
+                  url : '/assets/tpl/label_error.html',
+                  ext : '.html'
+                }).render(o);
+                if (e == 'gender')
+                  $('#edit-form #form-employee #lb_gender_f').after(h);
+                
+                else if (e == 'marital_status')
+                  $('#edit-form #form-employee #id_marital_status').after(h);
+                
+                else
+                  $("#edit-form #form-employee input[name='" + e + "']").after(h);
+              }
+            }
+          }
+          
+          if (result.employee_contact.error == 1) {
+            for (var e in result.employee_contact.errors) {
+              var d = $('#edit-form #form-employee-contact #error_' + e).get(0);
+              if (!d) {
+                var o = {
+                  field : e,
+                  msg : result.employee_contact.errors[e]
+                };
+                var h = new EJS({
+                  url : '/assets/tpl/label_error_inline.html',
+                  ext : '.html'
+                }).render(o);
+                $("#edit-form #form-employee-contact input[name='" + e + "']").after(h);
+              }
+            }
+          }
+          
+          if (result.employee_ec_contact.error == 1) {
+            for (var e in result.employee_ec_contact.errors) {
+              var d = $('#add-form #form-employee-ec-contact #error_' + e).get(0);
+              if (!d) {
+                var o = {
+                  field : e,
+                  msg : result.employee_ec_contact.errors[e]
+                };
+                var h = new EJS({
+                  url : '/assets/tpl/label_error.html',
+                  ext : '.html'
+                }).render(o);
+                $("#edit-form #form-employee-ec-contact input[name='" + e + "']").after(h);
+              }
+            }
+          }
+          
+          if (result.employee_job.error == 1) {
+            for (var e in result.employee_job.errors) {
+              var d = $('#add-form #form-employee-job #error_' + e).get(0);
+              if (!d) {
+                var o = {
+                  field : e,
+                  msg : result.employee_job.errors[e]
+                };
+                var h = new EJS({
+                  url : '/assets/tpl/label_error_inline.html',
+                  ext : '.html'
+                }).render(o);
+                if (e == 'designation_id' || e == 'department_id' || e == 'employment_status_id' || e == 'job_category_id')
+                  $('#edit-form #form-employee-job #id_' + e).after(h);
+                  
+                else
+                  $("#edit-form #form-employee-job input[name='" + e + "']").after(h);
+              }
+            }
+          }
+          
+          if (result.employee_spouse.error == 1) {
+            for (var e in result.employee_spouse.errors) {
+              var d = $('#add-form #form-employee-spouse #error_' + e).get(0);
+              if (!d) {
+                var o = {
+                  field : e,
+                  msg : result.employee_spouse.errors[e]
+                };
+                var h = new EJS({
+                  url : '/assets/tpl/label_error_inline.html',
+                  ext : '.html'
+                }).render(o);
+                $("#edit-form #form-employee-spouse input[name='" + e + "']").after(h);
+              }
+            }
+          }
+          
+          if (result.employee_salary.error == 1) {
+            for (var e in result.employee_salary.errors) {
+              if (!d) {
+                var o = {
+                  field : e,
+                  msg : result.employee_salary.errors[e]
+                };
+                var h = new EJS({
+                  url : '/assets/tpl/label_error_inline.html',
+                  ext : '.html'
+                }).render(o);
+                $("#edit-form #form-employee-salary input[name='" + e + "']").after(h);
+              }
+            }
+          }
+          
+          if (result.employee_qualification.error == 1) {
+            for (var e in result.employee_qualification.errors) {
+              if (!d) {
+                var o = {
+                  field : e,
+                  msg : result.employee_qualification.errors[e]
+                };
+                var h = new EJS({
+                  url : '/assets/tpl/label_error_inline.html',
+                  ext : '.html'
+                }).render(o);
+                if (e == 'level')
+                  $('#edit-form #form-employee-qualification #id_' + e).after(h);
+                  
+                else
+                  $("#edit-form #form-employee-qualification input[name='" + e + "']").after(h);
+              }
+            }
+          }
+          
+          if (result.employee_membership.error == 1) {
+            for (var e in result.employee_membership.errors) {
+              if (!d) {
+                var o = {
+                  field : e,
+                  msg : result.employee_membership.errors[e]
+                };
+                var h = new EJS({
+                  url : '/assets/tpl/label_error_inline.html',
+                  ext : '.html'
+                }).render(o);
+                $("#edit-form #form-employee-membership input[name='" + e + "']").after(h);
+              }
+            }
+          }
+        }
+        
+        else
+          utils.show_dialog(2, result);
+      });
       
       return false;
     }
@@ -328,7 +498,7 @@ var emp = ( function() {
         supervisor_id : form.find('#id_supervisor_id').val()
       };
 
-      return data;
+      return { employee : data };
     }
     
     function get_data_contact(t, o) {
@@ -451,7 +621,8 @@ var emp = ( function() {
       var form = f.find('#form-employee-membership');
       
       var data = {
-        
+        membership_no : form.find('#id_membership_no').val(),
+        year : form.find('#id_year').val()
       };
       
       o['employee_membership'] = data;

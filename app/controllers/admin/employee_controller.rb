@@ -79,15 +79,154 @@ class Admin::EmployeeController < Admin::AdminController
   
   # POST /employee/create
   def create
+    o = EmployeeHelper.employee_obj(params)
+         
+    b1 = EmployeeContactHelper.is_empty_params?(params)
+    oc = EmployeeContactHelper.employee_contact_obj(o, params)
+
+    b2 = EmployeeEcContactHelper.is_empty_params?(params)          
+    oec = EmployeeEcContactHelper.employee_ec_contact_obj(o, params)
+
+    b3 = EmployeeJobHelper.is_empty_params?(params)                         
+    oej = EmployeeJobHelper.employee_job_obj(o, params)
+           
+    b4 = EmployeeSpouseHelper.is_empty_params?(params)               
+    osp = EmployeeSpouseHelper.employee_spouse_obj(o, params)
+           
+    b5 = EmployeeSalaryHelper.is_empty_params?(params)                  
+    osa = EmployeeSalaryHelper.employee_salary_obj(o, params)
     
-    o = Employee.new(:id => SecureRandom.uuid)
-    oc = EmployeeContact.new(:id => o.id)
-    oec = EmployeeEcContact.new(:id => o.id)
-    oej = EmployeeJob.new(:id => o.id)
-    osp = EmployeeSpouse.new(:id => o.id)
-    osa = EmployeeSalary.new(:id => o.id)
-    oq = EmployeeQualification.new(:id => o.id)
-    om = EmployeeMembership.new(:id => o.id)
+    b6 = EmployeeQualificationHelper.is_empty_params?(params)                          
+    oq = EmployeeQualificationHelper.employee_qualification_obj(o, params)
+     
+    b7 = EmployeeMembershipHelper.is_empty_params?(params)                               
+    om = EmployeeMembershipHelper.employee_membership_obj(o, params)
+                              
+    v1 = o.valid?
+    v2 = b1 ? true : oc.valid?
+    v3 = b2 ? true : oec.valid?
+    v4 = b3 ? true : oej.valid?
+    v5 = b4 ? true : osp.valid?
+    v6 = b5 ? true : osa.valid?
+    v7 = b6 ? true : oq.valid?
+    v8 = b7 ? true : om.valid?
+    
+    if !v1 || !v2 || !v3 || !v4 || !v5 || !v6 || !v7 || !v8
+      employee_errors = EmployeeHelper.get_errors(o.errors, params)
+      employee_contact_errors = EmployeeContactHelper.get_errors(oc.errors, params)
+      employee_ec_contact_errors = EmployeeEcContactHelper.get_errors(oec.errors, params)
+      employee_job_errors = EmployeeJobHelper.get_errors(oej.errors, params)
+      employee_spouse_errors = EmployeeSpouseHelper.get_errors(osp.errors, params)
+      employee_salary_errors = EmployeeSalaryHelper.get_errors(osa.errors, params)
+      employee_qualification_errors = EmployeeQualificationHelper.get_errors(oq.errors, params)
+      employee_membership_errors = EmployeeMembershipHelper.get_errors(om.errors, params)
+      
+      errors = { :error => 1, :employee => employee_errors,
+                              :employee_contact => employee_contact_errors,
+                              :employee_ec_contact => employee_ec_contact_errors,
+                              :employee_job => employee_job_errors,
+                              :employee_spouse => employee_spouse_errors,
+                              :employee_salary => employee_salary_errors,
+                              :employee_qualification => employee_qualification_errors,
+                              :employee_membership => employee_membership_errors }
+      render :json => errors and return
+    end
+               
+    ActiveRecord::Base.transaction do
+      o.save
+      oc.save if b1
+      oec.save if b2
+      oej.save if b3
+      osp.save if b4
+      osa.save if b5
+      oq.save if b6
+      om.save if b7
+    end
+    
+    render :json => { :success => 1, :message => 'Employee was successfully added.' } and return
+  end
+  
+  # GET /employee/edit/1
+  # GET /employee/edit/1.json
+  def edit
+    @employee = Employee.find(params[:id])
+    @employee_contact = @employee.employee_contact.blank? ? EmployeeContact.new : @employee.employee_contact
+    @employee_ec_contact = @employee.employee_ec_contact.blank? ? EmployeeEcContact.new : @employee.employee_ec_contact
+    @employee_job = @employee.employee_job.blank? ? EmployeeJob.new : @employee.employee_job
+    @employee_salary = @employee.employee_salary.blank? ? EmployeeSalary.new : @employee.employee_salary
+    @employee_qualification = @employee.employee_qualification.blank? ? EmployeeQualification.new : @employee.employee_qualification
+    @employee_membership = @employee.employee_membership.blank? ? EmployeeMembership.new : @employee.employee_membership
+    @employee_spouse = @employee.employee_spouse.blank? ? EmployeeSpouse.new : @employee.employee_spouse
+    @form_id = 'edit-form'
+    @users = User.order(:username).all
+    @supervisors = Employee.all
+    @designations = Designation.order(:title).all
+    @employment_statuses = EmploymentStatus.order(:name).all
+    @job_categories = JobCategory.order(:name).all
+    @departments = Department.order(:name).all
+    
+    respond_to do |fmt|
+      fmt.html { render :partial => 'form' }
+      fmt.json { render :json => @employee }
+    end
+  end
+  
+  # POST /employee/update
+  def update
+    o = Employee.find(params[:id])
+    oc = o.employee_contact
+    oec = o.employee_ec_contact
+    oej = o.employee_job
+    osp = o.employee_spouse
+    osa = o.employee_salary
+    oq = o.employee_qualification
+    om = o.employee_membership
+    
+    oc_new = false
+    if oc.blank?
+      oc = EmployeeContactHelper.employee_contact_obj(o, params)
+      oc_new = true
+    end
+    
+    p "----------"
+    p oc
+    p "----------"
+    
+    oec_new = false
+    if oec.blank?
+      oec = EmployeeEcContactHelper.employee_ec_contact_obj(o, params)
+      oec_new = true
+    end
+    
+    oej_new = false
+    if oej.blank?
+      oej = EmployeeJobHelper.employee_job_obj(o, params)
+      oej_new = true
+    end
+    
+    osp_new = false
+    if osp.blank?
+      osp = EmployeeSpouseHelper.employee_spouse_obj(o, params)
+      osp_new = true
+    end
+    
+    osa_new = false
+    if osa.blank?
+      osa = EmployeeSalaryHelper.employee_salary_obj(o, params)
+      osa_new = true
+    end
+    
+    oq_new = false
+    if oq.blank?
+      oq = EmployeeQualificationHelper.employee_qualification_obj(o, params)
+      oq_new = true
+    end
+    
+    om_new = false
+    if om.blank?
+      om = EmployeeMembershipHelper.employee_membership_obj(o, params)
+      om_new = true
+    end
     
     v1 = o.valid?
     v2 = oc.valid?
@@ -116,40 +255,63 @@ class Admin::EmployeeController < Admin::AdminController
                               :employee_salary => employee_salary_errors,
                               :employee_qualification => employee_qualification_errors,
                               :employee_membership => employee_membership_errors }
-      render :json => errors
+      render :json => errors and return
+    end
+    
+    ActiveRecord::Base.transaction do
+      EmployeeHelper.update_obj(o, params)
       
-    else
-      render :json => { :success => 1, :message => 'Employee was successfully added.' }
+      if oc_new
+        oc.save
+        
+      else
+        EmployeeContactHelper.update_obj(oc, params)
+      end
+      
+      if oec_new
+        oec.save
+        
+      else
+        EmployeeEcContactHelper.update_obj(oec, params)
+      end
+      
+      if oej_new
+        oej.save
+        
+      else
+        EmployeeJobHelper.update_obj(oej, params)
+      end
+      
+      if osp_new
+        osp.save
+        
+      else
+        EmployeeSpouseHelper.update_obj(osp, params)
+      end
+      
+      if osa_new
+        osa.save
+        
+      else
+        EmployeeSalaryHelper.update_obj(osa, params)
+      end
+      
+      if oq_new
+        oq.save
+        
+      else
+        EmployeeQualificationHelper.update_obj(oq, params)
+      end
+      
+      if om_new
+        om.save
+        
+      else
+        EmployeeMembershipHelper.update_obj(om, params)
+      end
     end
-  end
-  
-  # GET /employee/edit/1
-  # GET /employee/edit/1.json
-  def edit
-    @employee = Employee.find(params[:id])
-    @employee_contact = @employee.employee_contact.blank? ? EmployeeContact.new : @employee.employee_contact
-    @employee_ec_contact = @employee.employee_ec_contact.blank? ? EmployeeEcContact.new : @employee.employee_ec_contact
-    @employee_job = @employee.employee_job.blank? ? EmployeeJob.new : @employee.employee_job
-    @employee_salary = @employee.employee_salary.blank? ? EmployeeSalary.new : @employee.employee_salary
-    @employee_qualification = @employee.employee_qualification.blank? ? EmployeeQualification.new : @employee.employee_qualification
-    @employee_membership = @employee.employee_membership.blank? ? EmployeeMembership.new : @employee.employee_membership
-    @employee_spouse = @employee.employee_spouse.blank? ? EmployeeSpouse.new : @employee.employee_spouse
-    @form_id = 'edit-form'
-    @users = User.order(:username).all
-    @supervisors = Employee.all
-    @designations = Designation.order(:title).all
-    @employment_statuses = EmploymentStatus.order(:name).all
-    @job_categories = JobCategory.order(:name).all
-    @departments = Department.order(:name).all
     
-    respond_to do |fmt|
-      fmt.html { render :partial => 'form' }
-      fmt.json { render :json => @employee }
-    end
-  end
-  
-  def update
-    
+    render :json => { :success => 1, :message => 'Employee was successfully added.' } and return
   end
   
   # POST /employee/delete
