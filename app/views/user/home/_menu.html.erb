@@ -1,0 +1,22 @@
+<div id="menu">
+  <h3><%= link_to 'Personal', '#' %></h3>
+  <div>
+    <div><%= link_to 'Personal Details', '#', :onclick => "return info.load()", :id => 'menu_info' %></div>
+    <div><%= link_to 'Contact Details', '#', :onclick => "return contact.load()" %></div>
+    <div><%= link_to 'Emergency Contacts', '#', :onclick => "return eccontact.load()" %></div>
+    <div><%= link_to 'Spouse Details', '#', :onclick => "return spouse.load()" %></div>
+    <div><%= link_to 'Dependents', '#', :onclick => "return dependent.load()" %></div>
+    <div><%= link_to 'Job', '#', :onclick => "return job.load()" %></div>
+    <div><%= link_to 'Salary', '#', :onclick => "return salary.load()" %></div>
+    <div><%= link_to 'Qualification', '#', :onclick => "return qualification.load()" %></div>
+    <div><%= link_to 'Membership', '#', :onclick => "return membership.load()" %></div>
+    <div><%= link_to 'Report-to', '#', :onclick => "return report.load()" %></div>
+  </div>
+  <h3><%= link_to 'Leave', '#' %></h3>
+  <div>
+    <div><%= link_to 'Leave Summary', '#', :onclick => "return leavesummary.load()" %></div>
+    <div><%= link_to 'Leave List', '#', :onclick => "return leave.load()" %></div>
+    <div><%= link_to 'Calendar', '#', :onclick => "return cal.load()" %></div>
+  </div>
+</div>
+

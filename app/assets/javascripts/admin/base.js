@@ -4,8 +4,8 @@
       menu.init();
       utils.init_progress();
       utils.init_server_error_dialog();
-      $('#menu_emp').addClass('menu_active');
-      //user.load();
+      $('#menu_user').addClass('menu_active');
+      user.load();
     }
 
     return {

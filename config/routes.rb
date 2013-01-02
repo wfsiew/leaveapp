@@ -1,5 +1,13 @@
 Leaveapp::Application.routes.draw do
   root :to => 'admin/home#index'
+  
+  namespace :user do
+    match 'index' => 'home#index', :via => :get
+    
+    scope 'info', :as => 'info' do
+      match '' => 'info#index', :via => :get
+    end
+  end
 
   namespace :admin do
     match 'index' => 'home#index', :via => :get

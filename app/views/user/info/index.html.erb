@@ -1,4 +1,5 @@
-<div id="form-employee">
+<div class="page_title ui-widget-header ui-widget">Personal Details</div>
+<form id="form-employee" class="ui-widget-content ui-widget" method="post">
   <table>
     <tr>
       <td valign="top" class="lbl">
@@ -31,8 +32,7 @@
         <%= label_tag :staff_id, 'Employee Id', :class => 'label' %>
       </td>
       <td class="colspacing">
-        <%= text_field_tag :staff_id, @employee.staff_id, :id => 'id_staff_id', :class => 'text', :placeholder => 'enter employee id',
-                           :title => 'enter employee id' %>
+        <span><%= h @employee.staff_id %>
       </td>
       <td valign="top" class="lbl">
         <%= label_tag :new_ic, 'New I.C No.', :class => 'label' %> 
@@ -133,29 +133,15 @@
     </tr>
     <tr>
       <td valign="top" class="lbl">
-        <%= label_tag :user_id, 'User ID', :class => 'label' %>
+        <%= label_tag :user_id, 'Username', :class => 'label' %>
       </td>
       <td>
-        <select id="id_user_id" class="select">
-          <option value="0">-- Select --</option>
-          <%= options_from_collection_for_select(@users, :id, :username, @employee.user_id.blank? ? '0' : @employee.user_id) %>
-        </select>
-      </td>
-      <td colspan="2"></td>
-    </tr>
-    <tr>
-      <td valign="top" class="lbl">
-        <%= label_tag :supervisor_id, 'Report to', :class => 'label' %>
-      </td>
-      <td>
-        <select id="id_supervisor_id" class="select">
-          <option value="0">-- Select --</option>
-          <% @supervisors.each do |o| %>
-          <option <%= "selected='selected'" if o.id == @employee.supervisor_id %> value="<%= o.id %>"><%= h o.first_name %> <%= h o.middle_name %> <%= h o.last_name %></option>
-          <% end %>
-        </select>
+        <span><%= h @employee.user_id %></span>
       </td>
       <td colspan="2"></td>
     </tr>
   </table>
+</form>
+<div style="margin-top: 10px">
+  <%= render 'shared/save_button' %>
 </div>
