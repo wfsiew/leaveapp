@@ -5,7 +5,7 @@
       utils.init_progress();
       utils.init_server_error_dialog();
       $('#menu_info').addClass('menu_active');
-      //user.load();
+      info.load();
     }
 
     return {
