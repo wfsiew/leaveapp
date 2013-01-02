@@ -56,10 +56,13 @@ var emp = ( function() {
   
     function func_save() {
       var data = get_data('add');
-      data = get_data_contact(data);
-      data = get_data_ec_contact(data);
-      data = get_data_job(data);
-      data = get_data_spouse(data);
+      data = get_data_contact('add', data);
+      data = get_data_ec_contact('add', data);
+      data = get_data_job('add', data);
+      data = get_data_spouse('add', data);
+      data = get_data_salary('add', data);
+      data = get_data_qualification('add', data);
+      data = get_data_membership('add', data);
       $('#add-form input[type="text"]').next().remove();
       $('#add-form select').next().remove();
       $('#add-form').find('#lb_gender_f').next().remove();
@@ -72,7 +75,7 @@ var emp = ( function() {
         else if (result.error == 1) {
           if (result.employee.error == 1) {
             for (var e in result.employee.errors) {
-              var d = $('#error_' + e).get(0);
+              var d = $('#add-form #form-employee #error_' + e).get(0);
               if (!d) {
                 var o = {
                   field : e,
@@ -83,37 +86,37 @@ var emp = ( function() {
                   ext : '.html'
                 }).render(o);
                 if (e == 'gender')
-                  $('#add-form').find('#form-employee').find('#lb_gender_f').after(h);
+                  $('#add-form #form-employee #lb_gender_f').after(h);
                 
                 else if (e == 'marital_status')
-                  $('#add-form').find('#form-employee').find('#id_marital_status').after(h);
+                  $('#add-form #form-employee #id_marital_status').after(h);
                 
                 else
-                  $('#add-form').find('#form-employee').find("input[name='" + e + "']").after(h);
+                  $("#add-form #form-employee input[name='" + e + "']").after(h);
               }
             }
           }
           
           if (result.employee_contact.error == 1) {
             for (var e in result.employee_contact.errors) {
-              var d = $('#error_' + e).get(0);
+              var d = $('#add-form #form-employee-contact #error_' + e).get(0);
               if (!d) {
                 var o = {
                   field : e,
                   msg : result.employee_contact.errors[e]
                 };
                 var h = new EJS({
-                  url : '/assets/tpl/label_error.html',
+                  url : '/assets/tpl/label_error_inline.html',
                   ext : '.html'
                 }).render(o);
-                $('#add-form').find('#form-employee-contact').find("input[name='" + e + "']").after(h);
+                $("#add-form #form-employee-contact input[name='" + e + "']").after(h);
               }
             }
           }
           
           if (result.employee_ec_contact.error == 1) {
             for (var e in result.employee_ec_contact.errors) {
-              var d = $('#error_' + e).get(0);
+              var d = $('#add-form #form-employee-ec-contact #error_' + e).get(0);
               if (!d) {
                 var o = {
                   field : e,
@@ -123,48 +126,97 @@ var emp = ( function() {
                   url : '/assets/tpl/label_error.html',
                   ext : '.html'
                 }).render(o);
-                $('#add-form').find('#form-employee-ec-contact').find("input[name='" + e + "']").after(h);
+                $("#add-form #form-employee-ec-contact input[name='" + e + "']").after(h);
               }
             }
           }
           
           if (result.employee_job.error == 1) {
             for (var e in result.employee_job.errors) {
-              var d = $('#error_' + e).get(0);
+              var d = $('#add-form #form-employee-job #error_' + e).get(0);
               if (!d) {
                 var o = {
                   field : e,
                   msg : result.employee_job.errors[e]
                 };
                 var h = new EJS({
-                  url : '/assets/tpl/label_error.html',
+                  url : '/assets/tpl/label_error_inline.html',
                   ext : '.html'
                 }).render(o);
                 if (e == 'designation_id' || e == 'department_id' || e == 'employment_status_id' || e == 'job_category_id')
-                  $('#add-form').find('#form-employee-job').find('#id_' + e).after(h);
+                  $('#add-form #form-employee-job #id_' + e).after(h);
                   
                 else
-                  $('#add-form').find('#form-employee-job').find("input[name='" + e + "']").after(h);
+                  $("#add-form #form-employee-job input[name='" + e + "']").after(h);
               }
             }
           }
           
           if (result.employee_spouse.error == 1) {
             for (var e in result.employee_spouse.errors) {
-              var d = $('#error_' + e).get(0);
+              var d = $('#add-form #form-employee-spouse #error_' + e).get(0);
               if (!d) {
                 var o = {
                   field : e,
                   msg : result.employee_spouse.errors[e]
                 };
                 var h = new EJS({
-                  url : '/assets/tpl/label_error.html',
+                  url : '/assets/tpl/label_error_inline.html',
                   ext : '.html'
                 }).render(o);
-                var id = (e == 'dob' ? 'spouse_dob' : e);
-                alert(e);
-                alert(id)
-                $('#add-form').find('#form-employee-spouse').find('#id_' + id).after(h);
+                $("#add-form #form-employee-spouse input[name='" + e + "']").after(h);
+              }
+            }
+          }
+          
+          if (result.employee_salary.error == 1) {
+            for (var e in result.employee_salary.errors) {
+              if (!d) {
+                var o = {
+                  field : e,
+                  msg : result.employee_salary.errors[e]
+                };
+                var h = new EJS({
+                  url : '/assets/tpl/label_error_inline.html',
+                  ext : '.html'
+                }).render(o);
+                $("#add-form #form-employee-salary input[name='" + e + "']").after(h);
+              }
+            }
+          }
+          
+          if (result.employee_qualification.error == 1) {
+            for (var e in result.employee_qualification.errors) {
+              if (!d) {
+                var o = {
+                  field : e,
+                  msg : result.employee_qualification.errors[e]
+                };
+                var h = new EJS({
+                  url : '/assets/tpl/label_error_inline.html',
+                  ext : '.html'
+                }).render(o);
+                if (e == 'level')
+                  $('#add-form #form-employee-qualification #id_' + e).after(h);
+                  
+                else
+                  $("#add-form #form-employee-qualification input[name='" + e + "']").after(h);
+              }
+            }
+          }
+          
+          if (result.employee_membership.error == 1) {
+            for (var e in result.employee_membership.errors) {
+              if (!d) {
+                var o = {
+                  field : e,
+                  msg : result.employee_membership.errors[e]
+                };
+                var h = new EJS({
+                  url : '/assets/tpl/label_error_inline.html',
+                  ext : '.html'
+                }).render(o);
+                $("#add-form #form-employee-membership input[name='" + e + "']").after(h);
               }
             }
           }
@@ -186,11 +238,7 @@ var emp = ( function() {
       id = utils.get_itemid(id);
       $('#dialog_edit_body').load(url.edit + id, function() {
         $('#tabs').tabs();
-        $('.date_input').datepicker({
-          dateFormat : utils.date_format,
-          changeMonth : true,
-          changeYear : true
-        });
+        $('.date_input').datepicker(utils.date_opt());
         $('.save_button.save').click(function() {
           return func_update(id);
         });
@@ -283,8 +331,9 @@ var emp = ( function() {
       return data;
     }
     
-    function get_data_contact(o) {
-      var form = $('#form-employee-contact');
+    function get_data_contact(t, o) {
+      var f = (t == 'add' ? $('#add-form') : $('#edit-form'));
+      var form = f.find('#form-employee-contact');
       
       var data = {
         address_1 : form.find('#id_address_1').val(),
@@ -305,8 +354,9 @@ var emp = ( function() {
       return o;
     }
     
-    function get_data_ec_contact(o) {
-      var form = $('#form-employee-ec-contact');
+    function get_data_ec_contact(t, o) {
+      var f = (t == 'add' ? $('#add-form') : $('#edit-form'));
+      var form = f.find('#form-employee-ec-contact');
       
       var data = {
         name : form.find('#id_name').val(),
@@ -321,8 +371,9 @@ var emp = ( function() {
       return o;
     }
     
-    function get_data_job(o) {
-      var form = $('#form-employee-job');
+    function get_data_job(t, o) {
+      var f = (t == 'add' ? $('#add-form') : $('#edit-form'));
+      var form = f.find('#form-employee-job');
       
       var data = {
         designation_id : form.find('#id_designation_id').val(),
@@ -338,8 +389,9 @@ var emp = ( function() {
       return o;
     }
     
-    function get_data_spouse(o) {
-      var form = $('#form-employee-spouse');
+    function get_data_spouse(t, o) {
+      var f = (t == 'add' ? $('#add-form') : $('#edit-form'));
+      var form = f.find('#form-employee-spouse');
       
       var data = {
         name : form.find('#id_name').val(),
@@ -350,6 +402,59 @@ var emp = ( function() {
       };
       
       o['employee_spouse'] = data;
+      
+      return o;
+    }
+    
+    function get_data_salary(t, o) {
+      var f = (t == 'add' ? $('#add-form') : $('#edit-form'));
+      var form = f.find('#form-employee-salary');
+      
+      var data = {
+        salary : form.find('#id_salary').val(),
+        allowance : form.find('#id_allowance').val(),
+        bank_name : form.find('#id_bank_name').val(),
+        bank_acc_no : form.find('#id_bank_acc_no').val(),
+        bank_acc_type : form.find('#id_bank_acc_type').val(),
+        bank_address : form.find('#id_bank_address').val(),
+        epf_no : form.find('#id_epf_no').val(),
+        socso_no : form.find('#id_socso_no').val(),
+        income_tax_no : form.find('#id_income_tax_no').val()
+      };
+      
+      o['employee_salary'] = data;
+      
+      return o;
+    }
+    
+    function get_data_qualification(t, o) {
+      var f = (t == 'add' ? $('#add-form') : $('#edit-form'));
+      var form = f.find('#form-employee-qualification');
+      
+      var data = {
+        level : form.find('#id_level').val(),
+        institute : form.find('#id_institute').val(),
+        major : form.find('#id_major').val(),
+        year : form.find('#id_year').val(),
+        gpa : form.find('#id_gpa').val(),
+        start_date : form.find('#id_start_date').val(),
+        end_date : form.find('#id_end_date').val()
+      };
+      
+      o['employee_qualification'] = data;
+      
+      return o;
+    }
+    
+    function get_data_membership(t, o) {
+      var f = (t == 'add' ? $('#add-form') : $('#edit-form'));
+      var form = f.find('#form-employee-membership');
+      
+      var data = {
+        
+      };
+      
+      o['employee_membership'] = data;
       
       return o;
     }

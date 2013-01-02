@@ -85,24 +85,37 @@ class Admin::EmployeeController < Admin::AdminController
     oec = EmployeeEcContact.new(:id => o.id)
     oej = EmployeeJob.new(:id => o.id)
     osp = EmployeeSpouse.new(:id => o.id)
+    osa = EmployeeSalary.new(:id => o.id)
+    oq = EmployeeQualification.new(:id => o.id)
+    om = EmployeeMembership.new(:id => o.id)
     
     v1 = o.valid?
     v2 = oc.valid?
     v3 = oec.valid?
     v4 = oej.valid?
     v5 = osp.valid?
+    v6 = osa.valid?
+    v7 = oq.valid?
+    v8 = om.valid?
     
-    if !v1 || !v2 || !v3 || !v4 || !v5
+    if !v1 || !v2 || !v3 || !v4 || !v5 || !v6 || !v7 || !v8
       employee_errors = EmployeeHelper.get_errors(o.errors, params)
       employee_contact_errors = EmployeeContactHelper.get_errors(oc.errors, params)
       employee_ec_contact_errors = EmployeeEcContactHelper.get_errors(oec.errors, params)
       employee_job_errors = EmployeeJobHelper.get_errors(oej.errors, params)
       employee_spouse_errors = EmployeeSpouseHelper.get_errors(osp.errors, params)
+      employee_salary_errors = EmployeeSalaryHelper.get_errors(osa.errors, params)
+      employee_qualification_errors = EmployeeQualificationHelper.get_errors(oq.errors, params)
+      employee_membership_errors = EmployeeMembershipHelper.get_errors(om.errors, params)
+      
       errors = { :error => 1, :employee => employee_errors,
                               :employee_contact => employee_contact_errors,
                               :employee_ec_contact => employee_ec_contact_errors,
                               :employee_job => employee_job_errors,
-                              :employee_spouse => employee_spouse_errors }
+                              :employee_spouse => employee_spouse_errors,
+                              :employee_salary => employee_salary_errors,
+                              :employee_qualification => employee_qualification_errors,
+                              :employee_membership => employee_membership_errors }
       render :json => errors
       
     else

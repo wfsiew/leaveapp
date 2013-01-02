@@ -1,20 +1,22 @@
-<table>
-  <tr>
-    <td valign="top" class="lbl">
-      <%= label_tag :membership_no, 'Membership No', :class => 'label' %>
-    </td>
-    <td>
-      <%= text_field_tag :membership_no, @employee_membership.membership_no, :id => 'id_membership_no', :class => 'text', :placeholder => 'enter membership no.',
-                         :title => 'enter membership no.' %>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top" class="lbl">
-      <%= label_tag :year, 'Year', :class => 'Label' %>
-    </td>
-    <td>
-      <%= text_field_tag :year, @employee_membership.year, :id => 'id_year', :class => 'text', :placeholder => 'enter year',
-                         :title => 'enter year' %>
-    </td>
-  </tr>
-</table>
+<div id="form-employee-membership">
+  <table>
+    <tr>
+      <td valign="top" class="lbl">
+        <%= label_tag :membership_no, 'Membership No', :class => 'label' %>
+      </td>
+      <td>
+        <%= text_field_tag :membership_no, @employee_membership.membership_no, :id => 'id_membership_no', :class => 'text', :placeholder => 'enter membership no.',
+                           :title => 'enter membership no.' %>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" class="lbl">
+        <%= label_tag :year, 'Year', :class => 'Label' %>
+      </td>
+      <td>
+        <%= text_field_tag :year, @employee_membership.year, :id => 'id_year', :class => 'text', :placeholder => 'enter year',
+                           :title => 'enter year' %>
+      </td>
+    </tr>
+  </table>
+</div>
