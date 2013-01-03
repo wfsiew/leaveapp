@@ -1,4 +1,4 @@
-<%= form_tag('.', :id => 'save-form', :class => 'save_form ui-widget-content ui-widget ui-corner-all') do %>
+<form id="save-form" class="save_form ui-widget-content ui-widget" method="post">
   <table>
     <tr>
       <td valign="top" class="lbl">
@@ -59,29 +59,13 @@
       <td>
         <%= radio_button_tag :day_type, 0, :selected => true %>
         <%= label_tag :day_type_full, 'Full day' %>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top" class="lbl"></td>
-      <td>
+        &nbsp;&nbsp;
         <%= radio_button_tag :day_type, 1 %>
         <%= label_tag :day_type_half_am, 'Half day morning' %>
-      </td>
-    </tr>
-    <tr>
-      <td valign="top" class="lbl"></td>
-      <td>
+        &nbsp;&nbsp;
         <%= radio_button_tag :day_type, 2 %>
         <%= label_tag :day_type_half_pm, 'Half day afternoon' %>
       </td>
     </tr>
-    <tr>
-      <td></td>
-      <td>
-        <div class="row_button">
-          <%= render 'shared/assign_button' %>
-        </div>
-      </td>
-    </tr>
   </table>
-<% end %>
+</form>

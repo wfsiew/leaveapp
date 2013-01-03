@@ -24,7 +24,8 @@ var leavesummary = ( function() {
       var data = {
         'empids[]' : empids,
         'leavetypeids[]' : leavetypeids,
-        'leaveent[]' : leaveent
+        'leaveent[]' : leaveent,
+        year : $('#id_year').val()
       };
 
       $.post(url.create, data, function(result) {
@@ -45,7 +46,8 @@ var leavesummary = ( function() {
         employee : $('#id_employee').val(),
         leave_type : $('#id_leave_type').val(),
         designation : $('#id_designation').val(),
-        dept : $('#id_dept').val()
+        dept : $('#id_dept').val(),
+        year : $('#id_year').val()
       };
       
       return param;
@@ -54,7 +56,7 @@ var leavesummary = ( function() {
     function init() {
       $('#id_find').click(nav_list.show_list);
       $('#id_display').change(nav_list.show_list);
-      $('#id_employee').tooltip({track : true});
+      $('#id_employee,#id_year').tooltip({track : true});
       utils.init_alert_dialog('#dialog-message');
       utils.bind_hover($('#id_save,#id_find'));
       nav_list.config.list_url = url.list;

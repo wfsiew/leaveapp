@@ -1,0 +1,13 @@
+<div id="table_container">
+  <div class="page_title ui-widget-header ui-widget"><%= @title %></div>
+  <div class="page_container ui-widget">
+    <%= yield :search_form %>
+  </div>
+  <div class="page_container ui-widget">
+    <div id="right_box">
+      <%= yield :content_list %>
+    </div>
+  </div>
+</div>
+<%= render 'shared/alert_panel' %>
+<%= yield :dialog %>

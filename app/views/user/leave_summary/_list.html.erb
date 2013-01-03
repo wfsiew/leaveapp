@@ -1,0 +1,51 @@
+<% if @data.present? && @data[:list].any? && @leavetypes.any? %>
+  <table class="list_table">
+    <thead class="ui-widget-header">
+      <tr>
+        <th class="data">
+          <span class="colheader">Employee Name</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Leave Type</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Leave Entitled (Days)</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Leave Taken (Days)</span>
+        </th>
+        <th class="data">
+          <span class="colheader">Leave Balance (Days)</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @data[:list].each do |o| %>
+      <% rowcss = cycle("ui-state-active", "ui-state-default") %>
+      <% @leavetypes.each do |t| %>
+      <% ent = LeaveSummaryHelper::get_employee_leave_entitlement(o.id, t.id, @year) %>
+      <tr class="<%= rowcss %>">
+        <td class="data">
+          <%= h o.first_name %> <%= h o.middle_name %> <%= h o.last_name %>
+          <input type="hidden" value="<%= o.id %>" name="hdnEmpId[]">
+        </td>
+        <td class="data">
+          <%= h t.name %>
+          <input type="hidden" value="<%= t.id %>" name="hdnLeaveTypeId[]">
+        </td>
+        <td class="data">
+          <%= number_with_precision ent[:day], :precision => 2 %>
+        </td>
+        <td class="data">
+          <%= number_with_precision ent[:taken], :precision => 2 %>
+        </td>
+        <td class="data">
+          <%= number_with_precision ent[:balance], :precision => 2 %>
+        </td>
+      </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+<input id="id_pg" type="hidden" value="<%= @data[:hasprev] %>,<%= @data[:hasnext] %>,<%= @data[:prevpage] %>,<%= @data[:nextpage] %>,<%= @data[:item_msg] %>,<%= @data[:sortcolumn] %>,<%= @data[:sortdir] %>" />

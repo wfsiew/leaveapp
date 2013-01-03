@@ -1,8 +1,7 @@
 <% @dialog_title = 'Assign Leave' %>
-<div id="admin-form" class="ui-widget-content ui-widget ui-corner-all">
-  <div class="page_title ui-widget-header ui-corner-all">
-    <span>Assign Leave</span>
-  </div>
-  <%= render 'form' %>
+<div class="page_title ui-widget-header ui-widget">Assign Leave</div>
+<%= render 'form' %>
+<div style="margin-top: 10px">
+  <%= render 'shared/assign_button' %>
 </div>
 <%= render 'shared/alert_panel' %>

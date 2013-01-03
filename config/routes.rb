@@ -47,7 +47,11 @@ Leaveapp::Application.routes.draw do
     end
     
     scope 'leave', :as => 'leave' do
-      match 'apply' => 'leave#apply', :as => :apply, :via => [:get, :post]
+      match 'apply' => 'leave_request#index', :via => :get
+      match 'apply' => 'leave_request#create', :as => :apply, :via => :post
+      
+      match 'summary' => 'leave_summary#index', :via => :get
+      match 'summary/list' => 'leave_summary#list', :as => :list, :via => [:get, :post]
     end
   end
 

@@ -7,6 +7,7 @@ class Admin::LeaveSummaryController < Admin::AdminController
     @leavetypes = LeaveType.order(:name).where(:admin_adjust => true)
     @designation = Designation.order(:title).all
     @dept = Department.order(:name).all
+    @year = Time.now.year
     
     respond_to do |fmt|
       fmt.html { render 'index', :layout => 'list' }
@@ -21,6 +22,7 @@ class Admin::LeaveSummaryController < Admin::AdminController
     leave_type = params[:leave_type].blank? ? 0 : params[:leave_type].to_i
     designation = params[:designation].blank? ? 0 : params[:designation].to_i
     dept = params[:dept].blank? ? 0 : params[:dept].to_i
+    year = params[:year].blank? ? Time.now.year : params[:year].to_i
     pgnum = params[:pgnum].blank? ? 1 : params[:pgnum].to_i
     pgsize = params[:pgsize].blank? ? 0 : params[:pgsize].to_i
     sortcolumn = params[:sortcolumn].blank? ? EmployeeHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
@@ -46,6 +48,7 @@ class Admin::LeaveSummaryController < Admin::AdminController
     end
     
     @leavetypes = criteria_leavetypes.all
+    @year = year
     
     respond_to do |fmt|
       fmt.html { render :partial => 'list' }
@@ -58,7 +61,7 @@ class Admin::LeaveSummaryController < Admin::AdminController
     empids = params[:empids]
     leavetypeids = params[:leavetypeids]
     leaveent = params[:leaveent]
-    year = Time.now.year
+    year = params[:year].blank? ? Time.now.year : params[:year].to_i
     count = 0
     
     ActiveRecord::Base.transaction do

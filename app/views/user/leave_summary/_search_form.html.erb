@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <td>
+      <%= label_tag :id_year, 'Year', :class => 'label' %>
+    </td>
+    <td class="colspacing">
+      <%= text_field_tag :year, Time.now.year, :id => 'id_year', :class => 'text', :placeholder => 'enter year', 
+                         :title => 'enter year' %>
+    </td>
+    <td>
+      <%= label_tag :id_leave_type, 'Leave Type', :class => 'label' %>
+    </td>
+    <td>
+      <select id="id_leave_type" class="select">
+        <option value="0">All</option>
+        <%= options_from_collection_for_select(@leavetypes, :id, :name) %>
+      </select>
+    </td>
+  </tr>
+</table>
+<br />
+<%= render 'search_panel' %>

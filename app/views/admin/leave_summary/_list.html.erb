@@ -23,7 +23,7 @@
     <% @data[:list].each do |o| %>
       <% rowcss = cycle("ui-state-active", "ui-state-default") %>
       <% @leavetypes.each do |t| %>
-      <% ent = LeaveSummaryHelper::get_employee_leave_entitlement(o.id, t.id, Time.now.year) %>
+      <% ent = LeaveSummaryHelper::get_employee_leave_entitlement(o.id, t.id, @year) %>
       <tr class="<%= rowcss %>">
         <td class="data">
           <%= h o.first_name %> <%= h o.middle_name %> <%= h o.last_name %>

@@ -15,6 +15,8 @@ class LeaveRequest < ActiveRecord::Base
   
   validates_numericality_of :day, :greater_than => 0, :message => 'No. of day(s) is invalid'
   
+  PENDING = 'P'
+  
   def display_status
     case self.status
     when 'P' then 'Pending' 
