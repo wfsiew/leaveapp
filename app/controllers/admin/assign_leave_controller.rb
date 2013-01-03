@@ -19,8 +19,8 @@ class Admin::AssignLeaveController < Admin::AdminController
     _from_date = params[:from_date]
     _to_date = params[:to_date]
     
-    from_date = Date.strptime(_from_date, '%d-%m-%Y') if _from_date.present?
-    to_date = Date.strptime(_to_date, '%d-%m-%Y') if _to_date.present?
+    from_date = Date.strptime(_from_date, ApplicationHelper.date_fmt) if _from_date.present?
+    to_date = Date.strptime(_to_date, ApplicationHelper.date_fmt) if _to_date.present?
     
     o = LeaveRequest.new(:id => SecureRandom.uuid, :staff_id => params[:staff_id], :leave_type_id => params[:leave_type_id],
                          :day => params[:day], :from_date => from_date, :to_date => to_date, :reason => params[:reason],

@@ -30,4 +30,5 @@
 //= require user/qualification
 //= require user/membership
 //= require user/reportto
+//= require user/leaveapply
 // require_tree .

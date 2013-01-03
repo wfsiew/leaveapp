@@ -1,11 +1,11 @@
-var asgnleave = ( function() {
+var leaveapply = ( function() {
     var url = {
-      create : '/admin/asgnleave/create/'
+      apply : '/user/leave/apply/'
     };
 
     function func_save() {
       var data = get_data();
-      $.post(url.create, data, function(result) {
+      $.post(url.apply, data, function(result) {
         if (result.success == 1) {
           stat.show_status(0, result.message);
           load();
@@ -43,7 +43,6 @@ var asgnleave = ( function() {
       var form = $('#save-form');
 
       var data = {
-        staff_id : form.find('#id_staff_id').val(),
         leave_type_id : form.find('#id_leave_type').val(),
         day : form.find('#id_day').val(),
         from_date : form.find('#id_from_date').val(),
@@ -56,18 +55,18 @@ var asgnleave = ( function() {
     }
 
     function init() {
-      utils.init_alert_dialog('#dialog-message');
-      $('#save-form').tooltip({track : true});
-      $('.save_button.save').click(func_save);
-      utils.bind_hover($('.save_button'));
       $('.date_input').datepicker(utils.date_opt());
+      $('.save_button.save').click(func_save);
+      $('#save-form').tooltip({track : true});
+      utils.bind_hover($('.save_button'));
+      utils.init_alert_dialog('#dialog-message');
     }
 
     function load() {
-      return menu.get('/admin/asgnleave/', init);
+      menu.get('/user/leave/apply', init);
     }
 
     return {
       load : load
-    }
-}()); 
+    };
+}());
