@@ -1,8 +1,11 @@
 class User::InfoController < User::UserController
   
+  # GET /info
+  # GET /info.json
   def index
     id = user_id
     @employee = Employee.find(id)
+    @user = @employee.user
     
     respond_to do |fmt|
       fmt.html { render 'index' }
@@ -10,7 +13,16 @@ class User::InfoController < User::UserController
     end
   end
   
-  def user_id
-    'c259d5e8-04e1-4b93-bf6b-f6c2c4abba29'
+  # POST /info/update
+  def update
+    id = user_id
+    o = Employee.find(id)
+    
+    if EmployeeHelper.update_info(o, params)
+      render :json => { :success => 1, :message => 'Personal Details was successfully updated.' }
+      
+    else
+      render :json => EmployeeHelper.get_errors(o.errors, params)
+    end
   end
 end

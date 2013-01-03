@@ -85,6 +85,19 @@ module EmployeeHelper
                         :supervisor_id => q[:supervisor_id])
   end
   
+  def self.update_info(o, params)
+    q = params[:employee]
+    
+    _dob = q[:dob]
+    dob = Date.strptime(_dob, ApplicationHelper.date_fmt) if _dob.present?
+    
+    o.update_attributes(:first_name => q[:first_name], :middle_name => q[:middle_name],
+                        :last_name => q[:last_name], :new_ic => q[:new_ic], :old_ic => q[:old_ic], 
+                        :passport_no => q[:passport_no], :gender => q[:gender], :marital_status => q[:marital_status], 
+                        :nationality => q[:nationality], :dob => dob, :place_of_birth => q[:place_of_birth], 
+                        :race => q[:race], :religion => q[:religion], :is_bumi => q[:is_bumi])
+  end
+  
   private
   
   def self.get_filter_criteria(filters, sort = nil)

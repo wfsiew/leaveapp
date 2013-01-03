@@ -29,5 +29,5 @@
 //= require user/salary
 //= require user/qualification
 //= require user/membership
-//= require user/report
+//= require user/reportto
 // require_tree .

@@ -6,6 +6,48 @@ Leaveapp::Application.routes.draw do
     
     scope 'info', :as => 'info' do
       match '' => 'info#index', :via => :get
+      match 'update' => 'info#update', :as => :update, :via => :post
+    end
+    
+    scope 'contact', :as => 'contact' do
+      match '' => 'contact#index', :via => :get
+      match 'update' => 'contact#update', :as => :update, :via => :post
+    end
+    
+    scope 'eccontact', :as => 'eccontact' do
+      match '' => 'ec_contact#index', :via => :get
+      match 'update' => 'ec_contact#update', :as => :update, :via => :post
+    end
+    
+    scope 'spouse', :as => 'spouse' do
+      match '' => 'spouse#index', :via => :get
+      match 'update' => 'spouse#update', :as => :update, :via => :post
+    end
+    
+    scope 'job', :as => 'job' do
+      match '' => 'job#index', :via => :get
+    end
+    
+    scope 'salary', :as => 'salary' do
+      match '' => 'salary#index', :via => :get
+    end
+    
+    scope 'qualification', :as => 'qualification' do
+      match '' => 'qualification#index', :via => :get
+      match 'update' => 'qualification#update', :as => :update, :via => :post
+    end
+    
+    scope 'membership', :as => 'membership' do
+      match '' => 'membership#index', :via => :get
+      match 'update' => 'membership#update', :as => :update, :via => :post
+    end
+    
+    scope 'reportto', :as => 'reportto' do
+      match '' => 'report_to#index', :via => :get
+    end
+    
+    scope 'leave', :as => 'leave' do
+      match 'apply' => 'leave#apply', :as => :apply, :via => :post
     end
   end
 

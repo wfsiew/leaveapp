@@ -143,7 +143,7 @@ class Admin::EmployeeController < Admin::AdminController
       om.save if b7
     end
     
-    render :json => { :success => 1, :message => 'Employee was successfully added.' } and return
+    render :json => { :success => 1, :message => 'Employee was successfully added.' }
   end
   
   # GET /employee/edit/1
@@ -187,10 +187,6 @@ class Admin::EmployeeController < Admin::AdminController
       oc = EmployeeContactHelper.employee_contact_obj(o, params)
       oc_new = true
     end
-    
-    p "----------"
-    p oc
-    p "----------"
     
     oec_new = false
     if oec.blank?
@@ -311,7 +307,7 @@ class Admin::EmployeeController < Admin::AdminController
       end
     end
     
-    render :json => { :success => 1, :message => 'Employee was successfully added.' } and return
+    render :json => { :success => 1, :message => 'Employee was successfully updated.' }
   end
   
   # POST /employee/delete

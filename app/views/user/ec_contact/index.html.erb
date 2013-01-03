@@ -1,0 +1,52 @@
+<div class="page_title ui-widget-header ui-widget">Emergency Contact</div>
+<form id="save-form" class="ui-widget-content ui-widget" method="post">
+  <table>
+    <tr>
+      <td valign="top" class="lbl">
+        <%= label_tag :name, 'Name', :class => 'label' %>
+      </td>
+      <td valign="top">
+        <%= text_field_tag :name, @employee_ec_contact.name, :id => 'id_name', :class => 'text', :placeholder => 'enter name',
+                           :title => 'enter name' %>
+      </td>
+      <td valign="top" class="lbl">
+        <%= label_tag :relationship, 'Relationship', :class => 'label' %>
+      </td>
+      <td valign="top">
+        <%= text_field_tag :relationship, @employee_ec_contact.relationship, :id => 'id_relationship', :class => 'text', :placeholder => 'enter relationship',
+                           :title => 'enter relationship' %>
+        </td>
+    </tr>
+    <tr>
+      <td valign="top" class="lbl">
+        <%= label_tag :home_phone, 'Home Telephone', :class => 'label' %>
+      </td>
+      <td valign="top">
+        <%= text_field_tag :home_phone, @employee_ec_contact.home_phone, :id => 'id_home_phone', :class => 'text', :placeholder => 'enter home phone',
+                           :title => 'enter home phone' %>
+      </td>
+      <td valign="top" class="lbl">
+        <%= label_tag :mobile_phone, 'Mobile', :class => 'label' %>
+      </td>
+      <td valign="top">
+        <%= text_field_tag :mobile_phone, @employee_ec_contact.mobile_phone, :id => 'id_mobile_phone', :class => 'text', :placeholder => 'enter mobile phone',
+                           :title => 'enter mobile phone' %>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top" class="lbl">
+        <%= label_tag :work_phone, 'Work Telephone', :class => 'label' %>
+      </td>
+      <td valign="top">
+        <%= text_field_tag :work_phone, @employee_ec_contact.work_phone, :id => 'id_work_phone', :class => 'text', :placeholder => 'enter work phone',
+                           :title => 'enter work phone' %>
+      </td>
+      <td colspan="2"></td>
+    </tr>
+  </table>
+</form>
+<div style="margin-top: 10px">
+  <%= render 'shared/save_button' %>
+</div>
+<%= render 'shared/alert_panel' %>
+

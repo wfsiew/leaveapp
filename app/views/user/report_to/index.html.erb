@@ -1,0 +1,17 @@
+<div id="table_container" style="width: 400px">
+  <div class="page_title ui-widget-header ui-widget">Assigned Supervisor</div>
+  <table class="page_container ui-widget ui-widget-content">
+    <thead class="ui-widget-header">
+      <tr>
+        <th align="justify">Name</th>
+        <th align="justify">Staff ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= h @supervisor.first_name %> <%= h @supervisor.middle_name %> <%= h @supervisor.last_name %></td>
+        <td><%= h @supervisor.staff_id %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

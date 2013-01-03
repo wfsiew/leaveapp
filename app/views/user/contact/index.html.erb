@@ -1,4 +1,5 @@
-<div id="form-employee-contact">
+<div class="page_title ui-widget-header ui-widget">Contact Details</div>
+<form id="save-form" class="ui-widget-content ui-widget" method="post">
   <table>
     <tr>
       <td valign="top" class="lbl">
@@ -105,4 +106,8 @@
       </td>
     </tr>
   </table>
+</form>
+<div style="margin-top: 10px">
+  <%= render 'shared/save_button' %>
 </div>
+<%= render 'shared/alert_panel' %>

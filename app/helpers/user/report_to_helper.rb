@@ -1,0 +1,2 @@
+module User::ReportToHelper
+end
