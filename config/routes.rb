@@ -50,8 +50,10 @@ Leaveapp::Application.routes.draw do
       match 'apply' => 'leave_request#index', :via => :get
       match 'apply' => 'leave_request#create', :as => :apply, :via => :post
       
-      match 'summary' => 'leave_summary#index', :via => :get
-      match 'summary/list' => 'leave_summary#list', :as => :list, :via => [:get, :post]
+      scope 'summary', :as => 'summary' do
+        match '' => 'leave_summary#index', :via => :get
+        match 'list' => 'leave_summary#list', :as => :list, :via => [:get, :post]
+      end
     end
   end
 
@@ -139,18 +141,18 @@ Leaveapp::Application.routes.draw do
       match 'create' => 'leave_period#create', :as => :create, :via => :post
     end
 
-    scope 'leavesummary', :as => 'leavesummary' do
-      match '' => 'leave_summary#index', :via => :get
-      match 'list' => 'leave_summary#list', :as => :list, :via => [:get, :post]
-      match 'create' => 'leave_summary#create', :as => :create, :via => :post
-    end
-
     scope 'leave', :as => 'leave' do
       match '' => 'leave#index', :via => :get
       match 'list' => 'leave#list', :as => :list, :via => [:get, :post]
       match 'edit(/:id)' => 'leave#edit', :as => :edit, :via => :get
       match 'update(/:id)' => 'leave#update', :as => :update, :via => :post
       match 'action/update' => 'leave#update_action', :as => :update, :via => :post
+      
+      scope 'summary', :as => 'summary' do
+        match '' => 'leave_summary#index', :as => :summary, :via => :get
+        match 'list' => 'leave_summary#list', :as => :list, :via => [:get, :post]
+        match 'create' => 'leave_summary#create', :as => :create, :via => :post
+      end
     end
   end
 

@@ -1,7 +1,7 @@
 var leavesummary = ( function() {
     var url = {
-      list : '/admin/leavesummary/list/',
-      create : '/admin/leavesummary/create/'
+      list : '/admin/leave/summary/list/',
+      create : '/admin/leave/summary/create/'
     };
 
     function func_save() {
@@ -66,7 +66,7 @@ var leavesummary = ( function() {
     }
 
     function load() {
-      return menu.get('/admin/leavesummary/', init);
+      return menu.get('/admin/leave/summary/', init);
     }
 
     return {

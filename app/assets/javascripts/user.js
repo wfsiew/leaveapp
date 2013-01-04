@@ -32,4 +32,5 @@
 //= require user/reportto
 //= require user/leaverequest
 //= require user/leavesummary
+//= require user/myleave
 // require_tree .
