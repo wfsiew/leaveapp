@@ -59,10 +59,10 @@
           <span class="icons editicon spaceiconlist hover editreason" title="Click here to edit"></span>
         </td>
         <td class="data">
-          <% if o.can_modify_status %>
+          <% if o.user_can_modify_status %>
           <select class="leaveaction">
             <option value="0">Select Action</option>
-            <%= options_for_select o.actions %>
+            <%= options_for_select o.user_actions %>
           </select>
           <% end %>
         </td>

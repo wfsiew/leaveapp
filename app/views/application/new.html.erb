@@ -1,0 +1,23 @@
+<% @title = 'Leave Application: Log In' %>
+<h1>Log In</h1>
+
+<div class="login_box">
+  <p class="msg">Please log in to access the application:</p>
+  
+  <%= content_tag :div, notice, :class => 'notice' if notice.present? %>
+  <%= content_tag :div, alert, :class => 'errorblock' if alert.present? %>
+  
+  <%= form_tag(auth_path) do %>
+    <div class="row">
+      <%= label_tag :username, 'Username', :class => 'editor-label' %>
+      <%= text_field_tag :username, nil, :class => 'text-box' %>
+    </div>
+    <div class="row">
+      <%= label_tag :password, 'Password', :class => 'editor-label' %>
+      <%= password_field_tag :password, nil, :class => 'text-box' %>
+    </div>
+    <p class="row_login_btn">
+      <%= submit_tag 'Log In' %>
+    </p>
+  <% end %>
+</div>

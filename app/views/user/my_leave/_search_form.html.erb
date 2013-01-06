@@ -1,0 +1,45 @@
+<table>
+  <tr>
+    <td>
+      <%= label_tag :id_from_date, 'From', :class => 'label' %>
+    </td>
+    <td>
+      <%= text_field_tag :from_date, nil, :id => 'id_from_date', :class => 'search date_input', :placeholder => 'dd-mm-YYYY' %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= label_tag :id_to_date, 'To', :class => 'label' %>
+    </td>
+    <td>
+      <%= text_field_tag :to_date, nil, :id => 'id_to_date', :class => 'search date_input', :placeholder => 'dd-mm-YYYY' %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= label_tag :status, 'Show Leave with Status', :class => 'label' %>
+    </td>
+    <td>
+      <%= label_tag :id_all, 'All' %>
+      <%= check_box_tag :id_all, nil, false, :class => 'chkall' %>
+      <span class="spacing"></span>
+      
+      <%= label_tag :id_rejected, 'Rejected' %>
+      <%= check_box_tag :id_rejected, nil, false, :class => 'chkstatus' %>
+      <span class="spacing"></span>
+      
+      <%= label_tag :id_canceled, 'Canceled' %>
+      <%= check_box_tag :id_canceled, nil, false, :class => 'chkstatus' %>
+      <span class="spacing"></span>
+      
+      <%=  label_tag :id_pending, 'Pending Approval' %>
+      <%= check_box_tag :id_pending, nil, true, :class => 'chkstatus' %>
+      <span class="spacing"></span>
+      
+      <%= label_tag :id_approved, 'Approved' %>
+      <%= check_box_tag :id_approved, nil, false, :class => 'chkstatus' %>
+    </td>
+  </tr>
+</table>
+<br />
+<%= render 'search_panel' %>

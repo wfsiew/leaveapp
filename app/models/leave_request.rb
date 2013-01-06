@@ -16,6 +16,7 @@ class LeaveRequest < ActiveRecord::Base
   validates_numericality_of :day, :greater_than => 0, :message => 'No. of day(s) is invalid'
   
   PENDING = 'P'
+  APPROVED = 'A'
   
   def display_status
     case self.status
@@ -44,6 +45,19 @@ class LeaveRequest < ActiveRecord::Base
   def actions
     if self.status == 'P'
       [['Approve', 'A'], ['Reject', 'R'], ['Cancel', 'C']]
+      
+    elsif self.status == 'A'
+      [['Cancel', 'C']]
+    end
+  end
+  
+  def user_can_modify_status
+    self.status != 'C' && self.status != 'R' ? true : false
+  end
+  
+  def user_actions
+    if self.status == 'P'
+      [['Cancel', 'C']]
       
     elsif self.status == 'A'
       [['Cancel', 'C']]

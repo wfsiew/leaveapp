@@ -1,0 +1,8 @@
+<%= form_tag('.', :id => 'edit-form', :class => 'save_form ui-widget-content ui-widget ui-corner-all') do %>
+  <%= text_area_tag :reason, @leave.reason, :id => 'id_reason', :placeholder => 'enter reason',
+                    :title => 'enter reason', :rows => 10, :cols => 48 %>
+  <div class="row_button">
+    <%= render 'shared/save_button' %>
+    <%= render 'shared/cancel_button' %>
+  </div>
+<% end %>

@@ -1,10 +1,10 @@
-class Admin::LeaveController < Admin::AdminController
+class User::LeaveController < User::UserController
   
   # GET /leave
   # GET /leave.json
   def index
-    @data = LeaveHelper.get_all
-    @dept = Department.order(:name).all
+    id = supervisor_id
+    @data = LeaveHelper.get_all_by_supervisor_id(id)
     
     respond_to do |fmt|
       fmt.html { render 'index', :layout => 'list' }
@@ -19,7 +19,7 @@ class Admin::LeaveController < Admin::AdminController
     _to_date = params[:to_date]
     leave_status = params[:leave_status].blank? ? '' : params[:leave_status]
     employee = params[:employee].blank? ? '' : params[:employee]
-    dept = params[:dept].blank? ? 0 : params[:dept].to_i
+    id = supervisor_id
     
     from_date = Date.strptime(_from_date, '%d-%m-%Y') if _from_date.present?
     to_date = Date.strptime(_to_date, '%d-%m-%Y') if _to_date.present?
@@ -35,40 +35,18 @@ class Admin::LeaveController < Admin::AdminController
                 :to_date => to_date,
                 :leave_status => leave_status,
                 :employee => employee,
-                :dept => dept }
+                :supervisor_id => supervisor_id }
                 
-    if from_date.blank? && to_date.blank? && employee.blank? && dept == 0 && leave_status.blank?
-      @data = LeaveHelper.get_all(pgnum, pgsize, sort)
+    if from_date.blank? && to_date.blank? && employee.blank? && leave_status.blank?
+      @data = LeaveHelper.get_all_by_supervisor_id(supervisor_id, pgnum, pgsize, sort)
       
     else
-      @data = LeaveHelper.get_filter_by(filters, pgnum, pgsize, sort)
+      @data = LeaveHelper.get_filter_by_supervisor_id(filters, pgnum, pgsize, sort)
     end
     
     respond_to do |fmt|
       fmt.html { render :partial => 'list' }
       fmt.json { render :json => @data }
-    end
-  end
-  
-  # GET /leave/edit/1
-  def edit
-    @leave = LeaveRequest.find(params[:id])
-    
-    respond_to do |fmt|
-      fmt.html { render :partial => 'form' }
-      fmt.json { render :json => @leave }
-    end
-  end
-  
-  # POST /leave/update/1
-  def update
-    o = LeaveRequest.find(params[:id])
-    
-    if o.update_attributes(:reason => params[:reason])
-      render :json => { :success => 1, :message => 'Leave Reason was successfully updated.' }
-      
-    else
-      render :json => { :success => 0 }
     end
   end
   

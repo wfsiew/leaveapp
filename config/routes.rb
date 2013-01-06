@@ -1,8 +1,12 @@
 Leaveapp::Application.routes.draw do
   root :to => 'admin/home#index'
   
+  match 'login' => 'application#new', :as => :login
+  match 'auth' => 'application#create', :as => :auth
+  match 'logout' => 'application#destroy', :as => :logout
+  
   namespace :user do
-    match 'index' => 'home#index', :via => :get
+    match 'index' => 'home#index', :as => :index, :via => :get
     
     scope 'info', :as => 'info' do
       match '' => 'info#index', :via => :get
@@ -47,6 +51,9 @@ Leaveapp::Application.routes.draw do
     end
     
     scope 'leave', :as => 'leave' do
+      match '' => 'leave#index', :via => :get
+      match 'list' => 'leave#list', :as => :list, :via => [:get, :post]
+      match 'action/update' => 'leave#update_action', :as => :update, :via => :post
       match 'apply' => 'leave_request#index', :via => :get
       match 'apply' => 'leave_request#create', :as => :apply, :via => :post
       
@@ -54,11 +61,24 @@ Leaveapp::Application.routes.draw do
         match '' => 'leave_summary#index', :via => :get
         match 'list' => 'leave_summary#list', :as => :list, :via => [:get, :post]
       end
+      
+      scope 'own', :as => 'own' do
+        match '' => 'my_leave#index', :via => :get
+        match 'list' => 'my_leave#list', :as => :list, :via => [:get, :post]
+        match 'edit(/:id)' => 'my_leave#edit', :as => :edit, :via => :get
+        match 'update(/:id)' => 'my_leave#update', :as => :update, :via => :post
+        match 'action/update' => 'my_leave#update_action', :as => :update, :via => :post
+      end
+      
+      scope 'cal', :as => 'cal' do
+        match '' => 'leave_calendar#index', :via => :get
+        match 'data' => 'leave_calendar#data', :as => :data, :via => [:get, :post]
+      end
     end
   end
 
   namespace :admin do
-    match 'index' => 'home#index', :via => :get
+    match 'index' => 'home#index', :as => :index, :via => :get
     
     scope 'user', :as => 'user' do
       match '' => 'user#index', :via => :get

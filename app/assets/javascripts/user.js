@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery_ui
 //= require libs
+//= require fullcal
 //= require utils
 //= require nav_list
 //= require stat
@@ -33,4 +34,6 @@
 //= require user/leaverequest
 //= require user/leavesummary
 //= require user/myleave
+//= require user/leave
+//= require user/leavecal
 // require_tree .

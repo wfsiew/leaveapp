@@ -224,14 +224,22 @@ class Admin::EmployeeController < Admin::AdminController
       om_new = true
     end
     
+    b1 = EmployeeContactHelper.is_empty_params?(params)
+    b2 = EmployeeEcContactHelper.is_empty_params?(params) 
+    b3 = EmployeeJobHelper.is_empty_params?(params)
+    b4 = EmployeeSpouseHelper.is_empty_params?(params)
+    b5 = EmployeeSalaryHelper.is_empty_params?(params)
+    b6 = EmployeeQualificationHelper.is_empty_params?(params)
+    b7 = EmployeeMembershipHelper.is_empty_params?(params)
+    
     v1 = o.valid?
-    v2 = oc.valid?
-    v3 = oec.valid?
-    v4 = oej.valid?
-    v5 = osp.valid?
-    v6 = osa.valid?
-    v7 = oq.valid?
-    v8 = om.valid?
+    v2 = b1 ? true : oc.valid?
+    v3 = b2 ? true : oec.valid?
+    v4 = b3 ? true : oej.valid?
+    v5 = b4 ? true : osp.valid?
+    v6 = b5 ? true : osa.valid?
+    v7 = b6 ? true : oq.valid?
+    v8 = b7 ? true : om.valid?
     
     if !v1 || !v2 || !v3 || !v4 || !v5 || !v6 || !v7 || !v8
       employee_errors = EmployeeHelper.get_errors(o.errors, params)

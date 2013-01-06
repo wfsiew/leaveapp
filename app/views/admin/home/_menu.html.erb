@@ -3,6 +3,7 @@
   <div>
     <div><%= link_to 'User', '#', :onclick => "return user.load()", :id => 'menu_user' %></div>
     <div><%= link_to 'Employee', '#', :onclick => "return emp.load()" %></div>
+    <div><%= link_to 'Logout', logout_path %></div>
   </div>
   <h3><%= link_to 'Job', '#' %></h3>
   <div>
@@ -13,7 +14,6 @@
   </div>
   <h3><%= link_to 'Leave', '#' %></h3>
   <div>
-    <div><%= link_to 'Leave Period', '#', :onclick => "return leaveperiod.load()" %></div>
     <div><%= link_to 'Leave Type', '#', :onclick => "return leavetype.load()" %></div>
     <div><%= link_to 'Leave Summary', '#', :onclick => "return leavesummary.load()" %></div>
     <div><%= link_to 'Leave List', '#', :onclick => "return leave.load()" %></div>
