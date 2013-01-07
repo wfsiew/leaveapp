@@ -17,8 +17,9 @@
 //= require utils
 //= require nav_list
 //= require stat
-//= require base
 //= require menu
+//= require sort
+//= require admin/base
 //= require admin/user
 //= require admin/designation
 //= require admin/empstatus
@@ -29,5 +30,4 @@
 //= require admin/leaveperiod
 //= require admin/leavesummary
 //= require admin/leave
-//= require sort
 // require_tree .

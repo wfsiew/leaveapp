@@ -22,7 +22,6 @@ class User::LeaveCalendarController < User::UserController
   
   def get_leave(start_date, end_date)
     criteria = LeaveRequest
-    criteria = LeaveHelper.get_join_employee(criteria)
     criteria = criteria.where(:status => LeaveRequest::APPROVED)
     criteria = criteria.where('from_date >= ? and from_date < ?', start_date, end_date)
     list = criteria.all
@@ -30,8 +29,15 @@ class User::LeaveCalendarController < User::UserController
     list.each do |x|
       e = x.employee
       leave_type = x.leave_type
+      title = "#{e.first_name} #{e.middle_name} #{e.last_name} (#{leave_type.name} Leave)"
+      if x.day_type == 1
+        title += " (Half day morning)"
+        
+      elsif x.day_type == 2
+        title += " (Half day afternoon)"
+      end
       o << {
-        :title => "#{e.first_name} #{e.middle_name} #{e.last_name} (#{leave_type.name} Leave)",
+        :title => title,
         :start => x.from_date.to_s,
         :end => x.to_date.to_s
       }

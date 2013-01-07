@@ -59,7 +59,7 @@ module Leaveapp
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
-    config.assets.precompile += %w(ui-darkness/jquery-ui-1.9.2.custom.min.css)
+    config.assets.precompile += %w(dark-hive/jquery-ui-1.9.2.custom.min.css fullcal.css fullcalendar.print.css admin.css user.css loginui.css admin.js user.js)
     
     jquitheme = %w(dark-hive)
     jquicss = 'jquery-ui-1.9.2.custom.min.css'

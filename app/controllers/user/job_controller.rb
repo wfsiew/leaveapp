@@ -3,7 +3,7 @@ class User::JobController < User::UserController
   # GET /job
   # GET /job.json
   def index
-    id = user_id
+    id = get_employee_id
     @employee_job = EmployeeJob.find(id)
     
     respond_to do |fmt|

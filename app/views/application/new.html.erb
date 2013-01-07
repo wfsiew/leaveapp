@@ -1,11 +1,10 @@
 <% @title = 'Leave Application: Log In' %>
-<h1>Log In</h1>
 
-<div class="login_box">
-  <p class="msg">Please log in to access the application:</p>
+<div class="login_box ui-corner-all">
+  <div class="msg ui-widget-header ui-state-hover ui-corner-all">Please log in to access the application:</div>
   
-  <%= content_tag :div, notice, :class => 'notice' if notice.present? %>
-  <%= content_tag :div, alert, :class => 'errorblock' if alert.present? %>
+  <%= content_tag :div, notice, :class => 'notice ui-state-highlight ui-corner-all' if notice.present? %>
+  <%= content_tag :div, alert, :class => 'errorblock ui-state-error ui-corner-all' if alert.present? %>
   
   <%= form_tag(auth_path) do %>
     <div class="row">
@@ -17,7 +16,7 @@
       <%= password_field_tag :password, nil, :class => 'text-box' %>
     </div>
     <p class="row_login_btn">
-      <%= submit_tag 'Log In' %>
+      <%= submit_tag 'Log In', :class => 'hover ui-state-default ui-corner-all' %>
     </p>
   <% end %>
 </div>

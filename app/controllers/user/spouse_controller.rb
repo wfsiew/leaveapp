@@ -3,7 +3,7 @@ class User::SpouseController < User::UserController
   # GET /spouse
   # GET /spouse.json
   def index
-    id = user_id
+    id = get_employee_id
     @employee_spouse = EmployeeSpouse.find(id)
     
     respond_to do |fmt|
@@ -14,7 +14,7 @@ class User::SpouseController < User::UserController
   
   # POST /spouse/update
   def update
-    id = user_id
+    id = get_employee_id
     osp = EmployeeSpouse.find(id)
     
     osp_new = false

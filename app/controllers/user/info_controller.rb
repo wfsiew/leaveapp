@@ -3,7 +3,7 @@ class User::InfoController < User::UserController
   # GET /info
   # GET /info.json
   def index
-    id = user_id
+    id = get_employee_id
     @employee = Employee.find(id)
     @user = @employee.user
     
@@ -15,7 +15,7 @@ class User::InfoController < User::UserController
   
   # POST /info/update
   def update
-    id = user_id
+    id = get_employee_id
     o = Employee.find(id)
     
     if EmployeeHelper.update_info(o, params)

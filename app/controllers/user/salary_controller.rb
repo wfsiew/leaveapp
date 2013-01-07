@@ -3,7 +3,7 @@ class User::SalaryController < User::UserController
   # GET /salary
   # GET /salary.json
   def index
-    id = user_id
+    id = get_employee_id
     @employee_salary = EmployeeSalary.find(id)
     
     respond_to do |fmt|

@@ -6,15 +6,15 @@ class ApplicationController < ActionController::Base
     if user.present?
       session[:user_id] = user.id
       if user.role == User::ADMIN
-        redirect_to admin_index_path
+        redirect_to admin_index_path and return
         
       else
         employee = user.employee
         if employee.present?
           session[:employee_id] = employee.id
           session[:staff_id] = employee.staff_id
-          session[:supervisor_id] = employee.supervisor_id
-          redirect_to user_index_path
+          session[:supervisor_id] = employee.id
+          redirect_to user_index_path and return
           
         else
           flash.now[:alert] = 'No employee record found. Please contact the administrator to create your employee record.'
@@ -23,8 +23,9 @@ class ApplicationController < ActionController::Base
       
     else
       flash.now[:alert] = 'Incorrect username or password'
-      render :action => 'new'
     end
+    
+    render :action => 'new'
   end
   
   def destroy
@@ -32,7 +33,7 @@ class ApplicationController < ActionController::Base
     redirect_to login_path
   end
   
-   protected
+  protected
   
   def current_user
     return unless session[:user_id]
@@ -55,6 +56,10 @@ class ApplicationController < ActionController::Base
     if dt.present?
       dt.strftime('%d-%m-%Y')
     end
+  end
+  
+  def get_user_id
+    session[:user_id]
   end
   
   helper_method :current_user

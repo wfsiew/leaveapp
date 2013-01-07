@@ -3,7 +3,7 @@ class Admin::LeaveController < Admin::AdminController
   # GET /leave
   # GET /leave.json
   def index
-    @data = LeaveHelper.get_all
+    @data = LeaveRequestHelper.get_all
     @dept = Department.order(:name).all
     
     respond_to do |fmt|
@@ -26,8 +26,8 @@ class Admin::LeaveController < Admin::AdminController
     
     pgnum = params[:pgnum].blank? ? 1 : params[:pgnum].to_i
     pgsize = params[:pgsize].blank? ? 0 : params[:pgsize].to_i
-    sortcolumn = params[:sortcolumn].blank? ? LeaveHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
-    sortdir = params[:sortdir].blank? ? LeaveHelper::DEFAULT_SORT_DIR : params[:sortdir]
+    sortcolumn = params[:sortcolumn].blank? ? LeaveRequestHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
+    sortdir = params[:sortdir].blank? ? LeaveRequestHelper::DEFAULT_SORT_DIR : params[:sortdir]
     
     sort = ApplicationHelper::Sort.new(sortcolumn, sortdir)
     
@@ -38,10 +38,10 @@ class Admin::LeaveController < Admin::AdminController
                 :dept => dept }
                 
     if from_date.blank? && to_date.blank? && employee.blank? && dept == 0 && leave_status.blank?
-      @data = LeaveHelper.get_all(pgnum, pgsize, sort)
+      @data = LeaveRequestHelper.get_all(pgnum, pgsize, sort)
       
     else
-      @data = LeaveHelper.get_filter_by(filters, pgnum, pgsize, sort)
+      @data = LeaveRequestHelper.get_filter_by(filters, pgnum, pgsize, sort)
     end
     
     respond_to do |fmt|
@@ -52,7 +52,7 @@ class Admin::LeaveController < Admin::AdminController
   
   # GET /leave/edit/1
   def edit
-    @leave = LeaveRequest.find(params[:id])
+    @leave = LeaveRequestHelper::DEFAULT_SORT_DIR.find(params[:id])
     
     respond_to do |fmt|
       fmt.html { render :partial => 'form' }
@@ -76,7 +76,7 @@ class Admin::LeaveController < Admin::AdminController
   def update_action
     ids = params[:id]
     actions = params[:act]
-    id = logged_in_id
+    id = get_user_id
     count = 0
 
     ActiveRecord::Base.transaction do

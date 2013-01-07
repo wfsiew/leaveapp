@@ -24,7 +24,7 @@ var emp = ( function() {
   
     function show_form() {
       $('#dialog_add_body').load(url.add, function() {
-        $('#tabs').tabs();
+        $(this).find('#tabs').tabs();
         $('.date_input').datepicker(utils.date_opt());
         $('.save_button.save').click(func_save);
         $('.save_button.cancel').click(func_cancel_add);
@@ -237,7 +237,7 @@ var emp = ( function() {
 
       id = utils.get_itemid(id);
       $('#dialog_edit_body').load(url.edit + id, function() {
-        $('#tabs').tabs();
+        $(this).find('#tabs').tabs();
         $('.date_input').datepicker(utils.date_opt());
         $('.save_button.save').click(function() {
           return func_update(id);

@@ -3,7 +3,7 @@ class User::EcContactController < User::UserController
   # GET /eccontact
   # GET /eccontact.json
   def index
-    id = user_id
+    id = get_employee_id
     @employee_ec_contact = EmployeeEcContact.find(id)
     
     respond_to do |fmt|
@@ -14,7 +14,7 @@ class User::EcContactController < User::UserController
   
   # POST /eccontact/update
   def update
-    id = user_id
+    id = get_employee_id
     oec = EmployeeEcContact.find(id)
     
     oec_new = false

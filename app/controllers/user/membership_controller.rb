@@ -3,7 +3,7 @@ class User::MembershipController < User::UserController
   # GET /membership
   # GET /membership.json
   def index
-    id = user_id
+    id = get_employee_id
     @employee_membership = EmployeeMembership.find(id)
     
     respond_to do |fmt|
@@ -14,7 +14,7 @@ class User::MembershipController < User::UserController
   
   # POST /membership/update
   def update
-    id = user_id
+    id = get_employee_id
     om = EmployeeMembership.find(id)
     
     om_new = false

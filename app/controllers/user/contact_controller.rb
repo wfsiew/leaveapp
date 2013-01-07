@@ -3,7 +3,7 @@ class User::ContactController < User::UserController
   # GET /contact
   # GET /contact.json
   def index
-    id = user_id
+    id = get_employee_id
     @employee_contact = EmployeeContact.find(id)
     
     respond_to do |fmt|
@@ -14,7 +14,7 @@ class User::ContactController < User::UserController
   
   # POST /contact/update
   def update
-    id = user_id
+    id = get_employee_id
     oc = EmployeeContact.find(id)
     
     oc_new = false

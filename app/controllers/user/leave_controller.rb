@@ -3,8 +3,8 @@ class User::LeaveController < User::UserController
   # GET /leave
   # GET /leave.json
   def index
-    id = supervisor_id
-    @data = LeaveHelper.get_all_by_supervisor_id(id)
+    id = get_supervisor_id
+    @data = LeaveRequestHelper.get_all_by_supervisor_id(id)
     
     respond_to do |fmt|
       fmt.html { render 'index', :layout => 'list' }
@@ -19,15 +19,15 @@ class User::LeaveController < User::UserController
     _to_date = params[:to_date]
     leave_status = params[:leave_status].blank? ? '' : params[:leave_status]
     employee = params[:employee].blank? ? '' : params[:employee]
-    id = supervisor_id
+    id = get_supervisor_id
     
     from_date = Date.strptime(_from_date, '%d-%m-%Y') if _from_date.present?
     to_date = Date.strptime(_to_date, '%d-%m-%Y') if _to_date.present?
     
     pgnum = params[:pgnum].blank? ? 1 : params[:pgnum].to_i
     pgsize = params[:pgsize].blank? ? 0 : params[:pgsize].to_i
-    sortcolumn = params[:sortcolumn].blank? ? LeaveHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
-    sortdir = params[:sortdir].blank? ? LeaveHelper::DEFAULT_SORT_DIR : params[:sortdir]
+    sortcolumn = params[:sortcolumn].blank? ? LeaveRequestHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
+    sortdir = params[:sortdir].blank? ? LeaveRequestHelper::DEFAULT_SORT_DIR : params[:sortdir]
     
     sort = ApplicationHelper::Sort.new(sortcolumn, sortdir)
     
@@ -35,13 +35,13 @@ class User::LeaveController < User::UserController
                 :to_date => to_date,
                 :leave_status => leave_status,
                 :employee => employee,
-                :supervisor_id => supervisor_id }
+                :supervisor_id => id }
                 
     if from_date.blank? && to_date.blank? && employee.blank? && leave_status.blank?
-      @data = LeaveHelper.get_all_by_supervisor_id(supervisor_id, pgnum, pgsize, sort)
+      @data = LeaveRequestHelper.get_all_by_supervisor_id(supervisor_id, pgnum, pgsize, sort)
       
     else
-      @data = LeaveHelper.get_filter_by_supervisor_id(filters, pgnum, pgsize, sort)
+      @data = LeaveRequestHelper.get_filter_by_supervisor_id(filters, pgnum, pgsize, sort)
     end
     
     respond_to do |fmt|
@@ -54,7 +54,7 @@ class User::LeaveController < User::UserController
   def update_action
     ids = params[:id]
     actions = params[:act]
-    id = logged_in_id
+    id = get_user_id
     count = 0
 
     ActiveRecord::Base.transaction do

@@ -38,6 +38,14 @@ body {
   margin-top: 0;
 }
 
+.top_right {
+  float: right;
+  clear: all;
+  margin-right: 10px;
+  margin-top: 10px;
+  display: inline-block;
+}
+
 #progress_status {
   width: 200px;
   position: absolute;

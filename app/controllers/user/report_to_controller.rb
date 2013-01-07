@@ -3,7 +3,7 @@ class User::ReportToController < User::UserController
   # GET /reportto
   # GET /reportto.json
   def index
-    id = user_id
+    id = get_employee_id
     o = Employee.find(id)
     @supervisor = o.employee
     

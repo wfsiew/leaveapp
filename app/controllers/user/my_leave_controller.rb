@@ -3,7 +3,7 @@ class User::MyLeaveController < User::UserController
   # GET /leave/own
   def index
     staff_id = get_staff_id
-    @data = LeaveHelper.get_all_by_staff_id(staff_id)
+    @data = LeaveRequestHelper.get_all_by_staff_id(staff_id)
     
     respond_to do |fmt|
       fmt.html { render 'index', :layout => 'list' }
@@ -23,8 +23,8 @@ class User::MyLeaveController < User::UserController
     
     pgnum = params[:pgnum].blank? ? 1 : params[:pgnum].to_i
     pgsize = params[:pgsize].blank? ? 0 : params[:pgsize].to_i
-    sortcolumn = params[:sortcolumn].blank? ? LeaveHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
-    sortdir = params[:sortdir].blank? ? LeaveHelper::DEFAULT_SORT_DIR : params[:sortdir]
+    sortcolumn = params[:sortcolumn].blank? ? LeaveRequestHelper::DEFAULT_SORT_COLUMN : params[:sortcolumn]
+    sortdir = params[:sortdir].blank? ? LeaveRequestHelper::DEFAULT_SORT_DIR : params[:sortdir]
     
     sort = ApplicationHelper::Sort.new(sortcolumn, sortdir)
     
@@ -34,10 +34,10 @@ class User::MyLeaveController < User::UserController
                 :staff_id => staff_id }
                 
     if from_date.blank? && to_date.blank? && leave_status.blank?
-      @data = LeaveHelper.get_all_by_staff_id(staff_id, pgnum, pgsize, sort)
+      @data = LeaveRequestHelper.get_all_by_staff_id(staff_id, pgnum, pgsize, sort)
       
     else
-      @data = LeaveHelper.get_filter_by_staff_id(filters, pgnum, pgsize, sort)
+      @data = LeaveRequestHelper.get_filter_by_staff_id(filters, pgnum, pgsize, sort)
     end
     
     respond_to do |fmt|

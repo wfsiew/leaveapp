@@ -3,7 +3,7 @@ class User::QualificationController < User::UserController
   # GET /qualification
   # GET /qualification.json
   def index
-    id = user_id
+    id = get_employee_id
     @employee_qualification = EmployeeQualification.find(id)
     
     respond_to do |fmt|
@@ -14,7 +14,7 @@ class User::QualificationController < User::UserController
   
   # POST /qualification/update
   def update
-    id = user_id
+    id = get_employee_id
     oq = EmployeeQualification.find(id)
     
     oq_new = false

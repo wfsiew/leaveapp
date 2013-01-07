@@ -16,7 +16,7 @@ class User::LeaveRequestController < User::UserController
     from_date = Date.strptime(_from_date, ApplicationHelper.date_fmt) if _from_date.present?
     to_date = Date.strptime(_to_date, ApplicationHelper.date_fmt) if _to_date.present?
       
-    id = user_id
+    id = get_employee_id
     o = Employee.find(id)
     staff_id = o.staff_id
       
