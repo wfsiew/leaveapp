@@ -43,7 +43,7 @@ class User::LeaveSummaryController < User::UserController
     sortcolumn = ''
     sortdir = ''
     
-    id = user_id
+    id = get_employee_id
     o = Employee.find(id)
     pager = ApplicationHelper::Pager.new(1, pgnum, pgsize)
     
