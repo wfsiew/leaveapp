@@ -29,4 +29,15 @@ module EmployeeSalaryHelper
                         :bank_address => q[:bank_address], :epf_no => q[:epf_no], :socso_no => q[:socso_no], 
                         :income_tax_no => q[:income_tax_no])
   end
+  
+  def self.find(id)
+    o = nil
+    begin
+      o = EmployeeSalary.find(id)
+      
+    rescue Exception => e
+      o = EmployeeSalary.new
+    end
+    o
+  end
 end

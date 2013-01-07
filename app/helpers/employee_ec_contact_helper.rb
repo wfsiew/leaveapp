@@ -25,4 +25,15 @@ module EmployeeEcContactHelper
     o.update_attributes(:name => q[:name], :relationship => q[:relationship], :home_phone => q[:home_phone],
                         :mobile_phone => q[:mobile_phone], :work_phone => q[:work_phone])
   end
+  
+  def self.find(id)
+    o = nil
+    begin
+      o = EmployeeEcContact.find(id)
+      
+    rescue Exception => e
+      o = EmployeeEcContact.new
+    end
+    o
+  end
 end

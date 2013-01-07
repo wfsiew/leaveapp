@@ -31,4 +31,15 @@ module EmployeeContactHelper
                         :home_phone => q[:home_phone], :mobile_phone => q[:mobile_phone], :work_email => q[:work_email],
                         :other_email => q[:other_email])
   end
+  
+  def self.find(id)
+    o = nil
+    begin
+      o = EmployeeContact.find(id)
+      
+    rescue Exception => e
+      o = EmployeeContact.new
+    end
+    o
+  end
 end

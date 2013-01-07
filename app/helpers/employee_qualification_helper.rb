@@ -38,4 +38,15 @@ module EmployeeQualificationHelper
     o.update_attributes(:level => q[:level], :institute => q[:institute], :major => q[:major], 
                         :year => q[:year], :gpa => q[:gpa], :start_date => start_date, :end_date => end_date)
   end
+  
+  def self.find(id)
+    o = nil
+    begin
+      o = EmployeeQualification.find(id)
+      
+    rescue Exception => e
+      o = EmployeeQualification.new
+    end
+    o
+  end
 end

@@ -4,7 +4,7 @@ class User::SalaryController < User::UserController
   # GET /salary.json
   def index
     id = get_employee_id
-    @employee_salary = EmployeeSalary.find(id)
+    @employee_salary = EmployeeSalaryHelper.find(id)
     
     respond_to do |fmt|
       fmt.html { render 'index' }

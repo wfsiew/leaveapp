@@ -4,7 +4,7 @@ class User::ContactController < User::UserController
   # GET /contact.json
   def index
     id = get_employee_id
-    @employee_contact = EmployeeContact.find(id)
+    @employee_contact = EmployeeContactHelper.find(id)
     
     respond_to do |fmt|
       fmt.html { render 'index' }
@@ -15,7 +15,7 @@ class User::ContactController < User::UserController
   # POST /contact/update
   def update
     id = get_employee_id
-    oc = EmployeeContact.find(id)
+    oc = EmployeeContactHelper.find(id)
     
     oc_new = false
     if oc.blank?

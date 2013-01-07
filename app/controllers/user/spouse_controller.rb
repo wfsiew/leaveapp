@@ -4,7 +4,7 @@ class User::SpouseController < User::UserController
   # GET /spouse.json
   def index
     id = get_employee_id
-    @employee_spouse = EmployeeSpouse.find(id)
+    @employee_spouse = EmployeeSpouseHelper.find(id)
     
     respond_to do |fmt|
       fmt.html { render 'index' }
@@ -15,7 +15,7 @@ class User::SpouseController < User::UserController
   # POST /spouse/update
   def update
     id = get_employee_id
-    osp = EmployeeSpouse.find(id)
+    osp = EmployeeSpouseHelper.find(id)
     
     osp_new = false
     if osp.blank?

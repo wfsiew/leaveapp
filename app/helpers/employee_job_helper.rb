@@ -38,4 +38,15 @@ module EmployeeJobHelper
                         :employment_status_id => q[:employment_status_id], :job_category_id => q[:job_category_id],
                         :join_date => join_date, :confirm_date => confirm_date)
   end
+  
+  def self.find(id)
+    o = nil
+    begin
+      o = EmployeeJob.find(id)
+      
+    rescue Exception => e
+      o = EmployeeJob.new
+    end
+    o
+  end
 end

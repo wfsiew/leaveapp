@@ -23,4 +23,15 @@ module EmployeeMembershipHelper
     
     o.update_attributes(:membership_no => q[:membership_no], :year => q[:year])
   end
+  
+  def self.find(id)
+    o = nil
+    begin
+      o = EmployeeMembership.find(id)
+      
+    rescue Exception => e
+      o = EmployeeMembership.new
+    end
+    o
+  end
 end

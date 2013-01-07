@@ -4,7 +4,7 @@ class User::EcContactController < User::UserController
   # GET /eccontact.json
   def index
     id = get_employee_id
-    @employee_ec_contact = EmployeeEcContact.find(id)
+    @employee_ec_contact = EmployeeEcContactHelper.find(id)
     
     respond_to do |fmt|
       fmt.html { render 'index' }
@@ -15,7 +15,7 @@ class User::EcContactController < User::UserController
   # POST /eccontact/update
   def update
     id = get_employee_id
-    oec = EmployeeEcContact.find(id)
+    oec = EmployeeEcContactHelper.find(id)
     
     oec_new = false
     if oec.blank?

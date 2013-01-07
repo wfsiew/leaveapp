@@ -31,4 +31,15 @@ module EmployeeSpouseHelper
     o.update_attributes(:name => q[:name], :dob => dob, :ic => q[:ic], :passport_no => q[:passport_no], 
                         :occupation => q[:occupation])
   end
+  
+  def self.find(id)
+    o = nil
+    begin
+      o = EmployeeSpouse.find(id)
+      
+    rescue Exception => e
+      o = EmployeeSpouse.new
+    end
+    o
+  end
 end

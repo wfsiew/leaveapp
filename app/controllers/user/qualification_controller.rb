@@ -4,7 +4,7 @@ class User::QualificationController < User::UserController
   # GET /qualification.json
   def index
     id = get_employee_id
-    @employee_qualification = EmployeeQualification.find(id)
+    @employee_qualification = EmployeeQualificationHelper.find(id)
     
     respond_to do |fmt|
       fmt.html { render 'index' }
@@ -15,7 +15,7 @@ class User::QualificationController < User::UserController
   # POST /qualification/update
   def update
     id = get_employee_id
-    oq = EmployeeQualification.find(id)
+    oq = EmployeeQualificationHelper.find(id)
     
     oq_new = false
     if oq.blank?

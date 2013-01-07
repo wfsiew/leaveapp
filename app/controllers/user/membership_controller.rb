@@ -4,7 +4,7 @@ class User::MembershipController < User::UserController
   # GET /membership.json
   def index
     id = get_employee_id
-    @employee_membership = EmployeeMembership.find(id)
+    @employee_membership = EmployeeMembershipHelper.find(id)
     
     respond_to do |fmt|
       fmt.html { render 'index' }
@@ -15,7 +15,7 @@ class User::MembershipController < User::UserController
   # POST /membership/update
   def update
     id = get_employee_id
-    om = EmployeeMembership.find(id)
+    om = EmployeeMembershipHelper.find(id)
     
     om_new = false
     if om.blank?
