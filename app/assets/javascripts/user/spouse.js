@@ -16,7 +16,7 @@ var spouse = ( function() {
             if (!d) {
               var o = {
                 field : e,
-                msg : result.errors[e]
+                msg : result.errors[e][0]
               };
               var h = new EJS({
                 url : '/assets/tpl/label_error_inline.html',

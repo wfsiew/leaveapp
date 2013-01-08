@@ -128,7 +128,7 @@ var leave = ( function() {
           a.push('C');
           
         if (is_checked('#id_pending'))
-          a.push('P')
+          a.push('P');
           
         if (is_checked('#id_approved'))
           a.push('A');
